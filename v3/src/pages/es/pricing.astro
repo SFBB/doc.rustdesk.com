@@ -7,7 +7,10 @@ import Steps from '~/components/widgets/Steps.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
-  title: 'Precios',
+  title: 'Precios de RustDesk - Planes de Servidor de Escritorio Remoto Autoalojado',
+  description: 'Elija el plan de autoalojamiento de RustDesk adecuado para su organización. Plan de código abierto gratuito disponible. Planes Pro con características avanzadas para uso empresarial.',
+  keywords: 'precios rustdesk, precios escritorio remoto autoalojado, costo servidor remoto, precios acceso remoto código abierto, planes escritorio remoto empresarial',
+  author: 'RustDesk Team',
 };
 ---
 
@@ -76,16 +79,16 @@ const metadata = {
         period: 'facturado anualmente',
         items: [
           {
-            description:
-              '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#what-are-managed-devices--licensed-users--concurrent-connections-in-pro">1 usuario con licencia</a>',
+          description:
+            '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#login-users">1 usuario de inicio de sesión <span class="inline-flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-red-500 rounded-full hover:bg-red-600 cursor-help ml-1" title="Click for more information">?</span></a>',
           },
           {
-            description:
-              '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#what-are-managed-devices--licensed-users--concurrent-connections-in-pro">20 dispositivos gestionados</a>',
+          description:
+            '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#managed-devices">20 dispositivos gestionados <span class="inline-flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-red-500 rounded-full hover:bg-red-600 cursor-help ml-1" title="Click for more information">?</span></a>',
           },
           {
-            description:
-              '<a class="underline text-blue-500 font-bold" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#what-are-managed-devices--licensed-users--concurrent-connections-in-pro">Conexiones concurrentes ilimitadas</a>',
+          description:
+            '<a class="underline text-red-500 font-bold" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#concurrent-connections">Conexiones concurrentes ilimitadas</a>',
           },
           {
             description:
@@ -130,16 +133,16 @@ const metadata = {
         period: 'facturado anualmente',
         items: [
           {
-            description: '<span class="font-bold">Todo lo incluido en el plan individual</span>',
+            description: '<span class="font-bold text-red-500">Todo lo incluido en el plan individual</span>',
             icon: 'tabler:checks',
           },
           {
-            description:
-              '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#what-are-managed-devices--licensed-users--concurrent-connections-in-pro">10 usuarios con licencia</a>',
+          description:
+            '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#login-users">10 usuario de inicio de sesión</a>',
           },
           {
-            description:
-              '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#what-are-managed-devices--licensed-users--concurrent-connections-in-pro">100 dispositivos gestionados</a>',
+          description:
+            '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#managed-devices">100 dispositivos gestionados</a>',
           },
           {
             description:
@@ -157,6 +160,10 @@ const metadata = {
             description:
               '<a class="underline text-blue-500 font-bold" target="_blank" href="https://rustdesk.com/docs/en/self-host/client-configuration/#1-custom-client-generator-pro-only">Generador de cliente personalizado</a>',
           },
+          {
+            description:
+              '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#how-to-make-rustdesk-work-properly-in-restricted-network-with-80443-only">WebSocket</a>',
+          },
         ],
         callToAction: {
           text: 'Comprar ahora',
@@ -172,7 +179,7 @@ const metadata = {
         period: 'facturado anualmente',
         items: [
           {
-            description: '<span class="font-bold">Todo lo incluido en el plan básico</span>',
+            description: '<span class="font-bold text-red-500">Todo lo incluido en el plan básico</span>',
             icon: 'tabler:checks',
           },
           {
@@ -184,7 +191,7 @@ const metadata = {
         ],
         content: `
 <form class="flex flex-col space-y-3 mx-3 min-w-[200px]">
-  <label for="users" class="text-left font-bold">Número de usuarios con licencia:</label>
+  <label for="users" class="text-left font-bold">Número de usuarios:</label>
   <input class="bg-white text-black rounded-md border border-gray-300 py-1 px-2 w-24 h-10" type="number" id="users" name="users" value="10" min="10" max="500" step="10">
   <input type="range" id="usersSlider" class="slider" name="usersRange" value="10" min="10" max="500" step="10">
   <label for="devices" class="text-left font-bold">Número de dispositivos gestionados:</label>
@@ -231,7 +238,7 @@ const metadata = {
         id: 'custom2',
         content: `
 <form class="flex flex-col space-y-3 mx-3">
-  <label for="users2" class="text-left font-bold">Número de usuarios con licencia:</label>
+  <label for="users2" class="text-left font-bold">Número de usuarios:</label>
   <input class="bg-white text-black rounded-md border border-gray-300 py-1 px-2 w-24 h-10" type="number" id="users2" name="users2" value="10" min="10" max="500" step="10">
   <input type="range" id="usersSlider2" class="slider" name="usersRange2" value="10" min="10" max="500" step="10">
   <label for="devices2" class="text-left font-bold">Número de dispositivos gestionados:</label>

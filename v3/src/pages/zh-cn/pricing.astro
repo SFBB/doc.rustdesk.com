@@ -5,9 +5,14 @@ import Prices from '~/components/widgets/Pricing.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import Steps from '~/components/widgets/Steps.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+//import { Image } from 'astro:assets';
+//import wxImage from '~/assets/images/wx.png';
 
 const metadata = {
-  title: '定价',
+  title: 'RustDesk 定价 - 自建远程桌面服务器计划',
+  description: '为您的组织选择合适的 RustDesk 自建计划。提供免费开源计划。企业版 Pro 计划具有高级功能。',
+  keywords: 'rustdesk价格, 自建远程桌面价格, 远程桌面服务器成本, 开源远程访问价格, 企业远程桌面计划',
+  author: 'RustDesk Team',
 };
 ---
 
@@ -79,15 +84,15 @@ const metadata = {
         items: [
           {
             description:
-              '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#what-are-managed-devices--licensed-users--concurrent-connections-in-pro">1 个授权用户</a>',
+              '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#login-users">1个登录用户 <span class="inline-flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-red-500 rounded-full hover:bg-red-600 cursor-help ml-1" title="Click for more information">?</span></a>',
           },
           {
             description:
-              '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#what-are-managed-devices--licensed-users--concurrent-connections-in-pro">20 个管理设备</a>',
+              '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#managed-devices">20个管理设备 <span class="inline-flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-red-500 rounded-full hover:bg-red-600 cursor-help ml-1" title="Click for more information">?</span></a>',
           },
           {
             description:
-              '<a class="underline text-blue-500 font-bold" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#what-are-managed-devices--licensed-users--concurrent-connections-in-pro">无限并发连接</a>',
+              '<a class="underline text-red-500 font-bold" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#concurrent-connections">无限并发连接</a>',
           },
           {
             description:
@@ -132,16 +137,16 @@ const metadata = {
         period: '按年计费',
         items: [
           {
-            description: '<span class="font-bold">个人计划中的所有内容</span>',
+            description: '<span class="font-bold text-red-500">个人计划中的所有内容</span>',
             icon: 'tabler:checks',
           },
           {
             description:
-              '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#what-are-managed-devices--licensed-users--concurrent-connections-in-pro">10 个授权用户</a>',
+              '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#login-users">10个登录用户</a>',
           },
           {
             description:
-              '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#what-are-managed-devices--licensed-users--concurrent-connections-in-pro">100 个管理设备</a>',
+              '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#managed-devices">100个管理设备</a>',
           },
           {
             description:
@@ -159,6 +164,10 @@ const metadata = {
             description:
               '<a class="underline text-blue-500 font-bold" target="_blank" href="https://rustdesk.com/docs/en/self-host/client-configuration/#1-custom-client-generator-pro-only">自定义客户端生成器</a>',
           },
+          {
+            description:
+              '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#how-to-make-rustdesk-work-properly-in-restricted-network-with-80443-only">WebSocket</a>',
+          },
         ],
         callToAction: {
           text: '立即购买',
@@ -174,7 +183,7 @@ const metadata = {
         period: '按年计费',
         items: [
           {
-            description: '<span class="font-bold">基础计划中的所有内容</span>',
+            description: '<span class="font-bold text-red-500">基础计划中的所有内容</span>',
             icon: 'tabler:checks',
           },
           {
@@ -186,7 +195,7 @@ const metadata = {
         ],
         content: `
 <form class="flex flex-col space-y-3 mx-3 min-w-[200px]">
-  <label for="users" class="text-left font-bold">授权用户数量：</label>
+  <label for="users" class="text-left font-bold">登录用户数量：</label>
   <input class="bg-white text-black rounded-md border border-gray-300 py-1 px-2 w-24 h-10" type="number" id="users" name="users" value="10" min="10" max="500" step="10">
   <input type="range" id="usersSlider" class="slider" name="usersRange" value="10" min="10" max="500" step="10">
   <label for="devices" class="text-left font-bold">管理设备数量：</label>
@@ -233,7 +242,7 @@ const metadata = {
         id: 'custom2',
         content: `
 <form class="flex flex-col space-y-3 mx-3">
-  <label for="users2" class="text-left font-bold">授权用户数量：</label>
+  <label for="users2" class="text-left font-bold">登录用户数量：</label>
   <input class="bg-white text-black rounded-md border border-gray-300 py-1 px-2 w-24 h-10" type="number" id="users2" name="users2" value="10" min="10" max="500" step="10">
   <input type="range" id="usersSlider2" class="slider" name="usersRange2" value="10" min="10" max="500" step="10">
   <label for="devices2" class="text-left font-bold">管理设备数量：</label>
@@ -253,6 +262,14 @@ const metadata = {
       },
     ]}
   />
+  <!-- 
+  <CallToAction>
+    <Fragment slot="title">联系我们获取更大的计划和咨询</Fragment>
+    <Fragment slot="subtitle">
+      <Image src={wxImage} alt="微信二维码" class="mx-auto mt-4" width={128} height={128} />
+    </Fragment>
+  </CallToAction>
+  -->
 
   <CallToAction
     actions={[

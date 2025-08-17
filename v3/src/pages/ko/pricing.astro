@@ -7,7 +7,10 @@ import Steps from '~/components/widgets/Steps.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
-  title: '가격',
+  title: 'RustDesk 가격 - 자체 호스팅 원격 데스크톱 서버 계획',
+  description: '조직에 적합한 RustDesk 자체 호스팅 계획을 선택하세요. 무료 오픈 소스 계획 이용 가능. 기업용 고급 기능을 갖춘 Pro 계획.',
+  keywords: 'rustdesk 가격, 자체 호스팅 원격 데스크톱 가격, 원격 데스크톱 서버 비용, 오픈 소스 원격 액세스 가격, 기업 원격 데스크톱 계획',
+  author: 'RustDesk Team',
 };
 ---
 
@@ -75,18 +78,18 @@ const metadata = {
         price: '9.90 <span class="text-sm">/월</span>',
         period: '연간 청구',
         items: [
-          {
-            description:
-              '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#what-are-managed-devices--licensed-users--concurrent-connections-in-pro">1 라이센스 사용자</a>',
-          },
-          {
-            description:
-              '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#what-are-managed-devices--licensed-users--concurrent-connections-in-pro">20 관리 장치</a>',
-          },
-          {
-            description:
-              '<a class="underline text-blue-500 font-bold" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#what-are-managed-devices--licensed-users--concurrent-connections-in-pro">무제한 동시 연결</a>',
-          },
+              {
+              description:
+                '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#login-users">1 로그인 사용자 <span class="inline-flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-red-500 rounded-full hover:bg-red-600 cursor-help ml-1" title="Click for more information">?</span></a>',
+              },
+              {
+              description:
+                '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#managed-devices">20 관리 장치 <span class="inline-flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-red-500 rounded-full hover:bg-red-600 cursor-help ml-1" title="Click for more information">?</span></a>',
+              },
+              {
+              description:
+                '<a class="underline text-red-500 font-bold" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#concurrent-connections">무제한 동시 연결</a>',
+              },
           {
             description:
               '<a class="underline" target="_blank" href="https://rustdesk.com/docs/en/self-host/rustdesk-server-pro/2fa/">2FA</a>',
@@ -130,17 +133,17 @@ const metadata = {
         period: '연간 청구',
         items: [
           {
-            description: '<span class="font-bold">개인 계획의 모든 것</span>',
+            description: '<span class="font-bold text-red-500">개인 계획의 모든 것</span>',
             icon: 'tabler:checks',
           },
           {
-            description:
-              '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#what-are-managed-devices--licensed-users--concurrent-connections-in-pro">10 라이센스 사용자</a>',
-          },
-          {
-            description:
-              '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#what-are-managed-devices--licensed-users--concurrent-connections-in-pro">100 관리 장치</a>',
-          },
+              description:
+                '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#login-users">10 로그인 사용자</a>',
+              },
+              {
+              description:
+                '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#managed-devices">100 관리 장치</a>',
+              },
           {
             description:
               '<a class="underline" target="_blank" href="https://rustdesk.com/docs/en/self-host/rustdesk-server-pro/oidc/">OIDC (SSO)</a>',
@@ -157,6 +160,10 @@ const metadata = {
             description:
               '<a class="underline text-blue-500 font-bold" target="_blank" href="https://rustdesk.com/docs/en/self-host/client-configuration/#1-custom-client-generator-pro-only">맞춤 클라이언트 생성기</a>',
           },
+          {
+            description:
+              '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#how-to-make-rustdesk-work-properly-in-restricted-network-with-80443-only">WebSocket</a>',
+          },
         ],
         callToAction: {
           text: '지금 구매',
@@ -172,7 +179,7 @@ const metadata = {
         period: '연간 청구',
         items: [
           {
-            description: '<span class="font-bold">기본 계획의 모든 것</span>',
+            description: '<span class="font-bold text-red-500">기본 계획의 모든 것</span>',
             icon: 'tabler:checks',
           },
           {

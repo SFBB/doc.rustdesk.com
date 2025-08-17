@@ -1,30 +1,51 @@
 ---
-title: Controle de Acesso
+title: Controle de acesso
 weight: 16
 ---
 
-### Permissões de acesso ao dispositivo
+## Permissões de acesso a dispositivos
 
-Existem duas maneiras de associar um dispositivo a um usuário:
-- Via página de dispositivos do console
-- Fazendo login na conta de usuário especificada no lado do cliente
+O dispositivo pode ser atribuído a um único usuário, a um único grupo de dispositivos, ou a ambos.
 
-As duas situações a seguir impedirão o acesso ao dispositivo:
-- `Desativar` o dispositivo na página de dispositivos do console
-- `Desativar` o usuário na página de usuários do console
+Quando o dispositivo é atribuído a um usuário, ele pode ser acessado por esse usuário, um grupo de usuários, ou através de configurações apropriadas entre grupos de usuários.
 
-O dispositivo associado só pode ser acessado por dispositivos do mesmo usuário ou grupo de usuários, ou em configurações de grupo cruzado corretas.
+Quando o dispositivo é atribuído a um grupo de dispositivos, ele pode ser acessado através de configurações apropriadas entre usuários e grupos de dispositivos.
 
-### Configurações de grupo cruzado
+Existem três maneiras de atribuir um dispositivo a um usuário:
+- Através da página de dispositivos do console
+- Fazer login na conta de usuário especificada no lado do cliente
+- Linha de comando de atribuição
 
-Vá para a página de grupos no console web e clique em `Editar` para editar as configurações de grupo cruzado conforme abaixo.
+Existem duas maneiras de atribuir um dispositivo a um grupo de dispositivos:
+- Através da página de dispositivos do console
+- Linha de comando de atribuição
 
-Suas modificações em `Acesso com outros grupos` entram em vigor imediatamente, sem necessidade de clicar no botão `OK`.
+As duas situações a seguir impedirão que o dispositivo seja acessado:
+- Tornar o dispositivo `desabilitado` na página de dispositivos do console
+- Tornar o usuário `desabilitado` na página de usuários do console
 
-Tanto `Pode acessar para` quanto `Pode ser acessado de` têm quase a mesma função, oferecemos ambas as opções para sua conveniência. No entanto, isso pode causar alguma confusão.
+## Configurações de acesso a grupos de usuários
+
+Vá para a página de grupos no console web, clique em `Editar` para editar as configurações entre grupos conforme mostrado abaixo.
+
+Suas modificações em `Acesso com outros grupos` fazem efeito imediatamente sem exigir que você clique no botão `OK`.
+
+Tanto `Pode acessar` quanto `Pode ser acessado de` servem quase a mesma função, fornecemos ambas as opções para sua conveniência. No entanto, isso pode causar alguma confusão.
 
 {{% notice note %}}
-O usuário e o grupo atribuídos ao lado controlador são determinados pelo usuário que faz login, e não pelo usuário atribuído do console web. Projetamos dessa forma porque alguns lados controladores não possuem um ID de dispositivo, como o cliente iOS e o cliente web.
+O usuário e grupo atribuídos ao lado de controle são determinados pelo usuário que faz login, em vez do usuário atribuído pelo console web. Projetamos dessa forma porque certos lados de controle não têm um ID de dispositivo, como o cliente iOS e o cliente web.
 {{% /notice %}}
 
 ![](/docs/en/self-host/rustdesk-server-pro/permissions/images/crossgrp.png)
+
+## Configurações de acesso a grupos de dispositivos
+
+Os grupos de dispositivos fornecem outra maneira de gerenciar permissões de acesso. Aqui estão as regras principais:
+
+1. Um dispositivo só pode ser adicionado a um grupo de dispositivos
+2. Você pode definir permissões de acesso para usuários ou grupos de usuários para grupos de dispositivos. Essas permissões são cumulativas com as permissões de acesso a grupos de usuários - o que significa que o acesso é concedido se as permissões do grupo de usuários ou as permissões do grupo de dispositivos permitirem
+3. Quando um dispositivo não atribuído é adicionado a um grupo de dispositivos, ele não é mais considerado "não atribuído"
+
+{{% notice note %}}
+O recurso de grupo de dispositivos requer RustDesk cliente >= 1.3.8 e RustDesk Server Pro >= 1.5.0
+{{% /notice %}}

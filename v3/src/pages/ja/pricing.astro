@@ -7,7 +7,10 @@ import Steps from '~/components/widgets/Steps.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
-  title: '料金',
+  title: 'RustDesk 料金 - セルフホスティングリモートデスクトップサーバープラン',
+  description: '組織に適した RustDesk セルフホスティングプランを選択してください。無料のオープンソースプランを利用できます。企業用の高度な機能を持つ Pro プラン。',
+  keywords: 'rustdesk料金, セルフホスティングリモートデスクトップ料金, リモートデスクトップサーバーコスト, オープンソースリモートアクセス料金, 企業リモートデスクトッププラン',
+  author: 'RustDesk Team',
 };
 ---
 
@@ -76,16 +79,16 @@ const metadata = {
         period: '年間請求',
         items: [
           {
-            description:
-              '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#what-are-managed-devices--licensed-users--concurrent-connections-in-pro">1ライセンスユーザー</a>',
+          description:
+            '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#login-users">1ログインユーザー <span class="inline-flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-red-500 rounded-full hover:bg-red-600 cursor-help ml-1" title="Click for more information">?</span></a>',
           },
           {
-            description:
-              '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#what-are-managed-devices--licensed-users--concurrent-connections-in-pro">20管理デバイス</a>',
+          description:
+            '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#managed-devices">20管理デバイス <span class="inline-flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-red-500 rounded-full hover:bg-red-600 cursor-help ml-1" title="Click for more information">?</span></a>',
           },
           {
-            description:
-              '<a class="underline text-blue-500 font-bold" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#what-are-managed-devices--licensed-users--concurrent-connections-in-pro">無制限の同時接続</a>',
+          description:
+            '<a class="underline text-red-500 font-bold" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#concurrent-connections">無制限の同時接続</a>',
           },
           {
             description:
@@ -130,16 +133,16 @@ const metadata = {
         period: '年間請求',
         items: [
           {
-            description: '<span class="font-bold">個人プランのすべての機能</span>',
+            description: '<span class="font-bold text-red-500">個人プランのすべての機能</span>',
             icon: 'tabler:checks',
           },
           {
-            description:
-              '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#what-are-managed-devices--licensed-users--concurrent-connections-in-pro">10ライセンスユーザー</a>',
+          description:
+            '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#login-users">10ログインユーザー</a>',
           },
           {
-            description:
-              '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#what-are-managed-devices--licensed-users--concurrent-connections-in-pro">100管理デバイス</a>',
+          description:
+            '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#managed-devices">100管理デバイス</a>',
           },
           {
             description:
@@ -157,6 +160,10 @@ const metadata = {
             description:
               '<a class="underline text-blue-500 font-bold" target="_blank" href="https://rustdesk.com/docs/en/self-host/client-configuration/#1-custom-client-generator-pro-only">カスタムクライアントジェネレーター</a>',
           },
+          {
+            description:
+              '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#how-to-make-rustdesk-work-properly-in-restricted-network-with-80443-only">WebSocket</a>',
+          },
         ],
         callToAction: {
           text: '今すぐ購入',
@@ -172,7 +179,7 @@ const metadata = {
         period: '年間請求',
         items: [
           {
-            description: '<span class="font-bold">ベーシックプランのすべての機能</span>',
+            description: '<span class="font-bold text-red-500">ベーシックプランのすべての機能</span>',
             icon: 'tabler:checks',
           },
           {
@@ -184,7 +191,7 @@ const metadata = {
         ],
         content: `
 <form class="flex flex-col space-y-3 mx-3 min-w-[200px]">
-  <label for="users" class="text-left font-bold">ライセンスユーザー数：</label>
+  <label for="users" class="text-left font-bold">ログインユーザー数：</label>
   <input class="bg-white text-black rounded-md border border-gray-300 py-1 px-2 w-24 h-10" type="number" id="users" name="users" value="10" min="10" max="500" step="10">
   <input type="range" id="usersSlider" class="slider" name="usersRange" value="10" min="10" max="500" step="10">
   <label for="devices" class="text-left font-bold">管理デバイス数：</label>

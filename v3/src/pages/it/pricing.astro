@@ -7,7 +7,10 @@ import Steps from '~/components/widgets/Steps.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
-  title: 'Prezzi',
+  title: 'Prezzi RustDesk - Piani Server Desktop Remoto Self-Hosted',
+  description: 'Scegli il piano di self-hosting RustDesk giusto per la tua organizzazione. Piano open source gratuito disponibile. Piani Pro con funzionalità avanzate per uso aziendale.',
+  keywords: 'prezzi rustdesk, prezzi desktop remoto self-hosted, costo server desktop remoto, prezzi accesso remoto open source, piani desktop remoto aziendali',
+  author: 'RustDesk Team',
 };
 ---
 
@@ -76,16 +79,16 @@ const metadata = {
         period: 'fatturato annualmente',
         items: [
           {
-            description:
-              '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#what-are-managed-devices--licensed-users--concurrent-connections-in-pro">1 utente con licenza</a>',
+          description:
+            '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#login-users">1 utente di login <span class="inline-flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-red-500 rounded-full hover:bg-red-600 cursor-help ml-1" title="Click for more information">?</span></a>',
           },
           {
-            description:
-              '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#what-are-managed-devices--licensed-users--concurrent-connections-in-pro">20 dispositivi gestiti</a>',
+          description:
+            '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#managed-devices">20 dispositivi gestiti <span class="inline-flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-red-500 rounded-full hover:bg-red-600 cursor-help ml-1" title="Click for more information">?</span></a>',
           },
           {
-            description:
-              '<a class="underline text-blue-500 font-bold" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#what-are-managed-devices--licensed-users--concurrent-connections-in-pro">Connessioni simultanee illimitate</a>',
+          description:
+            '<a class="underline text-red-500 font-bold" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#concurrent-connections">Connessioni simultanee illimitate</a>',
           },
           {
             description:
@@ -130,16 +133,16 @@ const metadata = {
         period: 'fatturato annualmente',
         items: [
           {
-            description: '<span class="font-bold">Tutto nel piano individuale</span>',
+            description: '<span class="font-bold text-red-500">Tutto nel piano individuale</span>',
             icon: 'tabler:checks',
           },
           {
-            description:
-              '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#what-are-managed-devices--licensed-users--concurrent-connections-in-pro">10 utenti con licenza</a>',
+          description:
+            '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#login-users">10 utente di login</a>',
           },
           {
-            description:
-              '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#what-are-managed-devices--licensed-users--concurrent-connections-in-pro">100 dispositivi gestiti</a>',
+          description:
+            '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#managed-devices">100 dispositivi gestiti</a>',
           },
           {
             description:
@@ -157,6 +160,10 @@ const metadata = {
             description:
               '<a class="underline text-blue-500 font-bold" target="_blank" href="https://rustdesk.com/docs/en/self-host/client-configuration/#1-custom-client-generator-pro-only">Generatore di client personalizzato</a>',
           },
+          {
+            description:
+              '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#how-to-make-rustdesk-work-properly-in-restricted-network-with-80443-only">WebSocket</a>',
+          },
         ],
         callToAction: {
           text: 'Acquista ora',
@@ -172,19 +179,19 @@ const metadata = {
         period: 'fatturato annualmente',
         items: [
           {
-            description: '<span class="font-bold">Tutto nel piano base</span>',
+            description: '<span class="font-bold text-red-500">Tutto nel piano base</span>',
             icon: 'tabler:checks',
           },
           {
-            description: '1€ per ogni utente aggiuntivo',
+            description: '1$ per ogni utente aggiuntivo',
           },
           {
-            description: '0,1€ per ogni dispositivo aggiuntivo',
+            description: '0,1$ per ogni dispositivo aggiuntivo',
           },
         ],
         content: `
 <form class="flex flex-col space-y-3 mx-3 min-w-[200px]">
-  <label for="users" class="text-left font-bold">Numero di utenti con licenza:</label>
+  <label for="users" class="text-left font-bold">Numero di utenti:</label>
   <input class="bg-white text-black rounded-md border border-gray-300 py-1 px-2 w-24 h-10" type="number" id="users" name="users" value="10" min="10" max="500" step="10">
   <input type="range" id="usersSlider" class="slider" name="usersRange" value="10" min="10" max="500" step="10">
   <label for="devices" class="text-left font-bold">Numero di dispositivi gestiti:</label>
@@ -218,19 +225,19 @@ const metadata = {
             description: 'Sessioni simultanee illimitate (in schede o finestre separate) per connessione simultanea',
           },
           {
-            description: '1€ per ogni utente aggiuntivo',
+            description: '1$ per ogni utente aggiuntivo',
           },
           {
-            description: '0,1€ per ogni dispositivo aggiuntivo',
+            description: '0,1$ per ogni dispositivo aggiuntivo',
           },
           {
-            description: '20€ per ogni connessione simultanea aggiuntiva',
+            description: '20$ per ogni connessione simultanea aggiuntiva',
           },
         ],
         id: 'custom2',
         content: `
 <form class="flex flex-col space-y-3 mx-3">
-  <label for="users2" class="text-left font-bold">Numero di utenti con licenza:</label>
+  <label for="users2" class="text-left font-bold">Numero di utenti:</label>
   <input class="bg-white text-black rounded-md border border-gray-300 py-1 px-2 w-24 h-10" type="number" id="users2" name="users2" value="10" min="10" max="500" step="10">
   <input type="range" id="usersSlider2" class="slider" name="usersRange2" value="10" min="10" max="500" step="10">
   <label for="devices2" class="text-left font-bold">Numero di dispositivi gestiti:</label>

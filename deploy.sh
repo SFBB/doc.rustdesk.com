@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+rm -rf public/*
 hugo --minify
 cd public; tar czf x *
 scp x ot:/tmp/

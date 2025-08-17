@@ -7,7 +7,10 @@ import Steps from '~/components/widgets/Steps.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
-  title: 'التسعير',
+  title: 'تسعير رست ديسك - خطط الخادم المستضاف ذاتيًا',
+  description: 'اختر خطة رست ديسك المناسبة لمؤسستك. خطة مفتوحة المصدر مجانية متوفرة. خطط احترافية مع ميزات متقدمة للاستخدام التجاري.',
+  keywords: 'تسعير رست ديسك, تسعير سطح المكتب البعيد المستضاف ذاتيًا, تكلفة خادم الوصول عن بعد, خطط سطح المكتب البعيد المتقدمة',
+  author: 'RustDesk Team',
 };
 ---
 
@@ -76,16 +79,16 @@ const metadata = {
         period: 'تُدفع سنويًا',
         items: [
           {
-            description:
-              '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#what-are-managed-devices--licensed-users--concurrent-connections-in-pro">مستخدم مرخص واحد</a>',
+          description:
+            '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#login-users"><span class="inline-flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-red-500 rounded-full hover:bg-red-600 cursor-help ml-1" title="Click for more information">?</span>مستخدم تسجيل دخول واحد</a>',
           },
           {
-            description:
-              '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#what-are-managed-devices--licensed-users--concurrent-connections-in-pro">20 جهاز مُدار</a>',
+          description:
+            '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#managed-devices"><span class="inline-flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-red-500 rounded-full hover:bg-red-600 cursor-help ml-1" title="Click for more information">?</span>20 جهاز مُدار</a>',
           },
           {
-            description:
-              '<a class="underline text-blue-500 font-bold" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#what-are-managed-devices--licensed-users--concurrent-connections-in-pro">اتصالات متزامنة غير محدودة</a>',
+          description:
+            '<a class="underline text-red-500 font-bold" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#concurrent-connections">اتصالات متزامنة غير محدودة</a>',
           },
           {
             description:
@@ -125,22 +128,22 @@ const metadata = {
       },
       {
         title: 'أساسي',
-        subtitle: 'خطة الاستضافة الذاتية <span class="font-bold">الاحترافية</span> الأساسية',
+        subtitle: 'خطة الاستضافة الذاتية <span class="font-bold text-red-500">الاحترافية</span> الأساسية',
         price: '19.90 <span class="text-sm">/ شهر</span>',
         period: 'تُدفع سنويًا',
         items: [
           {
-            description: '<span class="font-bold">كل ما في الخطة الفردية</span>',
+            description: '<span class="font-bold text-red-500">كل ما في الخطة الفردية</span>',
             icon: 'tabler:checks',
           },
-          {
+            {
             description:
-              '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#what-are-managed-devices--licensed-users--concurrent-connections-in-pro">10 مستخدمين مرخصين</a>',
-          },
-          {
+              '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#login-users">10 مستخدمين لتسجيل الدخول</a>',
+            },
+            {
             description:
-              '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#what-are-managed-devices--licensed-users--concurrent-connections-in-pro">100 جهاز مُدار</a>',
-          },
+              '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#managed-devices">100 جهاز مُدار</a>',
+            },
           {
             description:
               '<a class="underline" target="_blank" href="https://rustdesk.com/docs/en/self-host/rustdesk-server-pro/oidc/">OIDC (تسجيل دخول موحد)</a>',
@@ -157,6 +160,10 @@ const metadata = {
             description:
               '<a class="underline text-blue-500 font-bold" target="_blank" href="https://rustdesk.com/docs/en/self-host/client-configuration/#1-custom-client-generator-pro-only">مولد العملاء المخصص</a>',
           },
+          {
+            description:
+              '<a class="underline" target="_blank" href="https://github.com/rustdesk/rustdesk/wiki/FAQ#how-to-make-rustdesk-work-properly-in-restricted-network-with-80443-only">WebSocket</a>',
+          },
         ],
         callToAction: {
           text: 'اشترِ الآن',
@@ -167,12 +174,12 @@ const metadata = {
       },
       {
         title: 'مخصص',
-        subtitle: 'خطة <span class="font-bold">احترافية</span> مخصصة',
+        subtitle: 'خطة <span class="font-bold text-red-500">احترافية</span> مخصصة',
         price: '<span id="cprice">19.90</span> <span class="text-sm">/ شهر</span>',
         period: 'تُدفع سنويًا',
         items: [
           {
-            description: '<span class="font-bold">كل ما في الخطة الأساسية</span>',
+            description: '<span class="font-bold text-red-500">كل ما في الخطة الأساسية</span>',
             icon: 'tabler:checks',
           },
           {
@@ -184,7 +191,7 @@ const metadata = {
         ],
         content: `
 <form class="flex flex-col space-y-3 mx-3 min-w-[200px]">
-  <label for="users" class="text-right font-bold">عدد المستخدمين المرخصين:</label>
+  <label for="users" class="text-right font-bold">عدد المستخدمين لتسجيل الدخول:</label>
   <input class="bg-white text-black rounded-md border border-gray-300 py-1 px-2 w-24 h-10" type="number" id="users" name="users" value="10" min="10" max="500" step="10">
   <input type="range" id="usersSlider" class="slider" name="usersRange" value="10" min="10" max="500" step="10">
   <label for="devices" class="text-right font-bold">عدد الأجهزة المُدارة:</label>
@@ -230,7 +237,7 @@ const metadata = {
         id: 'custom2',
         content: `
 <form class="flex flex-col space-y-3 mx-3">
-  <label for="users2" class="text-right font-bold">عدد المستخدمين المرخصين:</label>
+  <label for="users2" class="text-right font-bold">عدد المستخدمين لتسجيل الدخول:</label>
   <input class="bg-white text-black rounded-md border border-gray-300 py-1 px-2 w-24 h-10" type="number" id="users2" name="users2" value="10" min="10" max="500" step="10">
   <input type="range" id="usersSlider2" class="slider" name="usersRange2" value="10" min="10" max="500" step="10">
   <label for="devices2" class="text-right font-bold">عدد الأجهزة المُدارة:</label>
