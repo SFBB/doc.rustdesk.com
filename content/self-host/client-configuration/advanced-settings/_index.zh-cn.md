@@ -809,21 +809,6 @@ ar, bg, ca, cs, da, de, el, en, eo, es, et, fa, fr, he, hr, hu, id, it, ja, ko, 
 | :------: | :------: | :------: | :------: |
 | 否 | Y, N | N | `privacy-mode=Y` |
 
-### touch-mode
-
-此选项将为每个对等端在首次连接后设置"触控模式"选项。
-
-每个对等端设置中的"触控模式"选项将控制是否使用触控模式或鼠标模式。
-
-**位置**：
-
-1. **桌面**
-2. **移动端** 设置 → 显示设置 → 其他默认选项 → 触控模式
-
-| 安装需要 | 值 | 默认值 | 示例 |
-| :------: | :------: | :------: | :------: |
-| 否 | Y, N | N | `touch-mode=Y` |
-
 ### i444
 
 此选项将为每个对等端在首次连接后设置"i444"选项。
@@ -1016,9 +1001,9 @@ ar, bg, ca, cs, da, de, el, en, eo, es, et, fa, fr, he, hr, hu, id, it, ja, ko, 
 
 ## 其他
 
-### preset-address-book-name & preset-address-book-tag
+### preset-address-book-name & preset-address-book-tag & preset-address-book-alias & preset-address-book-password & preset-address-book-note
 
-预设通讯录名称和标签，https://github.com/rustdesk/rustdesk-server-pro/issues/257。
+预设通讯录名称、设备标签、设备别名、设备密码、设备备注，https://github.com/rustdesk/rustdesk-server-pro/issues/257。
 如果不想设置标签，可以仅设置preset-address-book-name。
 请在Web控制台的通讯录页面上使用有效的通讯录名称和标签。
 
@@ -1026,6 +1011,11 @@ ar, bg, ca, cs, da, de, el, en, eo, es, et, fa, fr, he, hr, hu, id, it, ja, ko, 
 | :------: | :------: | :------: | :------: | :------: |
 | preset-address-book-name | 否 | | | `preset-address-book-name=<通讯录名称>` |
 | preset-address-book-tag | 否 | | | `preset-address-book-tag=<通讯录标签名称>` |
+| preset-address-book-alias | 否 | | | `preset-address-book-alias=<设备别名>` |
+| preset-address-book-password | 否 | | | `preset-address-book-password=<设备密码>` |
+| preset-address-book-note | 否 | | | `preset-address-book-note=<设备备注>` |
+
+preset-address-book-alias、preset-address-book-password、preset-address-book-note在RustDesk客户端>=1.4.3、pro >= 1.6.6中可用。
 
 ### disable-group-panel
 
@@ -1176,13 +1166,15 @@ https://github.com/rustdesk/rustdesk-server-pro/issues/277
 | :------: | :------: | :------: |
 | Y, N | N | `disable-udp=Y` |
 
-### preset-user-name / preset-strategy-name / preset-device-group-name
+### preset-user-name / preset-strategy-name / preset-device-group-name / preset-device-username / preset-device-name / preset-note
 
-将用户/策略/设备组分配给设备。您也可以通过[命令行](https://rustdesk.com/docs/en/self-host/rustdesk-server-pro/console/#assign-device-usersgroupsstrategies-to-devices)执行此操作。
+将用户/策略/设备组/设备用户名/设备名(主机名)/备注分配给设备。您也可以通过[命令行](https://rustdesk.com/docs/en/self-host/rustdesk-server-pro/console/#assign-device-usersgroupsstrategies-to-devices)执行此操作。
 
 https://github.com/rustdesk/rustdesk-server-pro/discussions/304
 
 设备组在RustDesk客户端>=1.3.8、pro >= 1.5.0中可用
+
+preset-device-username、preset-device-name、preset-note在RustDesk客户端>=1.4.3、pro >= 1.6.6中可用。
 
 ### default-connect-password
 
@@ -1312,7 +1304,7 @@ D3D渲染可以获得高帧率并减少CPU使用率，但在某些设备上远�
 如果`register-device=N`，以下功能对此设备不起作用。
 - 登录
 - `--assign`命令
-- `preset-address-book-name`, `--preset-address-book-tag`, `preset-user-name`, `preset-strategy-name`, `preset-device-group-name`
+- `preset-address-book-name`, `preset-address-book-tag`, `preset-address-book-alias`, `preset-address-book-password`, `preset-address-book-note` `preset-user-name`, `preset-strategy-name`, `preset-device-group-name`, `preset-device-username`, `preset-device-name`, `preset-note`
 - 审计日志
 - 策略
 
@@ -1345,3 +1337,66 @@ https://github.com/rustdesk/rustdesk-server-pro/issues/776#issuecomment-33065249
 | 选项 | 需要安装 | 值 | 默认值 | 示例 |
 | :------: | :------: | :------: | :------: | :------: |
 | disable-discovery-panel | N | Y, N | N | `disable-discovery-panel=Y` |
+
+### touch-mode
+
+控制远程会话时，使用 触控模式 或 鼠标模式。
+
+#### 版本行为差异
+
+##### RustDesk (控制端) < 1.4.3
+
+首次连接后，此选项会为每个被控设备设置 "touch-mode" 选项。之后各被控设备的独立设置将决定使用 触控模式 还是 鼠标模式 。
+
+**位置**：
+
+1. **桌面**
+2. **移动端** 设置 → 显示设置 → 其他默认选项 → 触控模式
+
+##### RustDesk (控制端) >= 1.4.3
+
+此选项将统一控制所有被控设备使用 触控模式 或 鼠标模式 ，覆盖各设备的独立设置。
+
+| 值 | 默认值 | 示例 |
+| :------: | :------: | :------: |
+| Y, N | N | `touch-mode=Y` |
+
+### show-virtual-mouse
+
+https://github.com/rustdesk/rustdesk/pull/12911
+
+控制 移动端 -> 桌面端 时，是否显示虚拟鼠标。
+
+**位置**：
+
+1. **桌面**
+2. **移动端** 远程会话 → 底部导航栏 → 手势助手
+
+自 RustDesk 1.4.3 版本起可用。
+
+| 值 | 默认值 | 示例 |
+| :------: | :------: | :------: |
+| Y, N | N | `show-virtual-mouse=Y` |
+
+**注意**: 此选项应在 **Default settings** 中配置，而非 **Override settings** 中。
+
+### show-virtual-joystick
+
+https://github.com/rustdesk/rustdesk/pull/12911
+
+控制 移动端 -> 桌面端 时，是否显示虚拟摇杆。
+
+此选项需要 **show-virtual-mouse** 选项处于启用状态。
+
+**位置**：
+
+1. **桌面**
+2. **移动端** 远程会话 → 底部导航栏 → 手势助手
+
+自 RustDesk 1.4.3 版本起可用。
+
+| 值 | 默认值 | 示例 |
+| :------: | :------: | :------: |
+| Y, N | N | `show-virtual-joystick=Y` |
+
+**注意**: 此选项应在 **Default settings** 中配置，而非 **Override settings** 中。

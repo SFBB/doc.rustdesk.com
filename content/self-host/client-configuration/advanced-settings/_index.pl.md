@@ -809,21 +809,6 @@ Opcja "privacy-mode" w ustawieniach każdego z partnerów będzie wtedy decydowa
 | :------: | :------: | :------: | :------: |
 | N | Y, N | N | `privacy-mode=Y` |
 
-### touch-mode
-
-Ta opcja ustawi opcję "touch-mode" dla każdego peer po pierwszym połączeniu.
-
-Opcja "touch-mode" w ustawieniach każdego partnera będzie wtedy kontrolować, czy używać trybu dotykowego, czy trybu myszy.
-
-**Lokalizacja**:
-
-1. **K. stacjonarny**
-2. **Smartfon** Ustawienia → Ustawienia wyświetlania → Inne domyślne opcje → Tryb dotykowy
-
-| Wymagana instalacja | Wartości | Domyślne | Przykład |
-| :------: | :------: | :------: | :------: |
-| N | Y, N | N | `touch-mode=Y` |
-
 ### i444
 
 Ta opcja ustawi opcję "i444" dla każdego partnera po pierwszym połączeniu.
@@ -1027,9 +1012,9 @@ Opcja "trackpad-speed" w ustawieniach każdego partnera będzie wtedy kontrolowa
 
 ## Inne
 
-### preset-address-book-name & preset-address-book-tag
+### preset-address-book-name & preset-address-book-tag & preset-address-book-alias & preset-address-book-password & preset-address-book-note
 
-Nazwa i tag wstępnie ustawionej książki adresowej, https://github.com/rustdesk/rustdesk-server-pro/issues/257.
+Nazwa książki adresowej, tag urządzenia, alias urządzenia, hasło urządzenia, notatka urządzenia wstępnie ustawione, https://github.com/rustdesk/rustdesk-server-pro/issues/257.
 Wartość preset-address-book-name można ustawić tylko wtedy, gdy nie chcesz ustawiać tagu.
 Użyj prawidłowej nazwy książki adresowej i tagu na stronie książki adresowej konsoli webowej.
 
@@ -1037,6 +1022,11 @@ Użyj prawidłowej nazwy książki adresowej i tagu na stronie książki adresow
 | :------: | :------: | :------: | :------: | :------: |
 | preset-address-book-name | N | | | `preset-address-book-name=<nazwa książki adresowej>` |
 | preset-address-book-tag | N | | | `preset-address-book-tag=<nazwa tagu książki adresowej>` |
+| preset-address-book-alias | N | | | `preset-address-book-alias=<alias urządzenia>` |
+| preset-address-book-password | N | | | `preset-address-book-password=<hasło urządzenia>` |
+| preset-address-book-note | N | | | `preset-address-book-note=<notatka urządzenia>` |
+
+preset-address-book-alias, preset-address-book-password, preset-address-book-note są dostępne w kliencie RustDesk >=1.4.3, pro >= 1.6.6.
 
 ### disable-group-panel
 
@@ -1187,13 +1177,15 @@ Kontroluje, czy używać wyłącznie protokołu TCP. Nie będzie już używać p
 | :------: | :------: | :------: |
 | Y, N | N | `disable-udp=Y` |
 
-### preset-user-name / preset-strategy-name / preset-device-group-name
+### preset-user-name / preset-strategy-name / preset-device-group-name / preset-device-username / preset-device-name / preset-note
 
-Przypisz użytkownika / strategię / grupę urządzeń do urządzenia. Możesz to również zrobić za pomocą [wiersza poleceń](https://rustdesk.com/docs/en/self-host/rustdesk-server-pro/console/#assign-device-usersgroupsstrategies-to-devices).
+Przypisz użytkownika / strategię / grupę urządzeń / nazwę użytkownika urządzenia / nazwę urządzenia(hostname) / notatkę do urządzenia. Możesz to również zrobić za pomocą [wiersza poleceń](https://rustdesk.com/docs/en/self-host/rustdesk-server-pro/console/#assign-device-usersgroupsstrategies-to-devices).
 
 https://github.com/rustdesk/rustdesk-server-pro/discussions/304
 
 funkcja grup urządzeń jest dostępna w klientach RustDeska >=1.3.8, pro >= 1.5.0
+
+preset-device-username, preset-device-name, preset-note są dostępne w kliencie RustDesk >=1.4.3, pro >= 1.6.6.
 
 ### default-connect-password
 
@@ -1321,7 +1313,7 @@ Nie rejestruj urządzenia, nie będzie ono widoczne na stronie urządzeń w kons
 Jeśli `register-device=N`, poniższe nie będzie działać dla tego urządzenia.
 - Logowanie się
 - Polecenie `--assign`
-- `preset-address-book-name`, `--preset-address-book-tag`, `preset-user-name`, `preset-strategy-name`, `preset-device-group-name`
+- `preset-address-book-name`, `preset-address-book-tag`, `preset-address-book-alias`, `preset-address-book-password`, `preset-address-book-note` `preset-user-name`, `preset-strategy-name`, `preset-device-group-name`, `preset-device-username`, `preset-device-name`, `preset-note`
 - Dzienniki audytowe
 - Strategie
 
@@ -1354,3 +1346,66 @@ Wyłącz panel "Odkryte" (obok panelu "Ulubione") w kliencie RustDesk.
 | Opcja | Wymagana instalacja | Wartości | Domyślne | Przykład |
 | :------: | :------: | :------: | :------: | :------: |
 | disable-discovery-panel | N | Y, N | N | `disable-discovery-panel=Y` |
+
+### touch-mode
+
+Kontroluje, czy podczas sesji zdalnego sterowania używany jest tryb dotykowy czy tryb myszy.
+
+#### Różnice w zachowaniu w zależności od wersji
+
+##### RustDesk (strona kontrolująca) < 1.4.3
+
+Po pierwszym połączeniu ta opcja ustawia parametr "touch-mode" dla każdego peer. Następnie indywidualne ustawienia każdego peer decydują o użyciu trybu dotykowego lub trybu myszy.
+
+**Lokalizacja**:
+
+1. **Desktop**
+2. **Mobile** Ustawienia → Ekran → Inne domyślne opcje → Tryb dotyku
+
+##### RustDesk (strona kontrolująca) >= 1.4.3
+
+Opcja ta jednolicie kontroluje, czy wszystkie urządzenia peer używają trybu dotykowego czy trybu myszy, nadpisując indywidualne ustawienia urządzeń.
+
+| Wartości | Domyślnie | Przykład |
+| :------: | :------: | :------: |
+| Y, N | N | `touch-mode=Y` |
+
+### show-virtual-mouse
+
+https://github.com/rustdesk/rustdesk/pull/12911
+
+Kontroluje wyświetlanie wirtualnego kursora przy trybie mobile → desktop.
+
+**Lokalizacja**:
+
+1. **Desktop**
+2. **Mobile** Sesja zdalna → dolny pasek nawigacji → pomocnik gestów
+
+Dostępne od RustDesk 1.4.3
+
+| Wartości | Domyślnie | Przykład |
+| :------: | :------: | :------: |
+| Y, N | N | `show-virtual-mouse=Y` |
+
+**Uwaga**: Opcja ta powinna być skonfigurowana w **Default settings**, a nie w **Override settings**.
+
+### show-virtual-joystick
+
+https://github.com/rustdesk/rustdesk/pull/12911
+
+Kontroluje wyświetlanie wirtualnego joysticka przy trybie mobile → desktop.
+
+Opcja ta wymaga, aby **show-virtual-mouse** był włączony.
+
+**Lokalizacja**:
+
+1. **Desktop**
+2. **Mobile** Sesja zdalna → dolny pasek nawigacji → pomocnik gestów
+
+Dostępne od RustDesk 1.4.3
+
+| Wartości | Domyślnie | Przykład |
+| :------: | :------: | :------: |
+| Y, N | N | `show-virtual-joystick=Y` |
+
+**Uwaga**: Opcja ta powinna być skonfigurowana w **Default settings**, a nie w **Override settings**.

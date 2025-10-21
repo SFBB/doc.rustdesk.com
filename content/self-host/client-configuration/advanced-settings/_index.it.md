@@ -808,21 +808,6 @@ L'opzione "modalità privacy" nelle impostazioni di ogni peer controllerà quind
 | :------: | :------: | :------: | :------: |
 | N | Y, N | N | `privacy-mode=Y` |
 
-### touch-mode
-
-Questa opzione imposterà l'opzione "modalità touch" per ogni peer dopo la prima connessione.
-
-L'opzione "modalità touch" nelle impostazioni di ogni peer controllerà quindi se usare modalità touch o modalità mouse.
-
-**Posizione**:
-
-1. **Desktop**
-2. **Mobile** Impostazioni → Impostazioni display → Altre opzioni predefinite → Modalità touch
-
-| Installazione richiesta | Valori | Predefinito | Esempio |
-| :------: | :------: | :------: | :------: |
-| N | Y, N | N | `touch-mode=Y` |
-
 ### i444
 
 Questa opzione imposterà l'opzione "i444" per ogni peer dopo la prima connessione.
@@ -1015,9 +1000,9 @@ L'opzione "trackpad-speed" nelle impostazioni di ogni peer controllerà quindi g
 
 ## Altri
 
-### preset-address-book-name & preset-address-book-tag
+### preset-address-book-name & preset-address-book-tag & preset-address-book-alias & preset-address-book-password & preset-address-book-note
 
-Nome e tag rubrica preimpostati, https://github.com/rustdesk/rustdesk-server-pro/issues/257.
+Nome rubrica, tag dispositivo, alias dispositivo, password dispositivo, nota dispositivo preimpostati, https://github.com/rustdesk/rustdesk-server-pro/issues/257.
 Puoi impostare preset-address-book-name solo se non vuoi impostare il tag.
 Usa un nome e tag rubrica validi nella tua pagina rubrica della console web.
 
@@ -1025,6 +1010,11 @@ Usa un nome e tag rubrica validi nella tua pagina rubrica della console web.
 | :------: | :------: | :------: | :------: | :------: |
 | preset-address-book-name | N | | | `preset-address-book-name=<nome rubrica>` |
 | preset-address-book-tag | N | | | `preset-address-book-tag=<nome tag rubrica>` |
+| preset-address-book-alias | N | | | `preset-address-book-alias=<alias dispositivo>` |
+| preset-address-book-password | N | | | `preset-address-book-password=<password dispositivo>` |
+| preset-address-book-note | N | | | `preset-address-book-note=<nota dispositivo>` |
+
+preset-address-book-alias, preset-address-book-password, preset-address-book-note sono disponibili nel client RustDesk >=1.4.3, pro >= 1.6.6.
 
 ### disable-group-panel
 
@@ -1175,13 +1165,15 @@ Controlla se usare solo TCP. Non userà più UDP 21116, TCP 21116 sarà usato in
 | :------: | :------: | :------: |
 | Y, N | N | `disable-udp=Y` |
 
-### preset-user-name / preset-strategy-name / preset-device-group-name
+### preset-user-name / preset-strategy-name / preset-device-group-name / preset-device-username / preset-device-name / preset-note
 
-Assegna utente / strategia / gruppo dispositivo al dispositivo. Puoi anche farlo tramite [riga di comando](https://rustdesk.com/docs/en/self-host/rustdesk-server-pro/console/#assign-device-usersgroupsstrategies-to-devices).
+Assegna utente / strategia / gruppo dispositivo / nome utente dispositivo / nome dispositivo(hostname) / nota al dispositivo. Puoi anche farlo tramite [riga di comando](https://rustdesk.com/docs/en/self-host/rustdesk-server-pro/console/#assign-device-usersgroupsstrategies-to-devices).
 
 https://github.com/rustdesk/rustdesk-server-pro/discussions/304
 
 gruppo dispositivo è disponibile nel client RustDesk >=1.3.8, pro >= 1.5.0
+
+preset-device-username, preset-device-name, preset-note sono disponibili nel client RustDesk >=1.4.3, pro >= 1.6.6.
 
 ### default-connect-password
 
@@ -1309,7 +1301,7 @@ Non registrare il dispositivo, non lo vedrai nella pagina dispositivi sulla cons
 Se `register-device=N`, quanto segue non funzionerà per questo dispositivo.
 - Login
 - Comando `--assign`
-- `preset-address-book-name`, `--preset-address-book-tag`, `preset-user-name`, `preset-strategy-name`, `preset-device-group-name`
+- `preset-address-book-name`, `preset-address-book-tag`, `preset-address-book-alias`, `preset-address-book-password`, `preset-address-book-note` `preset-user-name`, `preset-strategy-name`, `preset-device-group-name`, `preset-device-username`, `preset-device-name`, `preset-note`
 - Log di audit
 - Strategia
 
@@ -1342,3 +1334,66 @@ Disabilita il pannello "Rilevato" (accanto al pannello "Preferiti") sul client R
 | Opzione | Installazione richiesta | Valori | Predefinito | Esempio |
 | :------: | :------: | :------: | :------: |
 | disable-discovery-panel | N | Y, N | N | `disable-discovery-panel=Y` |
+
+### touch-mode
+
+Controlla se usare la modalità touch o la modalità mouse durante le sessioni di controllo remoto.
+
+#### Differenze di comportamento per versione
+
+##### RustDesk (lato controllante) < 1.4.3
+
+Dopo la prima connessione, questa opzione imposta la configurazione "touch-mode" per ogni peer. Successivamente, le impostazioni individuali di ciascun peer determinano se utilizzare la modalità touch o quella mouse.
+
+**Posizione**:
+
+1. **Desktop**
+2. **Mobile** Impostazioni → Schermo → Altre opzioni predefinite → Modalità touch
+
+##### RustDesk (lato controllante) >= 1.4.3
+
+Questa opzione controlla in modo uniforme se tutti i dispositivi peer utilizzano la modalità touch o la modalità mouse, sovrascrivendo le impostazioni dei singoli dispositivi.
+
+| Valori | Predefinito | Esempio |
+| :------: | :------: | :------: |
+| Y, N | N | `touch-mode=Y` |
+
+### show-virtual-mouse
+
+https://github.com/rustdesk/rustdesk/pull/12911
+
+Controlla la visualizzazione del mouse virtuale quando mobile → desktop.
+
+**Posizione**:
+
+1. **Desktop**
+2. **Mobile** Sessione remota → barra di navigazione inferiore → guida ai gesti
+
+Disponibile da RustDesk 1.4.3
+
+| Valori | Predefinito | Esempio |
+| :------: | :------: | :------: |
+| Y, N | N | `show-virtual-mouse=Y` |
+
+**Nota**: Questa opzione dovrebbe essere configurata nelle **Default settings** e non nelle **Override settings**.
+
+### show-virtual-joystick
+
+https://github.com/rustdesk/rustdesk/pull/12911
+
+Controlla la visualizzazione del joystick virtuale quando mobile → desktop.
+
+Questa opzione richiede che **show-virtual-mouse** sia abilitato.
+
+**Posizione**:
+
+1. **Desktop**
+2. **Mobile** Sessione remota → barra di navigazione inferiore → guida ai gesti
+
+Disponibile da RustDesk 1.4.3
+
+| Valori | Predefinito | Esempio |
+| :------: | :------: | :------: |
+| Y, N | N | `show-virtual-joystick=Y` |
+
+**Nota**: Questa opzione dovrebbe essere configurata nelle **Default settings** e non nelle **Override settings**.

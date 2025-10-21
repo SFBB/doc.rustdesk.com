@@ -808,21 +808,6 @@ La opción "modo privacidad" en las configuraciones de cada par controlará lueg
 | :------: | :------: | :------: | :------: |
 | N | Y, N | N | `privacy-mode=Y` |
 
-### touch-mode
-
-Esta opción establecerá la opción "modo táctil" para cada par después de la primera conexión.
-
-La opción "modo táctil" en las configuraciones de cada par controlará luego si usar modo táctil o modo ratón.
-
-**Ubicación**:
-
-1. **Escritorio**
-2. **Móvil** Configuración → Configuración de pantalla → Otras opciones predeterminadas → Modo táctil
-
-| Instalación requerida | Valores | Predeterminado | Ejemplo |
-| :------: | :------: | :------: | :------: |
-| N | Y, N | N | `touch-mode=Y` |
-
 ### i444
 
 Esta opción establecerá la opción "i444" para cada par después de la primera conexión.
@@ -1015,9 +1000,9 @@ La opción "trackpad-speed" en la configuración de cada par controlará los fps
 
 ## Otros
 
-### preset-address-book-name & preset-address-book-tag
+### preset-address-book-name & preset-address-book-tag & preset-address-book-alias & preset-address-book-password & preset-address-book-note
 
-Nombre y etiqueta de libreta de direcciones preestablecidos, https://github.com/rustdesk/rustdesk-server-pro/issues/257.
+Nombre de libreta de direcciones, etiqueta de dispositivo, alias de dispositivo, contraseña de dispositivo, nota de dispositivo preestablecidos, https://github.com/rustdesk/rustdesk-server-pro/issues/257.
 Puedes establecer preset-address-book-name solamente si no quieres establecer etiqueta.
 Por favor usa un nombre y etiqueta de libreta de direcciones válidos en tu página de libreta de direcciones de consola web.
 
@@ -1025,6 +1010,11 @@ Por favor usa un nombre y etiqueta de libreta de direcciones válidos en tu pág
 | :------: | :------: | :------: | :------: | :------: |
 | preset-address-book-name | N | | | `preset-address-book-name=<nombre de libreta de direcciones>` |
 | preset-address-book-tag | N | | | `preset-address-book-tag=<nombre de etiqueta de libreta de direcciones>` |
+| preset-address-book-alias | N | | | `preset-address-book-alias=<alias de dispositivo>` |
+| preset-address-book-password | N | | | `preset-address-book-password=<contraseña de dispositivo>` |
+| preset-address-book-note | N | | | `preset-address-book-note=<nota de dispositivo>` |
+
+preset-address-book-alias, preset-address-book-password, preset-address-book-note están disponibles en cliente RustDesk >=1.4.3, pro >= 1.6.6.
 
 ### disable-group-panel
 
@@ -1175,13 +1165,15 @@ Controla si usar solo TCP. No usará más UDP 21116, TCP 21116 se usará en su l
 | :------: | :------: | :------: |
 | Y, N | N | `disable-udp=Y` |
 
-### preset-user-name / preset-strategy-name / preset-device-group-name
+### preset-user-name / preset-strategy-name / preset-device-group-name / preset-device-username / preset-device-name / preset-note
 
-Asigna usuario / estrategia / grupo de dispositivo a dispositivo. También puedes hacer esto vía [línea de comandos](https://rustdesk.com/docs/en/self-host/rustdesk-server-pro/console/#assign-device-usersgroupsstrategies-to-devices).
+Asigna usuario / estrategia / grupo de dispositivo / nombre de usuario de dispositivo / nombre de dispositivo(hostname) / nota a dispositivo. También puedes hacer esto vía [línea de comandos](https://rustdesk.com/docs/en/self-host/rustdesk-server-pro/console/#assign-device-usersgroupsstrategies-to-devices).
 
 https://github.com/rustdesk/rustdesk-server-pro/discussions/304
 
 grupo de dispositivo está disponible en cliente RustDesk >=1.3.8, pro >= 1.5.0
+
+preset-device-username, preset-device-name, preset-note están disponibles en cliente RustDesk >=1.4.3, pro >= 1.6.6.
 
 ### default-connect-password
 
@@ -1309,7 +1301,7 @@ No registrar el dispositivo, no lo verás en la página de dispositivos en conso
 Si `register-device=N`, lo siguiente no funcionará para este dispositivo.
 - Iniciar sesión
 - Comando `--assign`
-- `preset-address-book-name`, `--preset-address-book-tag`, `preset-user-name`, `preset-strategy-name`, `preset-device-group-name`
+- `preset-address-book-name`, `preset-address-book-tag`, `preset-address-book-alias`, `preset-address-book-password`, `preset-address-book-note` `preset-user-name`, `preset-strategy-name`, `preset-device-group-name`, `preset-device-username`, `preset-device-name`, `preset-note`
 - Registros de auditoría
 - Estrategia
 
@@ -1342,3 +1334,66 @@ Desactivar el panel "Descubierto" (junto al panel "Favoritos") en el cliente Rus
 | Opción | Instalación requerida | Valores | Predeterminado | Ejemplo |
 | :------: | :------: | :------: | :------: | :------: |
 | disable-discovery-panel | N | Y, N | N | `disable-discovery-panel=Y` |
+
+### touch-mode
+
+Controla si se debe usar el modo táctil o el modo ratón durante las sesiones de control remoto.
+
+#### Diferencias de comportamiento según la versión
+
+##### RustDesk (lado controlador) < 1.4.3
+
+Tras la primera conexión, esta opción establece la configuración "touch-mode" para cada peer. A partir de entonces, las configuraciones individuales de cada peer determinan si se usa el modo táctil o el modo ratón.
+
+**Ubicación**:
+
+1. **Escritorio**
+2. **Móvil** Configuración → Pantalla → Otras opciones predeterminadas → Modo táctil
+
+##### RustDesk (lado controlador) >= 1.4.3
+
+Esta opción controla de forma uniforme si todos los dispositivos peer usan el modo táctil o el modo ratón, sobrescribiendo las configuraciones individuales de cada dispositivo.
+
+| Valores | Predeterminado | Ejemplo |
+| :------: | :------: | :------: |
+| Y, N | N | `touch-mode=Y` |
+
+### show-virtual-mouse
+
+https://github.com/rustdesk/rustdesk/pull/12911
+
+Controla la visualización del ratón virtual cuando móvil → escritorio.
+
+**Ubicación**:
+
+1. **Escritorio**
+2. **Móvil** Sesión remota → barra de navegación inferior → ayuda de gestos
+
+Disponible desde RustDesk 1.4.3
+
+| Valores | Predeterminado | Ejemplo |
+| :------: | :------: | :------: |
+| Y, N | N | `show-virtual-mouse=Y` |
+
+**Nota**: Esta opción debe configurarse en **Default settings** en lugar de en **Override settings**.
+
+### show-virtual-joystick
+
+https://github.com/rustdesk/rustdesk/pull/12911
+
+Controla la visualización del joystick virtual cuando móvil → escritorio.
+
+Esta opción requiere que **show-virtual-mouse** esté habilitado.
+
+**Ubicación**:
+
+1. **Escritorio**
+2. **Móvil** Sesión remota → barra de navegación inferior → ayuda de gestos
+
+Disponible desde RustDesk 1.4.3
+
+| Valores | Predeterminado | Ejemplo |
+| :------: | :------: | :------: |
+| Y, N | N | `show-virtual-joystick=Y` |
+
+**Nota**: Esta opción debe configurarse en **Default settings** en lugar de en **Override settings**.

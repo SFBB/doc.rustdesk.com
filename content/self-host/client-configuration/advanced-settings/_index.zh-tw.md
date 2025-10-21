@@ -771,21 +771,6 @@ ar, bg, ca, cs, da, de, el, en, eo, es, et, fa, fr, he, hr, hu, id, it, ja, ko, 
 | :------: | :------: | :------: | :------: |
 | 否 | Y, N | N | `privacy-mode=Y` |
 
-### touch-mode
-
-此選項將為每個對等端在首次連接後設定「觸控模式」選項。
-
-每個對等端設定中的「觸控模式」選項將控制是否使用觸控模式或滑鼠模式。
-
-**位置**：
-
-1. **桌面**
-2. **行動裝置** 設定 → 顯示設定 → 其他預設選項 → 觸控模式
-
-| 安裝需要 | 值 | 預設值 | 範例 |
-| :------: | :------: | :------: | :------: |
-| 否 | Y, N | N | `touch-mode=Y` |
-
 ### i444
 
 此選項將為每個對等端在首次連接後設定「i444」選項。
@@ -959,9 +944,9 @@ ar, bg, ca, cs, da, de, el, en, eo, es, et, fa, fr, he, hr, hu, id, it, ja, ko, 
 
 ## 其他
 
-### preset-address-book-name & preset-address-book-tag
+### preset-address-book-name & preset-address-book-tag & preset-address-book-alias & preset-address-book-password & preset-address-book-note
 
-預設通訊錄名稱和標籤，https://github.com/rustdesk/rustdesk-server-pro/issues/257。
+預設通訊錄名稱、設備標籤、設備別名、設備密碼、設備備註，https://github.com/rustdesk/rustdesk-server-pro/issues/257。
 如果不想設定標籤，可以僅設定preset-address-book-name。
 請在Web控制台的通訊錄頁面上使用有效的通訊錄名稱和標籤。
 
@@ -969,6 +954,11 @@ ar, bg, ca, cs, da, de, el, en, eo, es, et, fa, fr, he, hr, hu, id, it, ja, ko, 
 | :------: | :------: | :------: | :------: | :------: |
 | preset-address-book-name | 否 | | | `preset-address-book-name=<通訊錄名稱>` |
 | preset-address-book-tag | 否 | | | `preset-address-book-tag=<通訊錄標籤名稱>` |
+| preset-address-book-alias | 否 | | | `preset-address-book-alias=<設備別名>` |
+| preset-address-book-password | 否 | | | `preset-address-book-password=<設備密碼>` |
+| preset-address-book-note | 否 | | | `preset-address-book-note=<設備備註>` |
+
+preset-address-book-alias、preset-address-book-password、preset-address-book-note在RustDesk用戶端>=1.4.3、pro >= 1.6.6中可用。
 
 ### disable-group-panel
 
@@ -1119,13 +1109,15 @@ https://github.com/rustdesk/rustdesk-server-pro/issues/277
 | :------: | :------: | :------: |
 | Y, N | N | `disable-udp=Y` |
 
-### preset-user-name / preset-strategy-name / preset-device-group-name
+### preset-user-name / preset-strategy-name / preset-device-group-name / preset-device-username / preset-device-name / preset-note
 
-將使用者/策略/設備群組分配給設備。您也可以透過[命令列](https://rustdesk.com/docs/en/self-host/rustdesk-server-pro/console/#assign-device-usersgroupsstrategies-to-devices)執行此操作。
+將使用者/策略/設備群組/設備使用者名稱/設備名稱(主機名)/備註分配給設備。您也可以透過[命令列](https://rustdesk.com/docs/en/self-host/rustdesk-server-pro/console/#assign-device-usersgroupsstrategies-to-devices)執行此操作。
 
 https://github.com/rustdesk/rustdesk-server-pro/discussions/304
 
 設備群組在RustDesk用戶端>=1.3.8、pro >= 1.5.0中可用
+
+preset-device-username、preset-device-name、preset-note在RustDesk用戶端>=1.4.3、pro >= 1.6.6中可用。
 
 ### default-connect-password
 
@@ -1255,7 +1247,7 @@ D3D渲染可以獲得高幀率並減少CPU使用率，但在某些設備上遠�
 如果`register-device=N`，以下功能對此設備不起作用。
 - 登入
 - `--assign`命令
-- `preset-address-book-name`, `--preset-address-book-tag`, `preset-user-name`, `preset-strategy-name`, `preset-device-group-name`
+- `preset-address-book-name`, `preset-address-book-tag`, `preset-address-book-alias`, `preset-address-book-password`, `preset-address-book-note` `preset-user-name`, `preset-strategy-name`, `preset-device-group-name`, `preset-device-username`, `preset-device-name`, `preset-note`
 - 稽核日誌
 - 策略
 
@@ -1459,9 +1451,9 @@ D3D渲染可以獲得高幀率並減少CPU使用率，但在某些設備上遠�
 
 ## 其他
 
-### preset-address-book-name & preset-address-book-tag
+### preset-address-book-name & preset-address-book-tag & preset-address-book-alias & preset-address-book-password & preset-address-book-note
 
-預設通訊錄名稱和標籤，https://github.com/rustdesk/rustdesk-server-pro/issues/257。
+預設通訊錄名稱、設備標籤、設備別名、設備密碼、設備備註，https://github.com/rustdesk/rustdesk-server-pro/issues/257。
 如果不想設定標籤，可以僅設定preset-address-book-name。
 請在Web控制台的通訊錄頁面上使用有效的通訊錄名稱和標籤。
 
@@ -1469,6 +1461,11 @@ D3D渲染可以獲得高幀率並減少CPU使用率，但在某些設備上遠�
 | :------: | :------: | :------: | :------: | :------: |
 | preset-address-book-name | 否 | | | `preset-address-book-name=<通訊錄名稱>` |
 | preset-address-book-tag | 否 | | | `preset-address-book-tag=<通訊錄標籤名稱>` |
+| preset-address-book-alias | 否 | | | `preset-address-book-alias=<設備別名>` |
+| preset-address-book-password | 否 | | | `preset-address-book-password=<設備密碼>` |
+| preset-address-book-note | 否 | | | `preset-address-book-note=<設備備註>` |
+
+preset-address-book-alias、preset-address-book-password、preset-address-book-note在RustDesk用戶端>=1.4.3、pro >= 1.6.6中可用。
 
 ### disable-group-panel
 
@@ -1619,13 +1616,15 @@ https://github.com/rustdesk/rustdesk-server-pro/issues/277
 | :------: | :------: | :------: |
 | Y, N | N | `disable-udp=Y` |
 
-### preset-user-name / preset-strategy-name / preset-device-group-name
+### preset-user-name / preset-strategy-name / preset-device-group-name / preset-device-username / preset-device-name / preset-note
 
-將使用者/策略/設備群組分配給設備。您也可以透過[命令列](https://rustdesk.com/docs/en/self-host/rustdesk-server-pro/console/#assign-device-usersgroupsstrategies-to-devices)執行此操作。
+將使用者/策略/設備群組/設備使用者名稱/設備名稱(主機名)/備註分配給設備。您也可以透過[命令列](https://rustdesk.com/docs/en/self-host/rustdesk-server-pro/console/#assign-device-usersgroupsstrategies-to-devices)執行此操作。
 
 https://github.com/rustdesk/rustdesk-server-pro/discussions/304
 
 設備群組在RustDesk用戶端>=1.3.8、pro >= 1.5.0中可用
+
+preset-device-username、preset-device-name、preset-note在RustDesk用戶端>=1.4.3、pro >= 1.6.6中可用。
 
 ### default-connect-password
 
@@ -1755,7 +1754,7 @@ D3D渲染可以獲得高幀率並減少CPU使用率，但在某些設備上遠�
 如果`register-device=N`，以下功能對此設備不起作用。
 - 登入
 - `--assign`命令
-- `preset-address-book-name`, `--preset-address-book-tag`, `preset-user-name`, `preset-strategy-name`, `preset-device-group-name`
+- `preset-address-book-name`, `preset-address-book-tag`, `preset-address-book-alias`, `preset-address-book-password`, `preset-address-book-note` `preset-user-name`, `preset-strategy-name`, `preset-device-group-name`, `preset-device-username`, `preset-device-name`, `preset-note`
 - 稽核日誌
 - 策略
 
@@ -1788,3 +1787,66 @@ https://github.com/rustdesk/rustdesk-server-pro/issues/776#issuecomment-33065249
 | 選項 | 需要安裝 | 值 | 預設值 | 範例 |
 | :------: | :------: | :------: | :------: |
 | disable-discovery-panel | N | Y, N | N | `disable-discovery-panel=Y` |
+
+### touch-mode
+
+控制在遠端控制會話期間使用觸控模式或滑鼠模式。
+
+#### 不同版本的行為差異
+
+##### RustDesk（控制端） < 1.4.3
+
+在首次連線後，該選項會為每個裝置（peer）設定 "touch-mode"。此後，每個裝置的個別設定將決定是否使用觸控模式或滑鼠模式。
+
+**位置**：
+
+1. **桌面**
+2. **行動** 設定 → 顯示 → 其他預設選項 → 觸控模式
+
+##### RustDesk（控制端） >= 1.4.3
+
+此選項會統一控制所有裝置是否使用觸控模式或滑鼠模式，並覆寫個別裝置設定。
+
+| 值 | 預設 | 範例 |
+| :------: | :------: | :------: |
+| Y, N | N | `touch-mode=Y` |
+
+### show-virtual-mouse
+
+https://github.com/rustdesk/rustdesk/pull/12911
+
+控制在 行動 → 桌面 模式下虛擬滑鼠的顯示。
+
+**位置**：
+
+1. **桌面**
+2. **行動** 遠端連線 → 底部導覽列 → 手勢輔助
+
+自 RustDesk 1.4.3 起可用
+
+| 值 | 預設 | 範例 |
+| :------: | :------: | :------: |
+| Y, N | N | `show-virtual-mouse=Y` |
+
+**注意**：此選項應在 **Default settings** 中配置，而非 **Override settings**。
+
+### show-virtual-joystick
+
+https://github.com/rustdesk/rustdesk/pull/12911
+
+控制在 行動 → 桌面 模式下虛擬搖桿的顯示。
+
+此選項需要先啟用 **show-virtual-mouse**。
+
+**位置**：
+
+1. **桌面**
+2. **行動** 遠端連線 → 底部導覽列 → 手勢輔助
+
+自 RustDesk 1.4.3 起可用
+
+| 值 | 預設 | 範例 |
+| :------: | :------: | :------: |
+| Y, N | N | `show-virtual-joystick=Y` |
+
+**注意**：此選項應在 **Default settings** 中配置，而非 **Override settings**。
