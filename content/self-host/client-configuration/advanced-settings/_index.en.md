@@ -1,9 +1,34 @@
 ---
 title: Advanced Settings
 weight: 49
+description: "Reference the advanced settings available in RustDesk custom clients, including privilege levels and option behavior across override, default, user, and hardcoded settings."
+keywords: ["rustdesk advanced settings", "rustdesk custom client settings", "rustdesk privilege levels", "rustdesk override settings", "rustdesk default settings"]
 ---
 
+Use this reference to understand advanced custom client settings in RustDesk and how each setting behaves at different privilege levels.
+
 All advanced settings in custom clients are covered here.
+
+## What are advanced settings in RustDesk custom clients?
+
+Advanced settings are the low-level client options you can control through RustDesk custom clients, user settings, and server-side policy. They are useful when you need repeatable behavior across many clients or want tighter control over security, permissions, and UX defaults.
+
+## How do setting priorities work?
+
+| Source | Priority |
+| --- | --- |
+| Override | Highest |
+| Strategy | High |
+| User | Medium |
+| Default | Lowest |
+
+## Advanced settings quick answers
+
+- Override settings take precedence over every other source
+- Strategy settings can override user and default settings
+- User settings only apply when no higher-priority source overrides them
+- Default settings are the fallback layer
+- This page is a reference for exact setting keys, values, defaults, and examples
 
 ## Privilege Levels for Settings
 
@@ -1123,6 +1148,22 @@ This is for the Android controlled side. Note that keeping the screen on depends
 | :------: | :------: | :------: |
 | never, during-controlled, service-on | during-controlled | `keep-screen-on=never` |
 
+### keep-awake-during-incoming-sessions
+
+Keep the screen awake during incoming remote desktop sessions. This helps prevent the device from sleeping while the application is actively being used for remote connections.
+
+| Values | Default | Example |
+| :------: | :------: | :------: |
+| Y, N | Y | `keep-awake-during-incoming-sessions=N` |
+
+### keep-awake-during-outgoing-sessions
+
+Keep the screen awake during outgoing remote desktop sessions. This helps prevent the device from sleeping while the application is actively being used for remote connections.
+
+| Values | Default | Example |
+| :------: | :------: | :------: |
+| Y, N | Y | `keep-awake-during-outgoing-sessions=N` |
+
 ### enable-directx-capture
 
 This is for the Windows controlled side. If you don't encounter any problems, it is recommended to use the default settings, which prioritize using DirectX for screenshots instead of using GDI directly.
@@ -1242,6 +1283,16 @@ https://github.com/rustdesk/rustdesk-server-pro/issues/332
 | Values | Default | Example |
 | :------: | :------: | :------: |
 | Y, N | N | `hide-tray=Y` |
+
+### hide-stop-service
+
+Hide stop/toggle service controls while the service is running. This is mainly for custom clients to prevent users from stopping the service from the UI (desktop settings, tray menu, Android server page, and Android floating window menu).
+
+When the service is stopped, the start/enable entry remains visible.
+
+| Values | Default | Example |
+| :------: | :------: | :------: |
+| Y, N | N | `hide-stop-service=Y` |
 
 ### one-way-clipboard-redirection
 

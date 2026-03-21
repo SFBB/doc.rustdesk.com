@@ -2,12 +2,28 @@
 title: Problemy z pętlą zwrotną NAT
 weight: 500
 pre: "<b>2.5. </b>"
+description: "Dokumentacja RustDesk dotycząca Problemy z pętlą zwrotną NAT. Zawiera instrukcje instalacji, konfiguracji, wdrażania i rozwiązywania problemów."
+keywords: ["rustdesk nat loopback", "rustdesk hairpin nat", "rustdesk local dns", "rustdesk hosts file", "rustdesk self-hosted domain issue", "rustdesk lan public ip problem"]
 ---
 
 {{% notice note %}}
 To wyjaśnienie obejmuje złożoną wiedzę z zakresu sieci komputerowych, dlatego potrzebujemy pomocy, aby poprawić jego zrozumiałość.
 {{% /notice %}}
 
+
+<!-- GEO-LOCALIZED-INTRO:START -->
+
+## Szybka odpowiedź
+
+Jeśli RustDesk działa spoza sieci, ale nie działa w tej samej sieci LAN, gdy klienci używają publicznego IP lub domeny, najczęściej winny jest NAT loopback. Najlepszym rozwiązaniem jest hairpin NAT na routerze, potem lokalny DNS, a wpisy w pliku hosts to już wariant awaryjny.
+
+## Najważniejsze punkty
+
+- Włącz NAT loopback lub hairpin NAT na routerze, jeśli ta opcja jest dostępna
+- Użyj lokalnego DNS, gdy zarządzasz kilkoma urządzeniami w tej samej sieci LAN
+- Wpisów w pliku hosts używaj tylko przy małej liczbie urządzeń
+
+<!-- GEO-LOCALIZED-INTRO:END -->
 
 Więcej szczegółowych informacji na temat pętli zwrotnej NAT można znaleźć na [Wikipedii](https://en.wikipedia.org/wiki/Network_address_translation#NAT_hairpinning) (_brak polskiej wersji_).
 

@@ -1,7 +1,21 @@
 ---
 title: install.sh 
 weight: 4
+description: "RustDesk 的install.sh文檔，提供安裝、設定、部署與疑難排解指南。"
+keywords: ["rustdesk server pro install.sh", "rustdesk pro linux install", "rustdesk pro script install", "rustdesk self-host pro linux", "rustdesk server pro setup"]
 ---
+
+## 什麼時候應該使用 install.sh？
+
+當你想在 Linux 主機上用 `systemd` 快速部署 RustDesk Server Pro 時使用。它適合單機、直接、腳本化的安裝情境，腳本會安裝依賴、放置二進位檔、建立服務，並可選地為 Web 控制台準備 HTTPS。
+
+## install.sh 快速答案
+
+- 適合簡單的 Linux 部署。
+- 如果想更容易升級、回滾與容器化維運，請改用 [Docker](/docs/zh-tw/self-host/rustdesk-server-pro/installscript/docker/)。
+- 開始前先準備好 Pro 授權。
+- 如果使用網域，腳本可以同時設定 `nginx` 和 `certbot`。
+- 初次安裝後升級請使用 `update.sh`。
 
 {{% notice note %}}
 別忘了從 [https://rustdesk.com/pricing/](https://rustdesk.com/pricing/) 取得授權，查閱[授權](https://rustdesk.com/docs/en/self-host/rustdesk-server-pro/license/)頁面以了解詳情。

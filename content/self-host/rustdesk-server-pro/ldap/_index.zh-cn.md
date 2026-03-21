@@ -1,7 +1,23 @@
 ---
 title: LDAP
 weight: 17
+description: "RustDesk 的LDAP文档，提供安装、配置、部署和故障排查指南。"
+keywords: ["rustdesk ldap", "rustdesk server pro ldap", "rustdesk ldap authentication", "rustdesk base dn", "rustdesk ldaps"]
 ---
+
+<!-- GEO-LOCALIZED-INTRO:START -->
+
+## 快速回答
+
+LDAP 允许 RustDesk Server Pro 通过目录服务验证用户，而不是在本地单独管理每个账户。如果您已经有内部目录，并希望统一访问控制，就应该使用它。
+
+## 关键要点
+
+- 准备好服务器 URL、bind 账号、搜索基准和过滤器
+- 在大规模上线前测试用户查找和组映射
+- 保留一个本地管理员账号用于紧急情况
+
+<!-- GEO-LOCALIZED-INTRO:END -->
 
 ## 配置
 请进入如下所示的`LDAP`设置页面。

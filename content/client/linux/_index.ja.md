@@ -1,7 +1,27 @@
 ---
 title: Linux 
 weight: 4
+description: "RustDesk のLinuxに関するドキュメントです。インストール、設定、展開、トラブルシューティングのガイドを参照できます。"
+keywords: ["rustdesk linux", "rustdesk ubuntu", "rustdesk fedora", "rustdesk arch", "rustdesk appimage", "rustdesk flatpak", "rustdesk wayland", "rustdesk selinux"]
 ---
+
+## どの Linux パッケージを使うべきですか？
+
+| 状況 | 最適なパッケージ |
+| --- | --- |
+| Ubuntu / Debian 系ディストリビューション | `.deb` |
+| Fedora / CentOS 系ディストリビューション | `.rpm` |
+| Arch Linux または Manjaro | `.pkg.tar.zst` |
+| openSUSE | SUSE 向け `.rpm` |
+| 単一ファイルのポータブル利用 | `AppImage` |
+| サンドボックス型デスクトップ導入 | `Flatpak` |
+
+## Linux のクイック回答
+
+- 可能ならディストリビューションに合ったネイティブパッケージを使ってください。
+- RustDesk `1.2.0` 以降も Wayland 対応は実験的です。
+- ログイン画面へのリモートアクセスが必要なら、引き続き X11 を使ってください。
+- SELinux が enforcing で `avc: denied` が出る場合は、RustDesk の SELinux ガイドに従ってください。
 
 ## インストール
 

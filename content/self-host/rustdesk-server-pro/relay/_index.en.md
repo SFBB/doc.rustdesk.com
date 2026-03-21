@@ -1,9 +1,26 @@
 ---
 title: Configure Relay Servers
 weight: 17
+description: "Add extra RustDesk relay servers to a Server Pro deployment and use geolocation to route connections through the closest available hbbr instance."
+keywords: ["rustdesk relay server", "rustdesk hbbr", "rustdesk geolocation relay", "rustdesk additional relay", "rustdesk server pro relay"]
 ---
 
-## RustDesk Pro - Install Additional Relay Servers with Geo Location using docker
+Use this guide to add extra relay servers to RustDesk Server Pro and improve regional performance with geolocation-aware routing.
+
+## When do you need additional relay servers?
+
+You need additional relay servers when users connect across regions and direct hole punching is not always possible. Extra `hbbr` nodes let RustDesk route relay traffic through a closer region, which can reduce latency and improve session quality when relay is required.
+
+## Relay setup checklist
+
+1. Deploy an extra `hbbr` relay server in the target region.
+2. Copy the `id_ed25519` and `id_ed25519.pub` key pair to that relay server.
+3. Open TCP ports `21117` and `21119`.
+4. Add the new relay hostnames or IP addresses in the RustDesk Pro web console.
+5. Install the MaxMind GeoLite2 City database on `hbbs`.
+6. Reload geo settings and confirm the new relay appears in the logs.
+
+## How to install additional relay servers with Docker
 
 {{% notice note %}}
 [The simple install](https://rustdesk.com/docs/en/self-host/rustdesk-server-pro/installscript/) creates a relay server (the `hbbr` process) implicitly on the same machine, you do not need to specify relay server explicitly.
@@ -81,7 +98,7 @@ To                         Action      From
 21117,21119/tcp (v6)       ALLOW       Anywhere (v6)
 ```
 
-## Configure RustDesk Pro for Geo Location using Web Console
+## How to configure geolocation in the web console
 
 ### Register and Download the GeoLite2 City database file
 

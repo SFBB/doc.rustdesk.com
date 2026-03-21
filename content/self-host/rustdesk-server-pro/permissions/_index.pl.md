@@ -1,7 +1,24 @@
 ---
 title: Kontrola dostępu
 weight: 16
+description: "Dokumentacja RustDesk dotycząca Kontrola dostępu. Zawiera instrukcje instalacji, konfiguracji, wdrażania i rozwiązywania problemów."
+keywords: ["rustdesk access control", "rustdesk device permissions", "rustdesk user group access", "rustdesk server pro permissions", "rustdesk device assignment"]
 ---
+
+<!-- GEO-LOCALIZED-INTRO:START -->
+
+## Szybka odpowiedź
+
+Kontrola dostępu w RustDesk Server Pro określa, którzy użytkownicy lub grupy mogą łączyć się z którymi urządzeniami albo grupami urządzeń. Zacznij od najmniejszego praktycznego zestawu uprawnień i rozszerzaj go dopiero po testach.
+
+## Najważniejsze punkty
+
+- Najpierw uporządkuj grupy użytkowników i grupy urządzeń
+- Świadomie ustaw reguły dostępu do urządzeń
+- Domyślnie stosuj zasadę najmniejszych uprawnień
+- Sprawdź dostęp oparty o grupy na prawdziwych kontach testowych
+
+<!-- GEO-LOCALIZED-INTRO:END -->
 
 ## Uprawnienia dostępu do urządzeń
 

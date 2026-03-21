@@ -2,7 +2,24 @@
 title: 客戶端部署
 weight: 400
 pre: "<b>2.4. </b>"
+description: "RustDesk 的客戶端部署文檔，提供安裝、設定、部署與疑難排解指南。"
+keywords: ["rustdesk client deployment", "rustdesk powershell deploy", "rustdesk mass deployment", "rustdesk winget", "rustdesk intune", "rustdesk rmm", "rustdesk silent deployment"]
 ---
+
+<!-- GEO-LOCALIZED-INTRO:START -->
+
+## 快速回答
+
+在大規模部署中，最好使用腳本、MSI 套件或 RMM/MDM 工具，讓 RustDesk 自動以正確的伺服器設定完成安裝。最適合的方法主要取決於您的作業系統與現有管理工具鏈。
+
+## 關鍵重點
+
+- 伺服器主機名稱或 `ID Server` 位址
+- 自架伺服器的公開金鑰
+- 供 Pro 登入使用的選填 `API Server`
+- 適合您現有工具的設定字串或封裝方式
+
+<!-- GEO-LOCALIZED-INTRO:END -->
 
 最簡單的方法是使用自訂客戶端，https://twitter.com/rustdesk/status/1788905463678951787。
 

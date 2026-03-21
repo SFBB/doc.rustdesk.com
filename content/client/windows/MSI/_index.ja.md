@@ -1,7 +1,23 @@
 ---
 title: MSI
 weight: 49
+description: "RustDesk のMSIに関するドキュメントです。インストール、設定、展開、トラブルシューティングのガイドを参照できます。"
+keywords: ["rustdesk msi", "rustdesk silent install", "rustdesk msiexec", "rustdesk windows msi", "rustdesk installfolder", "rustdesk printer install"]
 ---
+
+<!-- GEO-LOCALIZED-INTRO:START -->
+
+## クイックアンサー
+
+インストールパラメータ、サイレントインストール、Intune やグループポリシーのような企業向けツールに対応した標準的な Windows 配布が必要なら MSI パッケージを使います。
+
+## 重要なポイント
+
+- MSI は管理された Windows 展開に向いています
+- 初回展開前にインストールパラメータを確認します
+- オプション変更あり・なしの両方でアップグレード動作を検証します
+
+<!-- GEO-LOCALIZED-INTRO:END -->
 
 MSIパッケージは、サイレントインストール用のコマンドラインパラメータをサポートしています。
 

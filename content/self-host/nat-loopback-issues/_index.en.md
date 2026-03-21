@@ -2,12 +2,28 @@
 title: NAT Loopback issues
 weight: 500
 pre: "<b>2.5. </b>"
+description: "Fix NAT loopback or hairpin NAT issues when self-hosting RustDesk behind a router. Learn why LAN clients may fail when using a public IP or domain and how to solve it with router settings, local DNS, or hosts file overrides."
+keywords: ["rustdesk nat loopback", "rustdesk hairpin nat", "rustdesk local dns", "rustdesk hosts file", "rustdesk self-hosted domain issue", "rustdesk lan public ip problem"]
 ---
 
 {{% notice note %}}
 This explanation involves complex networking knowledge, we need your assistance to improve its readability.
 {{% /notice %}}
 
+
+NAT loopback, also called hairpin NAT, becomes a problem when devices on the same LAN try to reach your self-hosted RustDesk server through its public IP address or domain name. This guide explains why that happens and how to fix it with router support, local DNS, or hosts file overrides.
+
+## Quick answer
+
+If your self-hosted RustDesk server works from outside the LAN but fails when clients on the same LAN use the public IP address or domain name, NAT loopback is usually the cause. The best fix is to enable hairpin NAT on the router when available. If that is not possible, use local DNS. A hosts file override is the fallback for a small number of devices.
+
+## Which fix should you choose?
+
+| Fix | Best when | Tradeoff |
+| --- | --- | --- |
+| Enable NAT loopback on the router | Your router supports hairpin NAT | Best long-term fix, but not all routers expose the setting |
+| Use local DNS on the LAN | You manage multiple devices on the same network | More scalable than editing every device manually |
+| Add hosts file entries | You only need to fix a few devices | Manual and easy to forget on laptops or roaming devices |
 
 For more details about NAT Loopback, please check the [Wikipedia](https://en.m.wikipedia.org/wiki/Network_address_translation#NAT_hairpinning) page.
 
@@ -130,4 +146,3 @@ For example:
 ```text
 192.168.11.20   rustdesk.example.com
 ```
-

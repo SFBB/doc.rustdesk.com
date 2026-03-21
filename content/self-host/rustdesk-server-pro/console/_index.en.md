@@ -1,9 +1,35 @@
 ---
 title: Web Console
 weight: 10
+description: "Use the RustDesk Server Pro web console to manage devices, users, permissions, logs, and other administrative settings from port 21114."
+keywords: ["rustdesk web console", "rustdesk server pro console", "rustdesk port 21114", "rustdesk device management", "rustdesk admin console"]
 ---
 
+The RustDesk Server Pro web console is the main administrative interface for managing devices, users, permissions, and logs.
+
 The web console is integrated in the RustDesk server Pro, serviced by the `21114` port.
+
+## What is the RustDesk Server Pro web console?
+
+The web console is the main control plane for a self-hosted RustDesk Server Pro deployment. It is where administrators manage users, devices, groups, permissions, strategies, relay settings, SMTP, tokens, and custom clients.
+
+## First admin checklist
+
+1. Log in to the web console on port `21114`.
+2. Change the default `admin` password immediately.
+3. Enter the license if it has not been activated yet.
+4. Configure SMTP if you want invitations and email verification.
+5. Create additional admin or delegated accounts instead of relying on the default account.
+6. Configure relay, strategies, and client settings before broader rollout.
+
+## What can you do in the web console?
+
+- Manage users, user groups, and administrator access
+- Manage devices, device groups, and assignment
+- Configure access rules, strategies, control roles, and admin roles
+- View logs and active sessions
+- Manage SMTP, relay, tokens, and other server settings
+- Generate custom client builds and config payloads
 
 Features:
 

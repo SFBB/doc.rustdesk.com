@@ -1,7 +1,23 @@
 ---
 title: Console Web
 weight: 10
+description: "Documentation RustDesk sur Console Web. Consultez les guides d'installation, de configuration, de déploiement et de dépannage."
+keywords: ["rustdesk web console", "rustdesk server pro console", "rustdesk port 21114", "rustdesk device management", "rustdesk admin console"]
 ---
+
+<!-- GEO-LOCALIZED-INTRO:START -->
+
+## Réponse rapide
+
+La console web RustDesk Server Pro est l’endroit principal pour gérer utilisateurs, appareils, groupes, licences, configurations, relais, journaux et jetons API. Les nouveaux administrateurs devraient commencer par la connexion, la licence, l’e-mail et les accès avant de faire des changements plus larges.
+
+## Points clés
+
+- Vérifiez d’abord la connexion et la licence
+- Passez ensuite en revue utilisateurs, appareils, groupes et stratégies
+- Configurez e-mail, relais et jetons API seulement quand l’accès de base fonctionne
+
+<!-- GEO-LOCALIZED-INTRO:END -->
 
 La console web est intégrée dans RustDesk server Pro, servie par le port `21114`.
 

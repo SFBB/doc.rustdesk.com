@@ -1,7 +1,23 @@
 ---
 title: License
 weight: 15
+description: "Buy, enter, and manage your RustDesk Server Pro license in the web console. Learn where to obtain the license and how to activate or change it after purchase."
+keywords: ["rustdesk pro license", "rustdesk server pro activate", "rustdesk pricing license", "rustdesk change license", "rustdesk web console license"]
 ---
+
+Use this page to understand how to buy, activate, and update a RustDesk Server Pro license.
+
+## How does RustDesk Server Pro licensing work?
+
+RustDesk Server Pro licensing is tied to the `hbbs` server, not to every relay node. You buy the license through the pricing page, enter it in the web console, and then manage renewals, upgrades, invoices, and migration through the self-service license portal.
+
+## License quick answers
+
+- One license is assigned to one `hbbs` machine at a time
+- `hbbr` relay servers do not require a separate license
+- Renewals and upgrades are handled in the self-service portal, then activated by refreshing the license in the web console
+- Migration is done by unbinding the old machine and setting the license on the new server
+- If the server cannot reach the internet directly, you can configure a proxy for license verification
 
 ## Buy license
 

@@ -1,7 +1,23 @@
 ---
 title: LDAP
 weight: 17
+description: "RustDesk 的LDAP文檔，提供安裝、設定、部署與疑難排解指南。"
+keywords: ["rustdesk ldap", "rustdesk server pro ldap", "rustdesk ldap authentication", "rustdesk base dn", "rustdesk ldaps"]
 ---
+
+<!-- GEO-LOCALIZED-INTRO:START -->
+
+## 快速回答
+
+LDAP 允許 RustDesk Server Pro 透過目錄服務驗證使用者，而不是在本機逐一管理每個帳號。如果您已經有內部目錄，並希望統一存取控制，就應該使用它。
+
+## 關鍵重點
+
+- 準備好伺服器 URL、bind 帳號、搜尋基底與篩選器
+- 在大規模上線前測試使用者查找與群組映射
+- 保留一個本機管理員帳號以應對緊急情況
+
+<!-- GEO-LOCALIZED-INTRO:END -->
 
 ## 配置
 請進入如下所示的`LDAP`設定頁面。

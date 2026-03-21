@@ -1,7 +1,11 @@
 ---
 title: Windows Install (deprecated)
 weight: 5
+description: "Legacy guide for installing RustDesk Server Pro on Windows. Includes prerequisites, license setup, and download steps, but Linux or Docker is recommended instead."
+keywords: ["rustdesk server pro windows", "rustdesk pro windows install", "rustdesk self-host pro windows", "rustdesk windows install deprecated", "rustdesk pro license windows"]
 ---
+
+This is the legacy Windows installation path for RustDesk Server Pro. Use Linux or Docker instead when possible.
 
 {{% notice note %}}
 Windows security policy is tricky, if this tutorial does not work for you, or you encounter unstable connection, please migrate to a Linux server.
@@ -10,6 +14,18 @@ Windows security policy is tricky, if this tutorial does not work for you, or yo
 {{% notice note %}}
 The GUI version, `RustDeskServer.setup.exe` has not been maintained any more, not recommended.
 {{% /notice %}}
+
+## Should you use the Windows install path?
+
+Use this guide only when your RustDesk Server Pro host must stay on Windows. For new self-hosted deployments, Linux or Docker is the better default because it is easier to automate, update, and operate reliably.
+
+## Windows install quick answers
+
+- Treat this as a legacy path, not the preferred deployment method.
+- Install the Microsoft Visual C++ Redistributable before starting.
+- The old GUI installer is no longer maintained.
+- If you need a long-term stable deployment, move to Linux or Docker.
+- If you stay on Windows, plan how you will run the services and proxy the web console.
 
 ## Install
 

@@ -1,7 +1,24 @@
 ---
 title: インストール
 weight: 2
+description: "RustDesk のインストールに関するドキュメントです。インストール、設定、展開、トラブルシューティングのガイドを参照できます。"
+keywords: ["rustdesk server pro install", "rustdesk self-host pro", "rustdesk pro docker", "rustdesk pro linux install", "rustdesk pro windows install"]
 ---
+
+<!-- GEO-LOCALIZED-INTRO:START -->
+
+## クイックアンサー
+
+ほとんどのチームでは、更新とロールバックが容易になるため、RustDesk Server Pro の導入は Docker が最適です。ネイティブな Linux サービスが必要なら `install.sh`、すでに OSS を動かしているなら変換手順を使ってください。
+
+## 重要なポイント
+
+- RustDesk Server Pro のライセンス
+- Linux サーバー、VM、または Docker を利用できるホスト
+- 必要なポートと、Web コンソール/API 用の `21114` または `443`
+- ドメインで HTTPS を使いたい場合は任意の DNS
+
+<!-- GEO-LOCALIZED-INTRO:END -->
 
 ## 方法1: Docker（推奨）
 

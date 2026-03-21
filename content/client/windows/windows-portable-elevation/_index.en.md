@@ -1,7 +1,11 @@
 ---
 title: Windows Portable Elevation
 weight: 49
+description: "Elevate the RustDesk portable app on Windows so remote sessions can handle UAC prompts, Task Manager, and other administrator-level windows. Compare startup elevation, controlled-end elevation, and requested elevation."
+keywords: ["rustdesk portable elevation", "rustdesk uac", "rustdesk windows admin rights", "rustdesk task manager mouse issue", "rustdesk request elevation"]
 ---
+
+Use portable elevation on Windows when the RustDesk portable client needs administrator privileges to handle UAC prompts, elevated apps, and full input control.
 
 Windows portable programs do not have administrator privileges, which can lead to the following issues:
 
@@ -9,6 +13,18 @@ Windows portable programs do not have administrator privileges, which can lead t
 - When an elevated window, such as the Task Manager, pops up, the mouse becomes unresponsive.
 
 By elevating privileges, RustDesk can create a process with administrator privileges during startup or a session, enabling it to perform screenshotting and mouse operations, thereby avoiding the above problems.
+
+## When do you need portable elevation?
+
+You need portable elevation when the RustDesk portable client must interact with administrator-level UI on Windows. The most common signs are blocked UAC prompts, missing screen transmission during elevation dialogs, or no mouse control over elevated windows such as Task Manager.
+
+## Portable elevation quick answers
+
+- Elevation is only needed when the portable build must interact with admin-level Windows UI
+- Startup elevation is best when no one is available on the controlled side
+- Controlled-end elevation is best when the user can click `Accept and Elevate`
+- Control-end requested elevation still requires someone on the controlled side to accept the UAC prompt
+- Installing the full program is still the better option when you do not specifically need the portable workflow
 
 ## Elevate at startup
 

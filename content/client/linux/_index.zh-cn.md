@@ -1,7 +1,27 @@
 ---
 title: Linux
 weight: 4
+description: "RustDesk 的Linux文档，提供安装、配置、部署和故障排查指南。"
+keywords: ["rustdesk linux", "rustdesk ubuntu", "rustdesk fedora", "rustdesk arch", "rustdesk appimage", "rustdesk flatpak", "rustdesk wayland", "rustdesk selinux"]
 ---
+
+## 应该使用哪个 Linux 包？
+
+| 场景 | 最佳包格式 |
+| --- | --- |
+| Ubuntu 或 Debian 系发行版 | `.deb` |
+| Fedora 或 CentOS 系发行版 | `.rpm` |
+| Arch Linux 或 Manjaro | `.pkg.tar.zst` |
+| openSUSE | SUSE 专用 `.rpm` |
+| 便携单文件使用 | `AppImage` |
+| 沙箱化桌面安装 | `Flatpak` |
+
+## Linux 快速答案
+
+- 优先使用与你的发行版匹配的原生软件包。
+- 自 RustDesk `1.2.0` 起，Wayland 支持仍为实验性。
+- 需要在登录界面远程访问时，仍应使用 X11。
+- 如果 SELinux 为 enforcing 且出现 `avc: denied`，请按 RustDesk 的 SELinux 指南处理。
 
 ## 安装
 

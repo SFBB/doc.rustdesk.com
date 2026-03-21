@@ -1,7 +1,24 @@
 ---
 title: Docker
 weight: 3
+description: "RustDesk 的Docker文檔，提供安裝、設定、部署與疑難排解指南。"
+keywords: ["rustdesk server pro docker", "rustdesk pro docker compose", "rustdesk pro host network", "rustdesk hbbs hbbr docker", "rustdesk self-host pro docker"]
 ---
+
+<!-- GEO-LOCALIZED-INTRO:START -->
+
+## 快速回答
+
+對大多數團隊來說，Docker Compose 是推薦的 RustDesk Server Pro Docker 方案，因為它比直接寫 docker run 指令更容易閱讀、更新與重現。
+
+## 關鍵重點
+
+- 為資料使用持久化磁碟區
+- 正確映射所需連接埠
+- 多容器維護時優先使用 Compose
+- 首次部署時就把授權與主控台存取考慮進去
+
+<!-- GEO-LOCALIZED-INTRO:END -->
 
 ## Docker Compose（推薦）
 

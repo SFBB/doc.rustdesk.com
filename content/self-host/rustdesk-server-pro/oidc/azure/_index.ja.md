@@ -1,7 +1,31 @@
 ---
 title: Azure
 weight: 16
+description: "RustDesk のAzureに関するドキュメントです。インストール、設定、展開、トラブルシューティングのガイドを参照できます。"
+keywords: ["rustdesk azure oidc", "rustdesk entra id", "rustdesk azure sso", "rustdesk oidc azure", "rustdesk server pro azure"]
 ---
+
+## Azure OIDC 設定は何をするものですか？
+
+この設定により、ユーザーは Microsoft Entra ID アカウントで OpenID Connect を使って RustDesk Server Pro にサインインできます。実際には、Azure で RustDesk をアプリ登録し、そのクライアント資格情報を RustDesk Pro に入力し、RustDesk Pro を Entra テナントの issuer URL に向けます。
+
+## Azure OIDC のチェックリスト
+
+- 最終的な callback origin で RustDesk Pro Web コンソールを開きます。
+- Microsoft Entra ID でアプリ登録を作成します。
+- Azure の `Client ID` を RustDesk Pro にコピーします。
+- client secret を作成し、secret value をすぐ保存します。
+- `Directory (tenant) ID` で issuer URL を組み立てます。
+- Azure の認証設定で `ID tokens` を有効にします。
+
+## Azure のどの値を RustDesk Pro に入れますか？
+
+| RustDesk Pro の項目 | Azure 側の値 |
+| --- | --- |
+| Callback URL | RustDesk Pro の OIDC 設定ページからコピー |
+| Client ID | Azure アプリ概要の `Application (client) ID` |
+| Client secret | `Certificates & secrets` で作成した secret の `Value` |
+| Issuer | `https://login.microsoftonline.com/<Directory (tenant) ID>/v2.0` |
 
 ## ビデオチュートリアル
 

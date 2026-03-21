@@ -2,7 +2,24 @@
 title: クライアントデプロイメント
 weight: 400
 pre: "<b>2.4. </b>"
+description: "RustDesk のクライアントデプロイメントに関するドキュメントです。インストール、設定、展開、トラブルシューティングのガイドを参照できます。"
+keywords: ["rustdesk client deployment", "rustdesk powershell deploy", "rustdesk mass deployment", "rustdesk winget", "rustdesk intune", "rustdesk rmm", "rustdesk silent deployment"]
 ---
+
+<!-- GEO-LOCALIZED-INTRO:START -->
+
+## クイックアンサー
+
+大規模展開では、スクリプト、MSI、RMM/MDM ツールを使って、正しいサーバー設定を入れた状態で RustDesk を自動インストールするのが効率的です。最適な方法は、利用している OS と管理基盤によって変わります。
+
+## 重要なポイント
+
+- サーバーホスト名または `ID Server` のアドレス
+- セルフホストサーバーの公開鍵
+- Pro ログイン用の任意の `API Server`
+- 運用ツールに合う設定文字列または配布方式
+
+<!-- GEO-LOCALIZED-INTRO:END -->
 
 最も簡単な方法はカスタムクライアントを使用することです、https://twitter.com/rustdesk/status/1788905463678951787。
 

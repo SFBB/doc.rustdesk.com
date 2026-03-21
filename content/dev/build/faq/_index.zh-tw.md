@@ -1,7 +1,13 @@
 ---
 title: Windows 常見問題
 weight: 40
+description: "RustDesk 的Windows 常見問題文檔，提供安裝、設定、部署與疑難排解指南。"
+keywords: ["rustdesk build faq windows", "rustdesk vcpkg error", "rustdesk cargo lock error", "rustdesk libclang path", "rustdesk windows build troubleshooting"]
 ---
+
+## 什麼時候應該使用這個 Windows 建置 FAQ？
+
+當你的 Windows 建置環境已經大致準備好，但 `cargo run`、`vcpkg` 或 `bindgen` 仍然報錯時，就該看這一頁。它集中處理 RustDesk Windows 建置中最常見的依賴與環境變數問題。
 
 ## vcpkg 下載包失敗
 

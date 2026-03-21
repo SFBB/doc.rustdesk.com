@@ -1,7 +1,23 @@
 ---
 title: 2FA
 weight: 16
+description: "RustDesk の2FAに関するドキュメントです。インストール、設定、展開、トラブルシューティングのガイドを参照できます。"
+keywords: ["rustdesk 2fa", "rustdesk totp", "rustdesk email verification", "rustdesk authenticator", "rustdesk server pro 2fa"]
 ---
+
+<!-- GEO-LOCALIZED-INTRO:START -->
+
+## クイックアンサー
+
+最も簡単に展開したい、かつユーザーがすでにメールを使っているならメール認証を選びます。より強力なアプリベースの第二要素が必要で、メール配送への依存を減らしたいなら TOTP が適しています。
+
+## 重要なポイント
+
+- メール認証は最も早く有効化できます
+- TOTP は管理者やセキュリティ重視のアカウント向けです
+- 全員に 2FA を強制する前に復旧とログインの流れを確認します
+
+<!-- GEO-LOCALIZED-INTRO:END -->
 
 アカウントにログインする際に、二要素認証（2FA）検証を有効にすることでアカウントのセキュリティを向上させることができます。
 

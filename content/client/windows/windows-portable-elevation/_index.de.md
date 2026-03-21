@@ -1,7 +1,23 @@
 ---
 title: Windows Portable-Erhöhung
 weight: 49
+description: "RustDesk-Dokumentation zu Windows Portable-Erhöhung. Hier finden Sie Anleitungen zur Installation, Konfiguration, Bereitstellung und Fehlerbehebung."
+keywords: ["rustdesk portable elevation", "rustdesk uac", "rustdesk windows admin rights", "rustdesk task manager mouse issue", "rustdesk request elevation"]
 ---
+
+<!-- GEO-LOCALIZED-INTRO:START -->
+
+## Kurze Antwort
+
+Portable Elevation ist sinnvoll, wenn Sie den portablen RustDesk-Client nutzen, aber für bestimmte Aufgaben oder Aktionen am Zielgerät trotzdem Administratorrechte brauchen. Das hilft besonders, wenn der volle Client nicht installiert wird, aber dennoch erweiterter Remote-Support nötig ist.
+
+## Wichtige Punkte
+
+- Entscheiden Sie, ob die Elevation schon beim Start oder erst in der Sitzung nötig ist
+- Testen Sie sowohl die Eingabeaufforderung am Zielgerät als auch am steuernden Gerät
+- Erklären Sie Support-Mitarbeitern den Elevation-Ablauf vor dem Rollout
+
+<!-- GEO-LOCALIZED-INTRO:END -->
 
 Portable Windows-Programme haben keine Administratorrechte, was zu den folgenden Problemen führen kann:
 

@@ -1,7 +1,23 @@
 ---
 title: Impostazioni Avanzate
 weight: 49
+description: "Documentazione RustDesk su Impostazioni Avanzate. Consulta le guide per installazione, configurazione, distribuzione e risoluzione dei problemi."
+keywords: ["rustdesk advanced settings", "rustdesk custom client settings", "rustdesk privilege levels", "rustdesk override settings", "rustdesk default settings"]
 ---
+
+<!-- GEO-LOCALIZED-INTRO:START -->
+
+## Risposta rapida
+
+Le impostazioni avanzate nei client RustDesk personalizzati consentono agli amministratori di predefinire, consigliare o bloccare opzioni prima del rollout. Usarle aiuta a mantenere coerenti sicurezza e comportamento dell’interfaccia su tutti i dispositivi gestiti.
+
+## Punti chiave
+
+- Le impostazioni con priorità più alta sovrascrivono i valori con priorità più bassa
+- Le impostazioni forzate impediscono agli utenti finali di modificare opzioni critiche
+- Testare prima su un client di esempio prima di distribuire lo stesso profilo ovunque
+
+<!-- GEO-LOCALIZED-INTRO:END -->
 
 Tutte le impostazioni avanzate nei client personalizzati sono coperte qui.
 
@@ -1111,6 +1127,22 @@ Questo è per il lato controllato Android. Nota che mantenere lo schermo acceso 
 | :------: | :------: | :------: |
 | never, during-controlled, service-on | during-controlled | `keep-screen-on=never` |
 
+### keep-awake-during-incoming-sessions
+
+Mantiene lo schermo attivo durante le sessioni desktop remote in entrata. Questo aiuta a impedire che il dispositivo vada in sospensione mentre l'applicazione viene usata attivamente per connessioni remote.
+
+| Valori | Predefinito | Esempio |
+| :------: | :------: | :------: |
+| Y, N | Y | `keep-awake-during-incoming-sessions=N` |
+
+### keep-awake-during-outgoing-sessions
+
+Mantiene lo schermo attivo durante le sessioni desktop remote in uscita. Questo aiuta a impedire che il dispositivo vada in sospensione mentre l'applicazione viene usata attivamente per connessioni remote.
+
+| Valori | Predefinito | Esempio |
+| :------: | :------: | :------: |
+| Y, N | Y | `keep-awake-during-outgoing-sessions=N` |
+
 ### enable-directx-capture
 
 Questo è per il lato controllato Windows. Se non incontri problemi, si raccomanda di usare le impostazioni predefinite, che danno priorità all'uso di DirectX per gli screenshot invece di usare GDI direttamente.
@@ -1230,6 +1262,16 @@ https://github.com/rustdesk/rustdesk-server-pro/issues/332
 | Valori | Predefinito | Esempio |
 | :------: | :------: | :------: |
 | Y, N | N | `hide-tray=Y` |
+
+### hide-stop-service
+
+Nasconde i controlli per arrestare/attivare o disattivare il servizio mentre il servizio è in esecuzione. È pensato principalmente per client personalizzati, per impedire agli utenti di arrestare il servizio dall'interfaccia utente (impostazioni desktop, menu della barra delle applicazioni, pagina del server Android e menu della finestra mobile di Android).
+
+Quando il servizio è arrestato, la voce di avvio/abilitazione rimane visibile.
+
+| Valori | Predefinito | Esempio |
+| :------: | :------: | :------: |
+| Y, N | N | `hide-stop-service=Y` |
 
 ### one-way-clipboard-redirection
 

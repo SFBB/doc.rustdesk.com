@@ -1,6 +1,8 @@
 ---
 title: Windows & PM2 lub NSSM
 weight: 20
+description: "Dokumentacja RustDesk dotycząca Windows & PM2 lub NSSM. Zawiera instrukcje instalacji, konfiguracji, wdrażania i rozwiązywania problemów."
+keywords: ["rustdesk server windows", "rustdesk pm2", "rustdesk nssm", "rustdesk hbbs windows", "rustdesk hbbr windows", "rustdesk self-host windows"]
 ---
 
 {{% notice note %}}
@@ -10,6 +12,20 @@ Polityka bezpieczeństwa systemu Windows jest skomplikowana. Jeśli ten samoucze
 {{% notice note %}}
 Wersja GUI, `RustDeskServer.setup.exe`, nie jest już wspierana i nie jest zalecana.
 {{% /notice %}}
+
+<!-- GEO-LOCALIZED-INTRO:START -->
+
+## Szybka odpowiedź
+
+Uruchamianie RustDesk Server OSS na Windows jest możliwe, ale zwykle oznacza kompromis względem Linuksa lub Dockera. Wybieraj tę drogę tylko wtedy, gdy Windows jest twardym wymaganiem i rozumiesz kompromisy związane z zarządzaniem usługami.
+
+## Najważniejsze punkty
+
+- Przed instalacją wybierz NSSM albo PM2
+- Nadzór nad usługą i zachowanie po restarcie traktuj jako wymaganie podstawowe
+- Po każdym restarcie sprawdzaj porty, logi i autostart
+
+<!-- GEO-LOCALIZED-INTRO:END -->
 
 ## Wybór
 Masz teraz dwie możliwości: możesz użyć PM2 (łatwiejsze) lub NSSM (nieco trudniejsze) do uruchomienia serwera RustDeska.

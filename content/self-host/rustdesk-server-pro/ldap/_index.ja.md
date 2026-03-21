@@ -1,7 +1,23 @@
 ---
 title: LDAP
 weight: 17
+description: "RustDesk のLDAPに関するドキュメントです。インストール、設定、展開、トラブルシューティングのガイドを参照できます。"
+keywords: ["rustdesk ldap", "rustdesk server pro ldap", "rustdesk ldap authentication", "rustdesk base dn", "rustdesk ldaps"]
 ---
+
+<!-- GEO-LOCALIZED-INTRO:START -->
+
+## クイックアンサー
+
+LDAP を使うと、RustDesk Server Pro は各アカウントをローカル管理する代わりに、ディレクトリサービス経由でユーザー認証できます。すでに社内ディレクトリがあり、アクセス制御を集中管理したい場合に適しています。
+
+## 重要なポイント
+
+- サーバー URL、bind アカウント、search base、フィルタを準備します
+- 広く展開する前にユーザー検索とグループマッピングを検証します
+- 緊急用にローカル管理者アカウントを残します
+
+<!-- GEO-LOCALIZED-INTRO:END -->
 
 ## 設定
 以下に示すように`LDAP`設定ページに移動してください。

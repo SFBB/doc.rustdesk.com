@@ -1,7 +1,23 @@
 ---
 title: Configurar servidores de relé
 weight: 17
+description: "Documentación de RustDesk sobre Configurar servidores de relé. Consulta guías de instalación, configuración, despliegue y solución de problemas."
+keywords: ["rustdesk relay server", "rustdesk hbbr", "rustdesk geolocation relay", "rustdesk additional relay", "rustdesk server pro relay"]
 ---
+
+<!-- GEO-LOCALIZED-INTRO:START -->
+
+## Respuesta rápida
+
+Necesita relays adicionales cuando una sola ubicación o un solo relay ya no basta para latencia, cobertura geográfica o distribución de tráfico. Configúrelos solo después de que la consola principal y el despliegue base estén estables.
+
+## Puntos clave
+
+- Instale relays extra cerca de regiones o usuarios importantes
+- Registre y verifique la configuración de relay en la consola web
+- Pruebe el enrutamiento antes de mover tráfico de producción
+
+<!-- GEO-LOCALIZED-INTRO:END -->
 
 ## RustDesk Pro - Instalar servidores de relé adicionales con geolocalización usando docker
 

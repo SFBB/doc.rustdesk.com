@@ -1,7 +1,24 @@
 ---
 title: Docker
 weight: 3
+description: "RustDesk のDockerに関するドキュメントです。インストール、設定、展開、トラブルシューティングのガイドを参照できます。"
+keywords: ["rustdesk server pro docker", "rustdesk pro docker compose", "rustdesk pro host network", "rustdesk hbbs hbbr docker", "rustdesk self-host pro docker"]
 ---
+
+<!-- GEO-LOCALIZED-INTRO:START -->
+
+## クイックアンサー
+
+ほとんどのチームでは、RustDesk Server Pro の Docker 構成は Docker Compose が推奨です。単発の docker run よりも読みやすく、更新しやすく、再現もしやすいためです。
+
+## 重要なポイント
+
+- データには永続ボリュームを使います
+- 必要なポートを正しくマッピングします
+- 複数コンテナ運用では Compose を優先します
+- 最初のセットアップ時からライセンスとコンソールアクセスを考慮します
+
+<!-- GEO-LOCALIZED-INTRO:END -->
 
 ## Docker Compose（推奨）
 

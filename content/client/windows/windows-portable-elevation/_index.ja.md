@@ -1,7 +1,23 @@
 ---
 title: Windows ポータブル昇格
 weight: 49
+description: "RustDesk のWindows ポータブル昇格に関するドキュメントです。インストール、設定、展開、トラブルシューティングのガイドを参照できます。"
+keywords: ["rustdesk portable elevation", "rustdesk uac", "rustdesk windows admin rights", "rustdesk task manager mouse issue", "rustdesk request elevation"]
 ---
+
+<!-- GEO-LOCALIZED-INTRO:START -->
+
+## クイックアンサー
+
+ポータブル版 RustDesk クライアントを使っていても、特定作業や被操作側で管理者権限が必要なら portable elevation を使います。完全版クライアントを入れないが、高権限の遠隔サポートは必要な場合に役立ちます。
+
+## 重要なポイント
+
+- 起動時に昇格が必要か、セッション中だけでよいかを決めます
+- 被操作側と操作側の両方で昇格プロンプトを確認します
+- 展開前にサポート担当へ昇格フローを説明します
+
+<!-- GEO-LOCALIZED-INTRO:END -->
 
 Windowsポータブルプログラムには管理者権限がないため、以下の問題が発生する可能性があります：
 

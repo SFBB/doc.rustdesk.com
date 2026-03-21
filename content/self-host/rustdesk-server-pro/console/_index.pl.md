@@ -1,7 +1,23 @@
 ---
 title: Konsola webowa
 weight: 10
+description: "Dokumentacja RustDesk dotycząca Konsola webowa. Zawiera instrukcje instalacji, konfiguracji, wdrażania i rozwiązywania problemów."
+keywords: ["rustdesk web console", "rustdesk server pro console", "rustdesk port 21114", "rustdesk device management", "rustdesk admin console"]
 ---
+
+<!-- GEO-LOCALIZED-INTRO:START -->
+
+## Szybka odpowiedź
+
+Konsola webowa RustDesk Server Pro to główne miejsce zarządzania użytkownikami, urządzeniami, grupami, licencjami, konfiguracją, relayami, logami i tokenami API. Nowi administratorzy powinni zacząć od logowania, licencji, poczty i ustawień dostępu, zanim wprowadzą szersze zmiany.
+
+## Najważniejsze punkty
+
+- Najpierw sprawdź logowanie i licencję
+- Następnie przejrzyj użytkowników, urządzenia, grupy i strategie
+- Email, relaye i tokeny API konfiguruj dopiero wtedy, gdy działa podstawowy dostęp
+
+<!-- GEO-LOCALIZED-INTRO:END -->
 
 Konsola webowa jest zintegrowana z serwerem RustDeska Pro i obsługiwana przez port `21114`.
 

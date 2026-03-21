@@ -1,7 +1,27 @@
 ---
 title: Linux
 weight: 4
+description: "RustDesk-Dokumentation zu Linux. Hier finden Sie Anleitungen zur Installation, Konfiguration, Bereitstellung und Fehlerbehebung."
+keywords: ["rustdesk linux", "rustdesk ubuntu", "rustdesk fedora", "rustdesk arch", "rustdesk appimage", "rustdesk flatpak", "rustdesk wayland", "rustdesk selinux"]
 ---
+
+## Welches Linux-Paket sollten Sie verwenden?
+
+| Situation | Bestes Paket |
+| --- | --- |
+| Ubuntu- oder Debian-basierte Distributionen | `.deb` |
+| Fedora- oder CentOS-basierte Distributionen | `.rpm` |
+| Arch Linux oder Manjaro | `.pkg.tar.zst` |
+| openSUSE | SUSE-spezifisches `.rpm` |
+| Portabler Ein-Datei-Einsatz | `AppImage` |
+| Sandboxed Desktop-Installation | `Flatpak` |
+
+## Linux-Kurzantworten
+
+- Verwenden Sie nach Moglichkeit das native Paket Ihrer Distribution.
+- Wayland-Unterstutzung ist seit RustDesk `1.2.0` weiterhin experimentell.
+- Fur Fernzugriff auf den Anmeldebildschirm sollten Sie weiterhin X11 verwenden.
+- Wenn SELinux erzwingend aktiv ist und `avc: denied` erscheint, folgen Sie der RustDesk-SELinux-Anleitung.
 
 ## Installation
 

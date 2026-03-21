@@ -1,11 +1,27 @@
 ---
 title: Admin Role
 weight: 17
+description: "Use Admin Roles in RustDesk Server Pro to delegate scoped management permissions across users, devices, strategies, control roles, and other console resources."
+keywords: ["rustdesk admin role", "rustdesk delegated admin", "rustdesk server pro permissions", "rustdesk role management", "rustdesk web console roles"]
 ---
+
+Use Admin Roles when you need to delegate partial management access in RustDesk Server Pro without granting full administrator privileges.
 
 Admin Role allows administrators to delegate partial management permissions to non-administrator users. You can define permissions for global resources (such as strategies, control roles, and custom clients) as well as users and devices within different scopes.
 
 Once an Admin Role is assigned to a user, they will see the corresponding pages and menus in the web console based on their granted permissions.
+
+## When should you use an Admin Role?
+
+Use an Admin Role when someone needs to manage part of your RustDesk environment without becoming a full administrator. This is the right model for help desk leads, regional IT teams, device owners, or group-scoped operators who should only manage part of the fleet.
+
+## Admin Role quick answers
+
+- Admin Roles delegate console management permissions
+- They do not replace full administrator accounts
+- A user can have multiple Admin Roles at the same time
+- The effective permission set is the union of all assigned Admin Roles
+- Group Scoped roles are the right option when management must stay limited to selected groups
 
 ## Administrators vs Admin Roles
 

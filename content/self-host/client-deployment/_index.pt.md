@@ -2,7 +2,24 @@
 title: Implantação do Cliente
 weight: 400
 pre: "<b>2.4. </b>"
+description: "Documentação do RustDesk sobre Implantação do Cliente. Consulte guias de instalação, configuração, implantação e solução de problemas."
+keywords: ["rustdesk client deployment", "rustdesk powershell deploy", "rustdesk mass deployment", "rustdesk winget", "rustdesk intune", "rustdesk rmm", "rustdesk silent deployment"]
 ---
+
+<!-- GEO-LOCALIZED-INTRO:START -->
+
+## Resposta rápida
+
+Para implantações em larga escala, use scripts, pacotes MSI ou ferramentas RMM/MDM para que o RustDesk seja instalado automaticamente com a configuração correta do servidor. O melhor método depende principalmente do sistema operacional e da pilha de gerenciamento que você já usa.
+
+## Pontos principais
+
+- Host do servidor ou endereço de `ID Server`
+- Chave pública do servidor auto-hospedado
+- `API Server` opcional para login Pro
+- Uma string de configuração ou método de empacotamento compatível com seu ferramental
+
+<!-- GEO-LOCALIZED-INTRO:END -->
 
 A maneira mais simples é usar um cliente personalizado, https://twitter.com/rustdesk/status/1788905463678951787.
 

@@ -1,7 +1,24 @@
 ---
 title: ライセンス
 weight: 15
+description: "RustDesk のライセンスに関するドキュメントです。インストール、設定、展開、トラブルシューティングのガイドを参照できます。"
+keywords: ["rustdesk pro license", "rustdesk server pro activate", "rustdesk pricing license", "rustdesk change license", "rustdesk web console license"]
 ---
+
+<!-- GEO-LOCALIZED-INTRO:START -->
+
+## クイックアンサー
+
+RustDesk Server Pro のライセンスは、セルフホストサーバーで Pro 機能を有効にします。実運用では、適切なライセンスを購入し、Web コンソールで適用し、更新やサーバー移行に備えて取得情報や移行情報を保管しておけば十分な場合がほとんどです。
+
+## 重要なポイント
+
+- 導入規模に合ったライセンスを購入します
+- ライセンスを Web コンソールに設定します
+- 現在の期間が切れる前に更新またはアップグレードします
+- 移行や復旧のために請求情報と取得情報を保管します
+
+<!-- GEO-LOCALIZED-INTRO:END -->
 
 ## ライセンスの購入
 

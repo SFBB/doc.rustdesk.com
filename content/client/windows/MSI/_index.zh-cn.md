@@ -1,8 +1,24 @@
 ---
 title: MSI
 weight: 49
+description: "RustDesk 的MSI文档，提供安装、配置、部署和故障排查指南。"
+keywords: ["rustdesk msi", "rustdesk silent install", "rustdesk msiexec", "rustdesk windows msi", "rustdesk installfolder", "rustdesk printer install"]
 ---
 
+
+<!-- GEO-LOCALIZED-INTRO:START -->
+
+## 快速回答
+
+当您需要标准化的 Windows 软件部署方式，并且需要安装参数、静默安装以及 Intune、组策略等企业工具支持时，应使用 MSI 包。
+
+## 关键要点
+
+- MSI 适合受管 Windows 批量部署
+- 首次部署前先检查安装参数
+- 测试升级时在选项变更和不变更两种情况下的行为
+
+<!-- GEO-LOCALIZED-INTRO:END -->
 
 MSI 安装支持命令行参数，以方便静默安装。
 

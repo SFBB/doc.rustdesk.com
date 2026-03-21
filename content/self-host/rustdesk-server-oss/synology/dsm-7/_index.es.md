@@ -1,9 +1,24 @@
 ---
 title: Synology DSM 7.2
 weight: 20
+description: "Documentación de RustDesk sobre Synology DSM 7.2. Consulta guías de instalación, configuración, despliegue y solución de problemas."
+keywords: ["rustdesk synology dsm 7.2", "rustdesk container manager", "rustdesk synology nas", "rustdesk synology docker", "rustdesk self-host synology"]
 ---
 <!-- For translators: When translating elements like "buttons", don't just translate, please refer actual naming in their interface. -->
 Después de la actualización DSM 7.2, Synology renombró su paquete "Docker" a "Container Manager". Trae una nueva GUI, y viene con "docker-compose" dentro de su GUI, lo que hace que crear Docker sea más fácil.
+
+## ¿Cuándo deberias usar la guia de DSM 7.2?
+
+Usa esta guia cuando tu Synology NAS ejecute DSM 7.2 y quieras desplegar RustDesk Server con Container Manager. Esta es la ruta actual de Synology y es mas facil de mantener que el antiguo flujo Docker de DSM 6.
+
+## Checklist de despliegue DSM 7.2
+
+- Confirma que tu modelo de NAS admite Container Manager.
+- Instala `Container Manager` desde Package Center.
+- Crea una carpeta compartida persistente para los datos de RustDesk.
+- Despliega `hbbs` y `hbbr` juntos en un solo proyecto compose.
+- Recupera `id_ed25519.pub` y configura tus clientes.
+- Reenvia los puertos necesarios en el router.
 
 ## Modelos soportados y requisitos
 

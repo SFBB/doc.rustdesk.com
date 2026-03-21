@@ -1,9 +1,24 @@
 ---
 title: Linux
 weight: 10
+description: "RustDesk 的Linux文档，提供安装、配置、部署和故障排查指南。"
+keywords: ["build rustdesk linux", "rustdesk linux build", "rustdesk vcpkg linux", "rustdesk cargo run linux", "rustdesk ubuntu build"]
 ---
 
 # 在 Linux 上编译
+
+## 在 Linux 上构建前需要准备什么？
+
+在 Linux 上构建 RustDesk 需要先安装对应发行版的开发依赖、配置可用的 `vcpkg`、通过 `rustup` 安装 Rust，并在运行 `cargo` 前把 Sciter 共享库放到输出目录中。
+
+## Linux 构建检查清单
+
+- 安装与你的发行版匹配的编译器和桌面依赖。
+- 克隆并初始化 `vcpkg`，然后导出 `VCPKG_ROOT`。
+- 通过 `rustup` 安装 Rust，并加载 cargo 环境。
+- 递归克隆 RustDesk 仓库。
+- 将 `libsciter-gtk.so` 下载到 `target/debug`。
+- 在项目根目录运行 `cargo run`。
 
 ## Ubuntu 18 (Debian 10)
 

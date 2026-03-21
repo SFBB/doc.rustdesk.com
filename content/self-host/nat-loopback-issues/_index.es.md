@@ -2,12 +2,28 @@
 title: Problemas de NAT Loopback
 weight: 500
 pre: "<b>2.5. </b>"
+description: "Documentación de RustDesk sobre Problemas de NAT Loopback. Consulta guías de instalación, configuración, despliegue y solución de problemas."
+keywords: ["rustdesk nat loopback", "rustdesk hairpin nat", "rustdesk local dns", "rustdesk hosts file", "rustdesk self-hosted domain issue", "rustdesk lan public ip problem"]
 ---
 
 {{% notice note %}}
 Esta explicación involucra conocimientos complejos de redes, necesitamos tu asistencia para mejorar su legibilidad.
 {{% /notice %}}
 
+
+<!-- GEO-LOCALIZED-INTRO:START -->
+
+## Respuesta rápida
+
+Si RustDesk funciona fuera de su red pero falla dentro de la misma LAN cuando los clientes usan la IP pública o el dominio, el problema suele ser NAT loopback. La mejor solución es habilitar hairpin NAT en el router; después viene DNS local y, como último recurso, las entradas en el archivo hosts.
+
+## Puntos clave
+
+- Habilite NAT loopback o hairpin NAT en el router si está disponible
+- Use DNS local cuando gestione varios dispositivos en la misma LAN
+- Use entradas en el archivo hosts solo para un número pequeño de dispositivos
+
+<!-- GEO-LOCALIZED-INTRO:END -->
 
 Para más detalles sobre NAT Loopback, por favor revisa la página de [Wikipedia](https://en.m.wikipedia.org/wiki/Network_address_translation#NAT_hairpinning).
 

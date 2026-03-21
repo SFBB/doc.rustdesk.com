@@ -1,7 +1,23 @@
 ---
 title: Windows 便攜式提權
 weight: 49
+description: "RustDesk 的Windows 便攜式提權文檔，提供安裝、設定、部署與疑難排解指南。"
+keywords: ["rustdesk portable elevation", "rustdesk uac", "rustdesk windows admin rights", "rustdesk task manager mouse issue", "rustdesk request elevation"]
 ---
+
+<!-- GEO-LOCALIZED-INTRO:START -->
+
+## 快速回答
+
+當您執行可攜版 RustDesk 客戶端，但仍需要管理員權限來執行特定任務或在被控端進行高權限操作時，應使用可攜提權。它適合未安裝完整客戶端、但仍需要高權限遠端支援的場景。
+
+## 關鍵重點
+
+- 先決定是啟動時就提權，還是僅在工作階段中提權
+- 同時測試被控端與控制端的提權提示
+- 在大規模部署前先向支援團隊說明提權流程
+
+<!-- GEO-LOCALIZED-INTRO:END -->
 
 Windows 便攜式程式沒有管理員權限，這可能導致以下問題：
 

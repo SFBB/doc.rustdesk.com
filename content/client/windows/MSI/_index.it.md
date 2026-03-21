@@ -1,7 +1,23 @@
 ---
 title: MSI
 weight: 49
+description: "Documentazione RustDesk su MSI. Consulta le guide per installazione, configurazione, distribuzione e risoluzione dei problemi."
+keywords: ["rustdesk msi", "rustdesk silent install", "rustdesk msiexec", "rustdesk windows msi", "rustdesk installfolder", "rustdesk printer install"]
 ---
+
+<!-- GEO-LOCALIZED-INTRO:START -->
+
+## Risposta rapida
+
+Usa il pacchetto MSI quando hai bisogno di una distribuzione software Windows standardizzata con parametri di installazione, installazione silenziosa e strumenti aziendali come Intune o Group Policy.
+
+## Punti chiave
+
+- MSI è adatto ai rollout Windows gestiti
+- Controlla i parametri prima del primo deployment
+- Testa il comportamento degli upgrade con e senza modifica delle opzioni
+
+<!-- GEO-LOCALIZED-INTRO:END -->
 
 Il pacchetto MSI supporta parametri della riga di comando per l'installazione silenziosa.
 

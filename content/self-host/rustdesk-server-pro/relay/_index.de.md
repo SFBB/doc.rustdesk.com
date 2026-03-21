@@ -1,7 +1,23 @@
 ---
 title: Relay-Server konfigurieren
 weight: 17
+description: "RustDesk-Dokumentation zu Relay-Server konfigurieren. Hier finden Sie Anleitungen zur Installation, Konfiguration, Bereitstellung und Fehlerbehebung."
+keywords: ["rustdesk relay server", "rustdesk hbbr", "rustdesk geolocation relay", "rustdesk additional relay", "rustdesk server pro relay"]
 ---
+
+<!-- GEO-LOCALIZED-INTRO:START -->
+
+## Kurze Antwort
+
+Zusätzliche Relay-Server brauchen Sie, wenn ein einzelner Standort oder ein einzelnes Relay für Latenz, Geografie oder Traffic-Verteilung nicht ausreicht. Konfigurieren Sie sie erst, wenn die Hauptkonsole und die Basisbereitstellung stabil laufen.
+
+## Wichtige Punkte
+
+- Zusätzliche Relays nahe bei wichtigen Regionen oder Benutzergruppen installieren
+- Relay-Einstellungen in der Webkonsole registrieren und prüfen
+- Das Routing testen, bevor Sie Produktivverkehr umstellen
+
+<!-- GEO-LOCALIZED-INTRO:END -->
 
 ## RustDesk Pro - Zusätzliche Relais-Server mit Geo-Standort mit Docker installieren
 

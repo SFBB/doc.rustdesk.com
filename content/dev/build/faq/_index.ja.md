@@ -1,7 +1,13 @@
 ---
 title: Windows FAQ
 weight: 40
+description: "RustDesk のWindows FAQに関するドキュメントです。インストール、設定、展開、トラブルシューティングのガイドを参照できます。"
+keywords: ["rustdesk build faq windows", "rustdesk vcpkg error", "rustdesk cargo lock error", "rustdesk libclang path", "rustdesk windows build troubleshooting"]
 ---
+
+## この Windows ビルド FAQ はいつ使うべきですか？
+
+Windows のビルド環境がひと通り整っているのに、`cargo run`、`vcpkg`、`bindgen` がまだ失敗する場合にこのページを使ってください。RustDesk の Windows ビルドでよくある依存関係と環境変数の問題をまとめています。
 
 ## vcpkg パッケージダウンロード失敗
 

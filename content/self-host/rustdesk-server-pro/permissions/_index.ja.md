@@ -1,7 +1,24 @@
 ---
 title: アクセス制御
 weight: 16
+description: "RustDesk のアクセス制御に関するドキュメントです。インストール、設定、展開、トラブルシューティングのガイドを参照できます。"
+keywords: ["rustdesk access control", "rustdesk device permissions", "rustdesk user group access", "rustdesk server pro permissions", "rustdesk device assignment"]
 ---
+
+<!-- GEO-LOCALIZED-INTRO:START -->
+
+## クイックアンサー
+
+RustDesk Server Pro のアクセス制御では、どのユーザーまたはグループが、どのデバイスまたはデバイスグループに接続できるかを定義します。まずは必要最小限の権限から始め、検証後にだけ広げてください。
+
+## 重要なポイント
+
+- 最初にユーザーグループとデバイスグループを整理します
+- デバイスアクセスルールを意図的に設定します
+- デフォルトは最小権限にします
+- グループベースのアクセスを実際のテストアカウントで確認します
+
+<!-- GEO-LOCALIZED-INTRO:END -->
 
 ## デバイスアクセス権限
 

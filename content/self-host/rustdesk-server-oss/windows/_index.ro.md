@@ -1,6 +1,8 @@
 ---
 title: Windows & PM2 sau NSSM
 weight: 20
+description: "Documentație RustDesk pentru Windows & PM2 sau NSSM. Găsiți ghiduri de instalare, configurare, implementare și depanare."
+keywords: ["rustdesk server windows", "rustdesk pm2", "rustdesk nssm", "rustdesk hbbs windows", "rustdesk hbbr windows", "rustdesk self-host windows"]
 ---
 
 {{% notice note %}}
@@ -10,6 +12,20 @@ Politicile de securitate Windows pot fi complicate; dacă acest tutorial nu func
 {{% notice note %}}
 Versiunea GUI, `RustDeskServer.setup.exe`, nu mai este întreținută și nu este recomandată.
 {{% /notice %}}
+
+<!-- GEO-LOCALIZED-INTRO:START -->
+
+## Răspuns rapid
+
+Rularea RustDesk Server OSS pe Windows este posibilă, dar de obicei este un compromis față de Linux sau Docker. Alege această variantă doar când Windows este o cerință fermă și înțelegi compromisurile legate de administrarea serviciilor.
+
+## Puncte cheie
+
+- Alege între NSSM și PM2 înainte de instalare
+- Tratează supravegherea serviciului și comportamentul la restart ca cerințe centrale
+- Verifică porturile, logurile și pornirea automată după fiecare reboot
+
+<!-- GEO-LOCALIZED-INTRO:END -->
 
 ## La o răscruce
 Acum ai două opțiuni: poți folosi PM2 (mai ușor) sau NSSM (puțin mai dificil) pentru a porni RustDesk Server.

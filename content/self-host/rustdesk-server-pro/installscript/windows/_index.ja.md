@@ -1,7 +1,21 @@
 ---
 title: Windowsインストール (deprecated)
 weight: 5
+description: "RustDesk のWindowsインストール (deprecated)に関するドキュメントです。インストール、設定、展開、トラブルシューティングのガイドを参照できます。"
+keywords: ["rustdesk server pro windows", "rustdesk pro windows install", "rustdesk self-host pro windows", "rustdesk windows install deprecated", "rustdesk pro license windows"]
 ---
+
+## Windows インストール経路を使うべきですか？
+
+このガイドは、RustDesk Server Pro のホストをどうしても Windows のままにする必要がある場合だけ使ってください。新規導入では、自動化、更新、安定運用のしやすさから Linux または [Docker](/docs/ja/self-host/rustdesk-server-pro/installscript/docker/) のほうが依然として標準的な選択です。
+
+## Windows インストールのクイック回答
+
+- これは旧方式であり、推奨導入方法ではありません。
+- 開始前に Microsoft Visual C++ Redistributable を入れてください。
+- 旧 GUI インストーラーはすでに保守されていません。
+- 長期的に安定運用したいなら、可能なら Linux または Docker へ移行してください。
+- Windows を使い続ける場合は、サービスの実行方法と Web コンソールのプロキシを事前に設計してください。
 
 {{% notice note %}}
 Windowsのセキュリティポリシーは複雑です。このチュートリアルがうまくいかない、または不安定な接続が発生する場合は、Linuxサーバーに移行してください。

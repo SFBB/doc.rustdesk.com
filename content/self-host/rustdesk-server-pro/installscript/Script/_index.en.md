@@ -1,13 +1,29 @@
 ---
 title: install.sh
 weight: 4
+description: "Install RustDesk Server Pro on Linux with the install.sh script after obtaining a license. Use this method for a simple scripted setup of the Pro server components."
+keywords: ["rustdesk server pro install.sh", "rustdesk pro linux install", "rustdesk pro script install", "rustdesk self-host pro linux", "rustdesk server pro setup"]
 ---
+
+Use the `install.sh` method when you want a simple Linux-based RustDesk Server Pro installation without writing your own service setup from scratch.
 
 {{% notice note %}}
 Don't forget to get your license from [https://rustdesk.com/pricing/](https://rustdesk.com/pricing/), check [license](https://rustdesk.com/docs/en/self-host/rustdesk-server-pro/license/) page for more details.
 
 Please read [OSS installation](https://rustdesk.com/docs/en/self-host/rustdesk-server-oss/install/) first before doing this simple install. You can know more underlying details there.
 {{% /notice %}}
+
+## When should you use install.sh?
+
+Use `install.sh` when you want the fastest way to deploy RustDesk Server Pro on a Linux host with `systemd`. It is best for a straightforward single-server setup where you want the script to install dependencies, place binaries, create services, and optionally prepare HTTPS for the web console.
+
+## install.sh quick answers
+
+- Use this method for a simple Linux deployment with `systemd`.
+- Use [Docker](https://rustdesk.com/docs/en/self-host/rustdesk-server-pro/installscript/docker/#docker-compose) instead if you want easier upgrades, rollback, and container-based operations.
+- Have your Pro license ready before you start.
+- If you use a domain, the script can also set up `nginx` and `certbot` for HTTPS.
+- Use `update.sh` for upgrades after the first installation.
 
 ## Install
 

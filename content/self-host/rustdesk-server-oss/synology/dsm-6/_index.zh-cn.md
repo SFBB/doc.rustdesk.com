@@ -1,7 +1,21 @@
 ---
 title: Synology DSM 6
 weight: 22
+description: "RustDesk 的Synology DSM 6文档，提供安装、配置、部署和故障排查指南。"
+keywords: ["rustdesk synology dsm 6", "rustdesk synology docker", "rustdesk nas dsm 6", "rustdesk self-host synology"]
 ---
+
+## 什么时候应该使用 DSM 6 指南？
+
+只有当你的 Synology NAS 仍在 DSM 6 上，并且通过旧版 Docker 套件部署 RustDesk Server OSS 时才使用本指南。如果设备已升级到 DSM 7.2，应改用 [Container Manager 指南](/docs/zh-cn/self-host/rustdesk-server-oss/synology/dsm-7/)。
+
+## DSM 6 部署检查清单
+
+- 确认 NAS 仍在 DSM 6。
+- 从 Package Center 安装 `Docker`。
+- 为 RustDesk 数据和密钥创建持久化宿主目录。
+- 让 `hbbs` 和 `hbbr` 都使用 host network 并启用 auto-restart。
+- 容器启动后取回 `id_ed25519.pub`。
 
 > 第三方的另一个最新教程在[这里](https://mariushosting.com/how-to-install-rustdesk-on-your-synology-nas/)。
 

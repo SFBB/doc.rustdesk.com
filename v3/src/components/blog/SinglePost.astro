@@ -16,6 +16,7 @@ export interface Props {
 }
 
 const { post, url } = Astro.props;
+const authorName = post.author || 'RustDesk Team';
 ---
 
 <section class="py-8 sm:py-16 lg:py-20 mx-auto">
@@ -26,14 +27,17 @@ const { post, url } = Astro.props;
           <Icon name="tabler:clock" class="w-4 h-4 inline-block -mt-0.5 dark:text-gray-400" />
           <time datetime={String(post.publishDate)} class="inline-block">{getFormattedDate(post.publishDate)}</time>
           {
-            post.author && (
+            post.updateDate && (
               <>
                 {' '}
-                · <Icon name="tabler:user" class="w-4 h-4 inline-block -mt-0.5 dark:text-gray-400" />
-                <span class="inline-block">{post.author}</span>
+                · <Icon name="tabler:refresh" class="w-4 h-4 inline-block -mt-0.5 dark:text-gray-400" />
+                <span class="inline-block text-sm text-gray-500">Updated: <time datetime={String(post.updateDate)}>{getFormattedDate(post.updateDate)}</time></span>
               </>
             )
           }
+          {' '}
+          · <Icon name="tabler:user" class="w-4 h-4 inline-block -mt-0.5 dark:text-gray-400" />
+          <span class="inline-block">{authorName}</span>
           {
             post.category && (
               <>
@@ -60,6 +64,11 @@ const { post, url } = Astro.props;
       >
         {post.title}
       </h1>
+      {
+        post.excerpt && (
+          <p class="px-4 sm:px-6 max-w-4xl mx-auto mt-4 text-lg text-muted dark:text-slate-300">{post.excerpt}</p>
+        )
+      }
 
       {
         post.image ? (
@@ -68,7 +77,7 @@ const { post, url } = Astro.props;
             class="mt-8 max-w-full lg:max-w-[900px] mx-auto mb-6 sm:rounded-md bg-gray-400 dark:bg-slate-700"
             widths={[400, 900]}
             sizes="(max-width: 900px) 400px, 900px"
-            alt={post?.excerpt || ''}
+            alt={post?.title || post?.excerpt || ''}
             width={900}
             height={506}
             loading="eager"

@@ -1,7 +1,23 @@
 ---
 title: Windows Portable 提权
 weight: 49
+description: "RustDesk 的Windows Portable 提权文档，提供安装、配置、部署和故障排查指南。"
+keywords: ["rustdesk portable elevation", "rustdesk uac", "rustdesk windows admin rights", "rustdesk task manager mouse issue", "rustdesk request elevation"]
 ---
+
+<!-- GEO-LOCALIZED-INTRO:START -->
+
+## 快速回答
+
+当您运行便携版 RustDesk 客户端，但仍需要管理员权限来执行特定任务或在被控端执行高权限操作时，应使用便携提权。它适合未安装完整客户端、但仍需要高权限远程支持的场景。
+
+## 关键要点
+
+- 先决定是启动时就提权，还是仅在会话中提权
+- 同时测试被控端和控制端的提权提示
+- 在大规模部署前先向支持团队讲清提权流程
+
+<!-- GEO-LOCALIZED-INTRO:END -->
 
 在Windows下，Portable程序没有管理员权限，这会导致以下问题：
 
@@ -44,7 +60,6 @@ weight: 49
 |              被控端没有人              |     重命名<br>或右键以管理员权限运行     |
 | 被控端有人<br/>且通过点击确认连接<br/>且连接时立即提权 |     被控端接收连接时点击`接受并提权`      |
 |        被控端有人<br/>且仅必要时提权         | 被控端通过连接管理窗口提权<br/>或主控端请求提权 |
-
 
 
 

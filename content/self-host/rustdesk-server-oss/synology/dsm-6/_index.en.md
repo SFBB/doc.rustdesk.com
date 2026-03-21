@@ -1,7 +1,11 @@
 ---
 title: Synology DSM 6
 weight: 22
+description: "Install RustDesk Server OSS on Synology DSM 6 with Docker. Follow the DSM 6 workflow for container setup, port mapping, and persistent data on older Synology systems."
+keywords: ["rustdesk synology dsm 6", "rustdesk synology docker", "rustdesk nas dsm 6", "rustdesk self-host synology"]
 ---
+
+Use this guide to install RustDesk Server OSS on Synology DSM 6 with Docker on older NAS systems.
 
 > An alternative up-to-date tutorial from third-party is [here](https://mariushosting.com/how-to-install-rustdesk-on-your-synology-nas/).
 
@@ -10,6 +14,18 @@ This tutorial is based on latest DSM v6 and v7.
 {{% notice note %}}
 After DSM 7.2 update, the Docker is upgraded to new "Container Manager", please check [this article](/docs/en/self-host/rustdesk-server-oss/synology/dsm-7) instead.
 {{% /notice %}}
+
+## When should you use the DSM 6 guide?
+
+Use this guide only if your Synology NAS is still on DSM 6 and you are deploying RustDesk Server OSS through the older Docker package. If your NAS is already on DSM 7.2, use the Container Manager guide instead.
+
+## DSM 6 deployment checklist
+
+- Confirm your NAS is still running DSM 6.
+- Install the Synology `Docker` package from Package Center.
+- Create a persistent host folder for RustDesk data and keys.
+- Run both `hbbs` and `hbbr` with host networking and auto-restart enabled.
+- Retrieve `id_ed25519.pub` after the containers start.
 
 ## Install Docker
 
