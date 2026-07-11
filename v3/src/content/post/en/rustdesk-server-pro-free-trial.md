@@ -13,16 +13,18 @@ tags:
 author: RustDesk Team
 faq:
   - question: 'Does RustDesk Server Pro have a free trial?'
-    answer: 'The public pricing page asks prospective buyers to contact RustDesk for current trial-license availability and terms. Do not assume a fixed duration, price, or feature set until sales confirms it in writing.'
+    answer: 'There is no self-serve free trial. Email sales@rustdesk.com for the current evaluation options, and do not assume a fixed duration, price, or feature set until sales confirms it in writing.'
   - question: 'How can I evaluate RustDesk Server Pro?'
     answer: 'Email sales@rustdesk.com to confirm the current evaluation path, duration, and included features in writing before you plan your proof of concept. Scope the pilot around the workflows you care about, such as custom branding, if you need to validate them.'
-  - question: 'Why are trial terms not listed in this article?'
-    answer: 'Evaluation availability, duration, price, and included features can change. This article avoids inventing a fixed policy and directs buyers to the current pricing page or written confirmation from RustDesk.'
+  - question: "What are RustDesk's current evaluation terms?"
+    answer: 'Evaluation terms are set by the RustDesk sales team and change over time, so there is no fixed public policy to quote. Email sales@rustdesk.com for the current availability, duration, price, and included features, and do not assume a fixed duration or feature set until sales confirms it in writing.'
   - question: 'What happens to my server and connections when a test license expires?'
-    answer: 'This article does not specify what happens at expiry, and you should not assume connections keep working. Confirm the exact end-of-trial behavior for your server and active sessions with sales@rustdesk.com before you rely on a test license in production.'
+    answer: 'Do not assume connections keep working after a test license expires — confirm expiry behavior with sales before your pilot. Ask sales@rustdesk.com exactly what happens to your server and active sessions at the end of the evaluation window before you rely on a test license in production.'
+  - question: 'Can I evaluate RustDesk for free without a trial license?'
+    answer: 'Yes. The open-source community server is free to run indefinitely, so you can self-host it, connect real devices, and validate connectivity, performance, and the self-hosting fit at no cost and no time limit. Email sales@rustdesk.com only for the Server Pro layer — the web console, centralized management, and custom client — that the open-source build does not include.'
 
 metadata:
-  description: 'RustDesk Server Pro does not publish a fixed free trial. Email sales@rustdesk.com to ask about current evaluation terms.'
+  description: 'Is there a RustDesk Server Pro free trial? No fixed public trial — evaluation terms come from the sales team and change; confirm them in writing first.'
   keywords: 'RustDesk free trial, RustDesk Server Pro trial, RustDesk test license, evaluate RustDesk Server Pro, RustDesk trial license'
 ---
 
@@ -36,15 +38,23 @@ Email [sales@rustdesk.com](mailto:sales@rustdesk.com) for current trial-license 
 
 RustDesk Server Pro is a self-hosted platform, meaning you run the server on your own infrastructure. The public pricing page does not publish a fixed self-serve trial policy, and this article does not speculate about the reason.
 
-For genuine evaluators, the practical takeaway is simple: confirm the current evaluation path, duration, and included features in writing before you plan your proof of concept. Do not assume a fixed number of days, a specific price, or custom-client availability unless the current offer says so.
-
 If custom branding or a preconfigured client is part of what you need to validate — common for [MSPs](/blog/rustdesk-for-msps) and businesses rolling RustDesk out to end users — ask whether your evaluation can include those workflows. That way you test something representative of what you'd actually run in production.
 
-The practical takeaway: scope your proof of concept around the workflows you actually care about, then confirm the current evaluation terms before you start.
+For genuine evaluators, the practical takeaway is simple: scope your proof of concept around the workflows you actually care about, then confirm the current evaluation path, duration, and included features in writing before you start — and do not assume a fixed number of days, a specific price, or custom-client availability unless the current offer says so.
+
+## Evaluate the core for free, no trial required
+
+For most of what a proof of concept needs to prove, you don't need a trial license at all. The [open-source community server](/blog/open-source-remote-desktop-software) is free to run for as long as you like: stand it up on your own host, point real devices at it, and validate the things that actually decide the platform — connectivity and NAT traversal on your network, session performance, and whether self-hosting fits your operations. With no clock running and the same core that Server Pro builds on, that is often a more representative test than a time-boxed trial.
+
+So the evaluation path is really two-track: prove the **core** for free with the community server today, and use a sales conversation only for the **Server Pro layer** you can't exercise on the open-source build.
+
+## What still needs a Pro evaluation
+
+The Pro-only capabilities are the web console, centralized user and device management, [device groups and a shared address book](/blog/rustdesk-per-user-access-control-device-groups-shared-address-book), and — from the Basic plan and up — the [custom-branded client generator](/blog/rustdesk-web-console-custom-client-generator-port-21114) and [LDAP/AD and OIDC SSO](/blog/rustdesk-active-directory-ldap-sso). If validating those is part of your pilot, that is when to email [sales@rustdesk.com](mailto:sales@rustdesk.com) and confirm the current evaluation path, duration, and included features in writing — and ask exactly what happens to your server and active sessions when a test license ends, before you rely on one in production.
 
 ## Who asks this
 
-This question comes overwhelmingly from IT admins, MSPs, and businesses evaluating remote-desktop tools — often teams migrating away from TeamViewer or AnyDesk who want to pilot a self-hosted alternative before signing off. The people asking generally want a low-risk way to prove the platform works in their environment before purchasing an annual license.
+Pilot planners ask this one first — the team assigned to stand up a proof of concept and report back before any budget is signed off. The people asking generally want a low-risk way to prove the platform works in their environment before purchasing an annual license.
 
 ## Related questions
 
