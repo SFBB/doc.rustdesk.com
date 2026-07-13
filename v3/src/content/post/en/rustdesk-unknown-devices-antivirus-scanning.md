@@ -5,7 +5,7 @@ translationKey: rustdesk-unknown-devices-antivirus-scanning
 draft: false
 title: 'Unknown Devices in Your RustDesk Console? Investigate First'
 excerpt: 'Seeing unfamiliar devices in your RustDesk console? AV sandboxing is one possibility; leaked config or unauthorized registration must be ruled out first.'
-image: ~/assets/images/blog/rustdesk-unknown-devices-antivirus-scanning-og.png
+image: ~/assets/images/blog/rustdesk-unknown-devices-antivirus-scanning-og.webp
 category: Deployment
 tags:
   - RustDesk
@@ -67,10 +67,9 @@ New server operators — IT admins and MSPs alike — tend to hit this within da
 
 ## Related questions
 
-- [How do I generate a custom-branded RustDesk client?](/blog/rustdesk-web-console-custom-client-generator-port-21114)
+- Generating a custom-branded client: see the [RustDesk docs](https://rustdesk.com/docs).
 - [What counts as a managed device in RustDesk?](/blog/what-counts-as-a-managed-device)
 - [Review current RustDesk releases and security fixes](https://github.com/rustdesk/rustdesk/releases)
 - [RustDesk for MSPs: one self-hosted, brandable tool](/blog/rustdesk-for-msps)
-- [How do I self-host RustDesk Server Pro at scale?](/blog/self-host-rustdesk-server-hardware-at-scale)
 
 Seeing a device you do not recognize? Preserve the relevant logs, restrict new enrollment, rotate any potentially exposed secrets, and contact RustDesk support with non-sensitive diagnostic details if the cause remains unclear.
