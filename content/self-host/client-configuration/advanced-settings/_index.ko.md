@@ -447,9 +447,19 @@ ar, bg, ca, cs, da, de, el, en, eo, es, et, fa, fr, he, hr, hu, id, it, ja, ko, 
 | :------: | :------: | :------: | :------: | :------: |
 | N | Y, N | N | `allow-auto-record-outgoing=Y` | >= 1.3.2 |
 
+### hide-recording-button
+
+제어 측의 원격 세션에서 녹화 버튼을 숨깁니다. 이 설정은 녹화를 비활성화하지 않습니다. 발신 세션 자동 녹화가 활성화되어 있으면 세션은 계속 녹화되지만, 사용자는 세션 도구 모음에서 녹화를 중지할 수 없습니다.
+
+| 설치 필요 | 값 | 기본값 | 예시 |
+| :------: | :------: | :------: | :------: |
+| N | Y, N | N | `hide-recording-button=Y` |
+
 ### 비디오 저장 디렉터리
 
 녹화된 동영상을 저장할 디렉터리입니다.
+
+설치된 Windows 서비스가 제어 대상 측에서 생성하는 녹화에는 [`windows-service-video-save-directory`](#windows-service-video-save-directory)를 사용하십시오.
 
 **위치**:
 
@@ -464,6 +474,14 @@ ar, bg, ca, cs, da, de, el, en, eo, es, et, fa, fr, he, hr, hu, id, it, ja, ko, 
 4. **Android** /Storage/emulated/0/**앱_이름**/ScreenRecord
 
 **노트**: **앱_이름**을 현재 앱 이름으로 대체하십시오.
+
+### windows-service-video-save-directory
+
+설치된 Windows 클라이언트가 서비스로 실행될 때 녹화 파일을 저장하는 디렉터리입니다. 경로는 절대 경로여야 합니다. 비어 있거나 상대 경로인 경우 무시되며 RustDesk는 기본 디렉터리를 대신 사용합니다.
+
+| 설치 필요 | 값 | 기본값 | 예시 |
+| :------: | :------: | :------: | :------: |
+| Y | Windows 절대 경로 | `<시스템 드라이브>\ProgramData\<app_name>\recording` | `windows-service-video-save-directory=D:\RustDesk\recordings` |
 
 ### 자동 업데이트 허용
 

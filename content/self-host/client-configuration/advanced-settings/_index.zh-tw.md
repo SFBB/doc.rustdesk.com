@@ -439,9 +439,19 @@ ar, bg, ca, cs, da, de, el, en, eo, es, et, fa, fr, he, hr, hu, id, it, ja, ko, 
 | :------: | :------: | :------: | :------: | :------: |
 | 否 | Y, N | N | `allow-auto-record-outgoing=Y` | >= 1.3.2 |
 
+### hide-recording-button
+
+在控制端的遠端會話中隱藏錄製按鈕。這不會停用錄製。如果已啟用自動錄製傳出會話，會話仍會被錄製，但使用者無法從會話工具列停止錄製。
+
+| 安裝需要 | 值 | 預設值 | 範例 |
+| :------: | :------: | :------: | :------: |
+| 否 | Y, N | N | `hide-recording-button=Y` |
+
 ### video-save-directory
 
 儲存錄製影片的目錄。
+
+對於已安裝的 Windows 服務在被控端進行的錄影，請使用 [`windows-service-video-save-directory`](#windows-service-video-save-directory)。
 
 **位置**：
 
@@ -456,6 +466,14 @@ ar, bg, ca, cs, da, de, el, en, eo, es, et, fa, fr, he, hr, hu, id, it, ja, ko, 
 4. **Android** /Storage/emulated/0/**app_name**/ScreenRecord
 
 **注意**：替換**app_name**表示目前應用程式名稱。
+
+### windows-service-video-save-directory
+
+已安裝的 Windows 用戶端作為服務執行時，用於儲存錄影的目錄。路徑必須是絕對路徑。空白或相對路徑將被忽略，RustDesk 會改用預設目錄。
+
+| 安裝需要 | 值 | 預設值 | 範例 |
+| :------: | :------: | :------: | :------: |
+| 是 | Windows 絕對路徑 | `<系統磁碟>\ProgramData\<app_name>\recording` | `windows-service-video-save-directory=D:\RustDesk\recordings` |
 
 ### allow-auto-update
 

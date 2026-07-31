@@ -438,9 +438,19 @@ Enregistre automatiquement les sessions sortantes.
 | :------: | :------: | :------: | :------: | :------: |
 | N | Y, N | N | `allow-auto-record-outgoing=Y` | >= 1.3.2 |
 
+### hide-recording-button
+
+Masque le bouton d'enregistrement dans les sessions à distance du côté contrôleur. Cela ne désactive pas l'enregistrement. Si l'enregistrement automatique des sessions sortantes est activé, les sessions sont toujours enregistrées, mais les utilisateurs ne peuvent pas arrêter l'enregistrement depuis la barre d'outils de la session.
+
+| Installation requise | Valeurs | Défaut | Exemple |
+| :------: | :------: | :------: | :------: |
+| N | Y, N | N | `hide-recording-button=Y` |
+
 ### video-save-directory
 
 Le répertoire pour sauvegarder les vidéos enregistrées.
+
+Pour les enregistrements effectués du côté contrôlé par le service Windows installé, utilisez [`windows-service-video-save-directory`](#windows-service-video-save-directory).
 
 **Emplacement** :
 
@@ -455,6 +465,14 @@ Valeurs par défaut :
 4. **Android** /Storage/emulated/0/**app_name**/ScreenRecord
 
 **Note** : Remplacez **app_name** par le nom actuel de l'application.
+
+### windows-service-video-save-directory
+
+Le répertoire dans lequel un client Windows installé stocke les enregistrements lorsqu'il s'exécute en tant que service. Le chemin doit être absolu. Un chemin vide ou relatif est ignoré et RustDesk utilise alors le répertoire par défaut.
+
+| Installation requise | Valeurs | Défaut | Exemple |
+| :------: | :------: | :------: | :------: |
+| Y | Chemin Windows absolu | `<lecteur système>\ProgramData\<app_name>\recording` | `windows-service-video-save-directory=D:\RustDesk\recordings` |
 
 ### allow-auto-update
 

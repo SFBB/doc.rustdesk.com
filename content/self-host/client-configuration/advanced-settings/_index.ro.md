@@ -439,9 +439,19 @@ Puteți verifica [LANGS](https://github.com/rustdesk/rustdesk/blob/master/src/la
 | :------: | :------: | :------: | :------: | :------: |
 | N | Y, N | N | `allow-auto-record-outgoing=Y` | >= 1.3.2 |
 
+### hide-recording-button
+
+Ascunde butonul de înregistrare în sesiunile la distanță pe partea care controlează. Această opțiune nu dezactivează înregistrarea. Dacă înregistrarea automată a sesiunilor inițiate este activată, sesiunile sunt înregistrate în continuare, dar utilizatorii nu pot opri înregistrarea din bara de instrumente a sesiunii.
+
+| Install required | Values | Default | Example |
+| :------: | :------: | :------: | :------: |
+| N | Y, N | N | `hide-recording-button=Y` |
+
 ### video-save-directory
 
 Directorul în care sunt salvate videoclipurile înregistrate.
+
+Pentru înregistrările realizate pe partea controlată de serviciul Windows instalat, utilizați [`windows-service-video-save-directory`](#windows-service-video-save-directory).
 
 **Locație**:
 
@@ -456,6 +466,14 @@ Valori implicite:
 4. **Android** /Storage/emulated/0/**app_name**/ScreenRecord
 
 **Notă**: Înlocuiți **app_name** cu numele aplicației curente.
+
+### windows-service-video-save-directory
+
+Directorul în care un client Windows instalat salvează înregistrările atunci când rulează ca serviciu. Calea trebuie să fie absolută. O cale goală sau relativă este ignorată, iar RustDesk utilizează în schimb directorul implicit.
+
+| Install required | Values | Default | Example |
+| :------: | :------: | :------: | :------: |
+| Y | Absolute Windows path | `<unitate de sistem>\ProgramData\<app_name>\recording` | `windows-service-video-save-directory=D:\RustDesk\recordings` |
 
 ### allow-auto-update
 

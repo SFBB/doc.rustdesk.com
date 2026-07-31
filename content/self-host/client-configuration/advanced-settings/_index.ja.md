@@ -438,9 +438,19 @@ ar, bg, ca, cs, da, de, el, en, eo, es, et, fa, fr, he, hr, hu, id, it, ja, ko, 
 | :------: | :------: | :------: | :------: | :------: |
 | N | Y, N | N | `allow-auto-record-outgoing=Y` | >= 1.3.2 |
 
+### hide-recording-button
+
+制御側のリモートセッションで録画ボタンを非表示にします。録画自体は無効になりません。発信セッションの自動録画が有効な場合、セッションは引き続き録画されますが、ユーザーはセッションツールバーから録画を停止できません。
+
+| インストール必要 | 値 | デフォルト | 例 |
+| :------: | :------: | :------: | :------: |
+| N | Y, N | N | `hide-recording-button=Y` |
+
 ### video-save-directory
 
 録画されたビデオを保存するディレクトリ。
+
+インストール済みのWindowsサービスによって被制御側で作成される録画には、[`windows-service-video-save-directory`](#windows-service-video-save-directory)を使用してください。
 
 **場所**：
 
@@ -455,6 +465,14 @@ ar, bg, ca, cs, da, de, el, en, eo, es, et, fa, fr, he, hr, hu, id, it, ja, ko, 
 4. **Android** /Storage/emulated/0/**app_name**/ScreenRecord
 
 **注意**：**app_name**を現在のアプリ名に置き換えてください。
+
+### windows-service-video-save-directory
+
+インストール済みのWindowsクライアントがサービスとして実行されているときに録画を保存するディレクトリ。パスは絶対パスでなければなりません。空または相対パスは無視され、RustDeskは代わりにデフォルトのディレクトリを使用します。
+
+| インストール必要 | 値 | デフォルト | 例 |
+| :------: | :------: | :------: | :------: |
+| Y | Windowsの絶対パス | `<システムドライブ>\ProgramData\<app_name>\recording` | `windows-service-video-save-directory=D:\RustDesk\recordings` |
 
 ### allow-auto-update
 
