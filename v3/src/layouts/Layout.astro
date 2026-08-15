@@ -131,7 +131,19 @@ metadata.description ||= (t({
         }
       }
       if (lang && lang !== defaultLocale) {
-        location.href = `${baseUrl + lang + location.pathname + (location.hash || location.search || '')}`.replace(/\/$/, '');
+        // Localized URLs can differ from prefixed paths (blog post slugs carry a
+        // language suffix), so prefer the hreflang alternate rendered above.
+        let target;
+        document.querySelectorAll('link[rel="alternate"][hreflang]').forEach((link) => {
+          if (link.getAttribute('hreflang').toLowerCase() === lang) {
+            target = link.getAttribute('href');
+          }
+        });
+        if (target) {
+          location.href = target + (location.hash || location.search || '');
+        } else {
+          location.href = `${baseUrl + lang + location.pathname + (location.hash || location.search || '')}`.replace(/\/$/, '');
+        }
       }
     </script> }
   </head>
