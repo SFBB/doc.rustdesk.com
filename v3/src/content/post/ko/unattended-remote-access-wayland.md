@@ -50,3 +50,10 @@ RustDesk는 이제 원격 컴퓨터 앞에서 누군가가 매번 세션을 승�
 구현이 안정화되면 **Fedora와 Arch Linux**를 비롯한 더 많은 Linux 배포판에 Wayland 무인 접속을 제공하고, 최종적으로는 RustDesk 표준 릴리스에 포함할 계획입니다.
 
 Wayland를 사용 중이라면, 특히 다중 모니터 환경이라면 프리뷰 빌드를 사용해 보시고 잘 되는 점과 안 되는 점을 알려주세요.
+
+## 관련 글
+
+- [리눅스용 RustDesk](/ko/blog/rustdesk-for-linux-ko)
+- [RustDesk 무인 원격 접속](/ko/blog/rustdesk-unattended-access-setup-ko)
+- [RustDesk vs AnyDesk](/ko/blog/rustdesk-vs-anydesk-ko)
+- [RustDesk vs TeamViewer](/ko/blog/rustdesk-vs-teamviewer-ko)

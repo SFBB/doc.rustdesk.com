@@ -50,3 +50,10 @@ Queremos recopilar más pruebas en entornos reales antes de convertirlo en el co
 Cuando la implementación sea estable, planeamos llevar el acceso desatendido en Wayland a más distribuciones de Linux, incluidas **Fedora y Arch Linux**, y finalmente incluirlo en las versiones estándar de RustDesk.
 
 Si usas Wayland, especialmente con varios monitores, prueba la versión preliminar y cuéntanos qué funciona… y qué no.
+
+## Lecturas relacionadas
+
+- [RustDesk para Linux](/es/blog/rustdesk-para-linux-el-escritorio-remoto-de-codigo-abierto)
+- [Acceso desatendido en RustDesk](/es/blog/acceso-desatendido-en-rustdesk-guia-de-configuracion)
+- [RustDesk vs AnyDesk](/es/blog/rustdesk-vs-anydesk-escritorio-remoto-autoalojado-y-de-codigo-abierto)
+- [RustDesk vs TeamViewer](/es/blog/rustdesk-vs-teamviewer-la-alternativa-autoalojada)

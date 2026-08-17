@@ -50,3 +50,10 @@ RustDesk 現在可以在 Wayland 上提供**真正的無人值守存取**，無�
 待實作穩定後，我們計劃將 Wayland 無人值守存取帶到更多 Linux 發行版，包括 **Fedora 和 Arch Linux**，並最終將其納入 RustDesk 的標準發行版本。
 
 如果你在使用 Wayland，尤其是多螢幕環境，歡迎試用這個預覽版，並告訴我們哪些功能正常、哪些還有問題。
+
+## 延伸閱讀
+
+- [RustDesk for Linux](/zh-tw/blog/rustdesk-for-linux-zh-tw)
+- [RustDesk 無人值守存取](/zh-tw/blog/rustdesk-unattended-access-setup-zh-tw)
+- [RustDesk vs AnyDesk](/zh-tw/blog/rustdesk-vs-anydesk-zh-tw)
+- [RustDesk 對比 TeamViewer](/zh-tw/blog/rustdesk-vs-teamviewer-zh-tw)

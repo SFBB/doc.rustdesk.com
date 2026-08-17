@@ -50,3 +50,10 @@ Nous souhaitons recueillir davantage de tests en conditions réelles avant d'en 
 Une fois l'implémentation stabilisée, nous prévoyons d'étendre l'accès sans surveillance sous Wayland à d'autres distributions Linux, notamment **Fedora et Arch Linux**, puis de l'intégrer aux versions standard de RustDesk.
 
 Si vous utilisez Wayland, en particulier avec plusieurs écrans, essayez la version préliminaire et dites-nous ce qui fonctionne — et ce qui ne fonctionne pas.
+
+## Pour aller plus loin
+
+- [RustDesk pour Linux](/fr/blog/rustdesk-pour-linux-le-bureau-a-distance-open-source)
+- [Accès non surveillé RustDesk](/fr/blog/acces-non-surveille-rustdesk-guide-de-configuration)
+- [RustDesk vs AnyDesk](/fr/blog/rustdesk-vs-anydesk-bureau-a-distance-open-source-et-auto-heberge)
+- [RustDesk vs TeamViewer](/fr/blog/rustdesk-vs-teamviewer-lalternative-auto-hebergee)
