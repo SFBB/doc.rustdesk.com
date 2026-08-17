@@ -554,21 +554,6 @@ ar, bg, ca, cs, da, de, el, en, eo, es, et, fa, fr, he, hr, hu, id, it, ja, ko, 
 | :------: | :------: | :------: | :------: |
 | 否 | Y, N | N | `allow-always-software-render=N` |
 
-### allow-linux-headless
-
-如果沒有顯示器，允許傳入連接。
-
-此選項需要桌面環境、Xorg伺服器和GDM，請參閱[PR 3902](https://github.com/rustdesk/rustdesk/pull/3902)。
-
-**位置**：
-
-1. **桌面** 設定 → 一般 → 其他 → 允許Linux無頭模式
-2. **行動裝置**
-
-| 安裝需要 | 值 | 預設值 | 範例 |
-| :------: | :------: | :------: | :------: |
-| 是 | Y, N | N | `allow-linux-headless=N` |
-
 ### enable-hwcodec
 
 啟用硬體編碼以使畫面更流暢。

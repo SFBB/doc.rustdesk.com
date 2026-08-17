@@ -562,21 +562,6 @@ ar, bg, ca, cs, da, de, el, en, eo, es, et, fa, fr, he, hr, hu, id, it, ja, ko, 
 | :------: | :------: | :------: | :------: |
 | N | Y, N | N | `allow-always-software-render=N` |
 
-### allow-linux-headless
-
-디스플레이 없음일 경우 수신 연결을 허용합니다.
-
-이 옵션은 데스크톱 환경, Xorg 서버 및 GDM을 필요로 하며, [PR 3902](https://github.com/rustdesk/rustdesk/pull/3902)를 참조하십시오.
-
-**위치**:
-
-1. **데스크톱** 설정 → 일반 → 기타 → Linux headless 허용
-2. **모바일**
-
-| 설치 필요 | 값 | 기본값 | 예시 |
-| :------: | :------: | :------: | :------: |
-| Y | Y, N | N | `allow-linux-headless=N` |
-
 ### enable-hwcodec
 
 하드웨어 인코딩을 활성화하여 그림을 더 부드럽게 만듭니다.

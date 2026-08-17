@@ -15,7 +15,7 @@ faq:
   - question: 'Why does RustDesk say "Connected, waiting for image"?'
     answer: "The session established successfully, but the remote machine is not producing a screen image to send. The most common reason is that there is no active display to capture — a headless server with no monitor, a screen that has gone to sleep or locked, or a display the OS won't let RustDesk record. Fix the capture source and the image appears."
   - question: 'How do I fix RustDesk waiting for image on a headless computer?'
-    answer: 'A machine with no monitor has no framebuffer to capture, so RustDesk has nothing to send. Attach a real monitor, plug in an inexpensive HDMI dummy plug that makes the GPU think a display is connected, or on Linux use the documented headless setup (github.com/rustdesk/rustdesk/wiki/Headless-Linux-Support). Waking or keeping the display awake resolves most cases.'
+    answer: 'A machine with no monitor has no framebuffer to capture, so RustDesk has nothing to send. Attach a real monitor or plug in an inexpensive HDMI dummy plug that makes the GPU think a display is connected. Waking or keeping the display awake resolves most cases.'
   - question: 'Does changing the video codec fix the black screen?'
     answer: 'Often, yes. In the remote session toolbar or settings you can switch codecs — VP8, VP9, AV1, or H.264/H.265 where hardware supports them. A codec the remote hardware cannot encode will show a blank or frozen image, and falling back to a software codec such as VP9 usually restores the picture.'
   - question: 'RustDesk shows the image on one PC but not another. Why?'
@@ -38,11 +38,10 @@ The session connected, but there is no framebuffer to capture. On a remote machi
 
 By far the most reported cause is a **headless machine** — a server, mini-PC, or workstation running with no monitor attached, or with the display asleep. With no active display, the GPU produces no framebuffer, so RustDesk connects but has nothing to send. This pattern shows up repeatedly in the RustDesk issue tracker, including [reports of black screens specifically when the target's monitor is off](https://github.com/rustdesk/rustdesk/issues/9884) and the long-running ["Connected, waiting for image" thread](https://github.com/rustdesk/rustdesk/issues/222).
 
-Three ways to give it something to capture:
+Two ways to give it something to capture:
 
 - **Attach a monitor** and make sure it's powered on and awake.
 - **Use an HDMI (or DisplayPort) dummy plug.** These inexpensive adapters make the GPU believe a display is connected, so it keeps rendering a framebuffer for RustDesk to grab. This is the standard fix for headless desktops and home servers.
-- **On Linux, use the documented headless path.** RustDesk supports headless Linux setups, but the configuration differs from a normal desktop session — see the [Headless Linux Support wiki](https://github.com/rustdesk/rustdesk/wiki/Headless-Linux-Support).
 
 If a monitor _is_ attached, the next suspect is that it went to sleep.
 
@@ -50,7 +49,7 @@ If a monitor _is_ attached, the next suspect is that it went to sleep.
 
 | Cause                          | Signal                              | Fix                                                                                                                                      |
 | ------------------------------ | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| Headless / no display          | Black screen on a server or mini-PC | Attach a monitor, add an HDMI dummy plug, or use the Linux headless path                                                                 |
+| Headless / no display          | Black screen on a server or mini-PC | Attach a monitor or add an HDMI dummy plug                                                                                               |
 | Screen asleep / locked         | Worked earlier, black after idle    | Wake the screen; disable sleep/screensaver; on macOS stop the display sleeping in Settings                                               |
 | Missing permission (macOS)     | Connects, permanent black           | Grant Screen Recording in Privacy & Security; install the helper for the login screen                                                    |
 | Codec mismatch                 | Blank or frozen image               | Switch codec (VP8 / VP9 / AV1 / H.264 / H.265); fall back to a software codec                                                            |
@@ -84,7 +83,7 @@ Some GPUs — NVIDIA configurations come up most often — clash with RustDesk's
 
 ### Linux and Wayland
 
-On Linux, **Wayland screen capture goes through PipeWire and the `xdg-desktop-portal`**: it prompts for consent to pick a display the first time — in most cases the choice is remembered, so it does not prompt again — and works inside an active login session. That is a Wayland security design, so by itself it does not cover the greeter or a truly headless box — though unattended Wayland capture is in active development ([PR #15420](https://github.com/rustdesk/rustdesk/pull/15420)). If you get a blank screen on Wayland, the fix is usually to accept the portal's screen-share prompt and confirm `xdg-desktop-portal` and PipeWire are installed and running; on a headless box, use the documented [headless configuration](https://github.com/rustdesk/rustdesk/wiki/Headless-Linux-Support). Logging into an X11/Xorg session also avoids the portal path where a distribution still offers one — but as many distributions move to Wayland-only, fixing the portal/PipeWire path is the more future-proof approach.
+On Linux, **Wayland screen capture goes through PipeWire and the `xdg-desktop-portal`**: it prompts for consent to pick a display the first time — in most cases the choice is remembered, so it does not prompt again — and works inside an active login session. That is a Wayland security design, so by itself it does not cover the greeter or a truly headless box — though unattended Wayland capture is in active development ([PR #15420](https://github.com/rustdesk/rustdesk/pull/15420)). If you get a blank screen on Wayland, the fix is usually to accept the portal's screen-share prompt and confirm `xdg-desktop-portal` and PipeWire are installed and running. Logging into an X11/Xorg session also avoids the portal path where a distribution still offers one — but as many distributions move to Wayland-only, fixing the portal/PipeWire path is the more future-proof approach.
 
 ### Network and relay
 

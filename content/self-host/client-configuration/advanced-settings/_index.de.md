@@ -553,21 +553,6 @@ Immer Software-Rendering verwenden.
 | :------: | :------: | :------: | :------: |
 | N | Y, N | N | `allow-always-software-render=N` |
 
-### allow-linux-headless
-
-Eingehende Verbindung zulassen, wenn keine Displays vorhanden sind.
-
-Diese Option erfordert eine Desktop-Umgebung, Xorg-Server und GDM, siehe [PR 3902](https://github.com/rustdesk/rustdesk/pull/3902).
-
-**Ort**:
-
-1. **Desktop** Einstellungen → Allgemein → Sonstiges → Linux headless zulassen
-2. **Mobil**
-
-| Installation erforderlich | Werte | Standard | Beispiel |
-| :------: | :------: | :------: | :------: |
-| Y | Y, N | N | `allow-linux-headless=N` |
-
 ### enable-hwcodec
 
 Hardware-Kodierung aktivieren, um das Bild flüssiger zu machen.

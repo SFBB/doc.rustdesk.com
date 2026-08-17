@@ -14,7 +14,7 @@ faq:
   - question: 'Por que o RustDesk exibe "Conectado, aguardando imagem"?'
     answer: 'A sessão foi estabelecida com sucesso, mas a máquina remota não está gerando uma imagem de tela para enviar. O motivo mais comum é a ausência de um display ativo para capturar — um servidor headless sem monitor, uma tela que entrou em suspensão ou foi bloqueada, ou um display que o sistema operacional não permite que o RustDesk grave. Corrija a origem da captura e a imagem aparece.'
   - question: 'Como corrigir o RustDesk que fica "aguardando imagem" em um computador headless?'
-    answer: 'Uma máquina sem monitor não tem framebuffer para capturar, então o RustDesk não tem nada para enviar. Conecte um monitor real, use um dummy plug HDMI barato que faz a GPU pensar que há um display conectado ou, no Linux, use a configuração headless documentada (github.com/rustdesk/rustdesk/wiki/Headless-Linux-Support). Ativar ou manter o display acordado resolve a maioria dos casos.'
+    answer: 'Uma máquina sem monitor não tem framebuffer para capturar, então o RustDesk não tem nada para enviar. Conecte um monitor real ou use um dummy plug HDMI barato que faz a GPU pensar que há um display conectado. Ativar ou manter o display acordado resolve a maioria dos casos.'
   - question: 'Alterar o codec de vídeo corrige a tela preta?'
     answer: 'Frequentemente, sim. Na barra de ferramentas da sessão remota ou nas configurações, você pode alternar entre codecs — VP8, VP9, AV1 ou H.264/H.265, quando o hardware oferece suporte. Um codec que o hardware remoto não consegue codificar exibirá uma imagem em branco ou congelada, e voltar para um codec por software, como o VP9, geralmente restaura a imagem.'
   - question: 'O RustDesk exibe a imagem em um PC, mas não em outro. Por quê?'
@@ -37,11 +37,10 @@ A sessão conectou, mas não há framebuffer para capturar. Em uma máquina remo
 
 De longe, a causa mais relatada é uma **máquina headless** — um servidor, mini-PC ou estação de trabalho rodando sem monitor conectado, ou com o display em suspensão. Sem um display ativo, a GPU não produz framebuffer, então o RustDesk conecta, mas não tem nada para enviar. Esse padrão aparece repetidamente no rastreador de problemas do RustDesk, incluindo [relatos de telas pretas especificamente quando o monitor do alvo está desligado](https://github.com/rustdesk/rustdesk/issues/9884) e a [thread de longa duração sobre "Conectado, aguardando imagem"](https://github.com/rustdesk/rustdesk/issues/222).
 
-Três maneiras de dar a ele algo para capturar:
+Duas maneiras de dar a ele algo para capturar:
 
 - **Conecte um monitor** e certifique-se de que está ligado e ativo.
 - **Use um dummy plug HDMI (ou DisplayPort).** Esses adaptadores baratos fazem a GPU acreditar que há um display conectado, então ela continua renderizando um framebuffer para o RustDesk capturar. Essa é a solução padrão para desktops headless e servidores domésticos.
-- **No Linux, use o caminho headless documentado.** O RustDesk oferece suporte a configurações headless no Linux, mas a configuração é diferente de uma sessão de desktop normal — veja a [wiki de Suporte Headless para Linux](https://github.com/rustdesk/rustdesk/wiki/Headless-Linux-Support).
 
 Se um monitor _estiver_ conectado, o próximo suspeito é que ele entrou em suspensão.
 
@@ -49,7 +48,7 @@ Se um monitor _estiver_ conectado, o próximo suspeito é que ele entrou em susp
 
 | Causa                              | Sinal                                    | Solução                                                                                                                                                   |
 | ---------------------------------- | ---------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Headless / sem display             | Tela preta em um servidor ou mini-PC     | Conecte um monitor, adicione um dummy plug HDMI ou use o caminho headless do Linux                                                                        |
+| Headless / sem display             | Tela preta em um servidor ou mini-PC     | Conecte um monitor ou adicione um dummy plug HDMI                                                                                                         |
 | Tela em suspensão / bloqueada      | Funcionava antes, preta após inatividade | Ative a tela; desative a suspensão/proteção de tela; no macOS, impeça a suspensão do display nas Configurações                                            |
 | Permissão ausente (macOS)          | Conecta, tela preta permanente           | Conceda Gravação de Tela em Privacidade e Segurança; instale o helper para a tela de login                                                                |
 | Incompatibilidade de codec         | Imagem em branco ou congelada            | Troque o codec (VP8 / VP9 / AV1 / H.264 / H.265); volte para um codec por software                                                                        |
@@ -83,7 +82,7 @@ Algumas GPUs — configurações NVIDIA aparecem com mais frequência — entram
 
 ### Linux e Wayland
 
-No Linux, **a captura de tela no Wayland passa pelo PipeWire e pelo `xdg-desktop-portal`**: ele solicita consentimento para escolher um display na primeira vez — na maioria dos casos, a escolha é lembrada, então não solicita novamente — e funciona dentro de uma sessão de login ativa. Esse é um design de segurança do Wayland, então, por si só, não cobre a tela de login (greeter) nem uma máquina verdadeiramente headless — embora a captura Wayland sem supervisão esteja em desenvolvimento ativo ([PR #15420](https://github.com/rustdesk/rustdesk/pull/15420)). Se você tiver uma tela em branco no Wayland, a solução geralmente é aceitar o aviso de compartilhamento de tela do portal e confirmar que o `xdg-desktop-portal` e o PipeWire estão instalados e em execução; em uma máquina headless, use a [configuração headless](https://github.com/rustdesk/rustdesk/wiki/Headless-Linux-Support) documentada. Fazer login em uma sessão X11/Xorg também evita o caminho do portal onde uma distribuição ainda oferece essa opção — mas, à medida que muitas distribuições migram para Wayland exclusivamente, corrigir o caminho do portal/PipeWire é a abordagem mais preparada para o futuro.
+No Linux, **a captura de tela no Wayland passa pelo PipeWire e pelo `xdg-desktop-portal`**: ele solicita consentimento para escolher um display na primeira vez — na maioria dos casos, a escolha é lembrada, então não solicita novamente — e funciona dentro de uma sessão de login ativa. Esse é um design de segurança do Wayland, então, por si só, não cobre a tela de login (greeter) nem uma máquina verdadeiramente headless — embora a captura Wayland sem supervisão esteja em desenvolvimento ativo ([PR #15420](https://github.com/rustdesk/rustdesk/pull/15420)). Se você tiver uma tela em branco no Wayland, a solução geralmente é aceitar o aviso de compartilhamento de tela do portal e confirmar que o `xdg-desktop-portal` e o PipeWire estão instalados e em execução. Fazer login em uma sessão X11/Xorg também evita o caminho do portal onde uma distribuição ainda oferece essa opção — mas, à medida que muitas distribuições migram para Wayland exclusivamente, corrigir o caminho do portal/PipeWire é a abordagem mais preparada para o futuro.
 
 ### Rede e relay
 

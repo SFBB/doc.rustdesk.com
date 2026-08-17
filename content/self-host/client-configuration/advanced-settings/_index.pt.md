@@ -553,21 +553,6 @@ Sempre usar renderização por software.
 | :------: | :------: | :------: | :------: |
 | N | Y, N | N | `allow-always-software-render=N` |
 
-### allow-linux-headless
-
-Permitir conexão de entrada se não houver displays.
-
-Esta opção requer ambiente desktop, servidor Xorg e GDM, veja [PR 3902](https://github.com/rustdesk/rustdesk/pull/3902).
-
-**Localização**:
-
-1. **Desktop** Configurações → Geral → Outro → Permitir Linux headless
-2. **Móvel**
-
-| Instalação necessária | Valores | Padrão | Exemplo |
-| :------: | :------: | :------: | :------: |
-| Y | Y, N | N | `allow-linux-headless=N` |
-
 ### enable-hwcodec
 
 Habilita codificação por hardware para tornar a imagem mais suave.

@@ -563,21 +563,6 @@ Always use software rendering.
 | :------: | :------: | :------: | :------: |
 | N | Y, N | N | `allow-always-software-render=N` |
 
-### allow-linux-headless
-
-Allow incoming connection if there's no displays.
-
-This option requires desktop environment, Xorg server and GDM, see [PR 3902](https://github.com/rustdesk/rustdesk/pull/3902).
-
-**Location**:
-
-1. **Desktop** Settings → General → Other → Allow Linux headless
-2. **Mobile**
-
-| Install required | Values | Default | Example |
-| :------: | :------: | :------: | :------: |
-| Y | Y, N | N | `allow-linux-headless=N` |
-
 ### enable-hwcodec
 
 Enable hardware encoding to make the picture smoother.

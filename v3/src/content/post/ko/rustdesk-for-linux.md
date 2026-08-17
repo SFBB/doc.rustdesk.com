@@ -12,11 +12,11 @@ author: 'RustDesk Team'
 slug: 'rustdesk-for-linux-ko'
 faq:
   - question: 'RustDesk는 Wayland에서 작동하나요?'
-    answer: '네 — RustDesk는 1.4.3에서 추가된 다중 모니터 공유를 포함해 원격 데스크톱 도구 중에서도 손꼽히게 강력한 Wayland 지원을 제공합니다. Wayland에서는 PipeWire와 XDG 데스크톱 포털을 통해 화면을 캡처하며, 공유할 디스플레이를 선택하는 동의 대화상자가 표시됩니다 — 대부분의 경우 선택 사항이 기억되어 다시 묻지 않으며, 현재 로그인된 세션 내에서 작동합니다. 이 동의 절차는 모든 화면 공유 앱에 공통으로 적용되는 Wayland의 보안 설계입니다. 로그인 이전이나 완전 무인 상태의 머신에서는 아래의 헤드리스 가상 디스플레이 설정을 사용하세요(또는 배포판이 아직 X11 세션을 제공한다면 X11 세션을 사용할 수 있습니다 — 여러 배포판이 Wayland 전용으로 전환하고 있기 때문입니다). 완전 무인 Wayland 캡처는 현재 활발히 개발 중입니다(github.com/rustdesk/rustdesk/pull/15420 참고).'
+    answer: '네 — RustDesk는 1.4.3에서 추가된 다중 모니터 공유를 포함해 원격 데스크톱 도구 중에서도 손꼽히게 강력한 Wayland 지원을 제공합니다. Wayland에서는 PipeWire와 XDG 데스크톱 포털을 통해 화면을 캡처하며, 공유할 디스플레이를 선택하는 동의 대화상자가 표시됩니다 — 대부분의 경우 선택 사항이 기억되어 다시 묻지 않으며, 현재 로그인된 세션 내에서 작동합니다. 이 동의 절차는 모든 화면 공유 앱에 공통으로 적용되는 Wayland의 보안 설계입니다. 로그인 이전 접속이 필요한 경우에는 지원되는 범위에서 디스플레이 관리자의 로그인 화면이 X11/Xorg를 사용하도록 설정하세요(여러 배포판이 Wayland 전용으로 전환하고 있습니다). 완전 무인 Wayland 캡처는 현재 활발히 개발 중입니다(github.com/rustdesk/rustdesk/pull/15420 참고).'
   - question: '리눅스에서 어떤 패키지를 설치해야 하나요?'
     answer: 'Debian, Ubuntu, Linux Mint에서는 .deb를, Fedora, RHEL, openSUSE에서는 .rpm을 사용하세요. 샌드박스 환경에서 폭넓은 호환성을 원한다면 Flathub의 Flatpak을, 단일 파일로 된 대안이 필요하다면 휴대용 AppImage를 사용할 수 있습니다. .deb와 .rpm 패키지는 systemd 서비스를 등록하고 시작하므로 재부팅 후에도 RustDesk가 유지되지만, Flatpak과 AppImage는 기본적으로 그렇지 않습니다.'
   - question: '헤드리스 리눅스 머신에서 왜 검은 화면이 나타나나요?'
-    answer: '모니터가 연결되어 있지 않으면 X나 Wayland는 프레임버퍼를 전혀 할당하지 않으므로 RustDesk가 캡처할 화면 자체가 없어, 뷰어에는 검은 화면 또는 이미지 대기 화면이 표시됩니다. 더미 HDMI/DisplayPort 플러그를 연결하거나, xserver-xorg-video-dummy나 VKMS 같은 가상 디스플레이를 구성하거나, RustDesk의 선택적 리눅스 헤드리스 모드를 활성화해 가상 디스플레이가 자동으로 생성되도록 하세요.'
+    answer: '모니터가 연결되어 있지 않으면 X나 Wayland는 프레임버퍼를 전혀 할당하지 않으므로 RustDesk가 캡처할 화면 자체가 없어, 뷰어에는 검은 화면 또는 이미지 대기 화면이 표시됩니다. 더미 HDMI/DisplayPort 플러그를 연결하세요.'
   - question: '리눅스에서 RustDesk 서버를 직접 호스팅할 수 있나요?'
     answer: '네. RustDesk 서버(hbbs ID/랑데부 프로세스와 hbbr 릴레이 프로세스)는 리눅스용으로 제작되었으며 이것이 표준적인 실행 방식입니다. 무료 오픈소스 커뮤니티 서버는 비용 없이 무기한 실행할 수 있으며, Server Pro는 여기에 웹 콘솔, 기기 그룹, 맞춤 클라이언트 생성기를 추가로 제공합니다. 두 가지 모두 일반 리눅스 VM이나 베어메탈 호스트에 설치할 수 있습니다.'
 metadata:
@@ -53,7 +53,7 @@ RustDesk는 일반적으로 사용되는 모든 리눅스 패키징 형식으로
 **Wayland: RustDesk는 원격 데스크톱 도구 중에서도 단연 가장 강력한 지원을 제공한다고 할 만합니다.** RustDesk는 버전 1.2.0부터 Wayland를 지원해 왔으며 이후로도 계속 기능을 확장해 왔습니다. Wayland 컴포지터는 프레임버퍼에 직접 접근하는 것을 허용하지 않기 때문에, RustDesk는 `xdg-desktop-portal` 서비스와 [PipeWire](https://deepwiki.com/rustdesk/rustdesk/6.3.1-wayland-support)를 통해 화면을 캡처하고, 커널의 `uinput` 모듈을 통해 입력을 주입합니다. 이는 Wayland 자체의 설계에서 비롯된 두 가지 결과이며, RustDesk뿐 아니라 모든 Wayland 화면 공유 도구에 동일하게 적용됩니다:
 
 - **연결마다 필요한 동의.** 포털은 공유할 디스플레이를 선택하도록 요청하는 대화상자를 표시합니다. 이는 RustDesk의 버그가 아니라 Wayland가 의도적으로 설계한 보안 기능입니다 — 백그라운드 앱이 사용자 몰래 화면 녹화를 시작할 수 없도록 하기 위함입니다. 포털 v4 이상에서는 "복원 토큰(restore token)"을 지원해 매번 다시 묻지 않지만, 최초 공유 시에는 화면에서 클릭이 필요합니다.
-- **활성 세션에서만 작동.** Wayland 캡처는 로그인된 그래픽 세션에 종속됩니다. Wayland 로그인 화면(그리터) 캡처는 아직 지원되지 않으며, 현재 활발히 개발 중입니다([PR #15420](https://github.com/rustdesk/rustdesk/pull/15420)). 현재 로그인 이전 접속이 필요하다면 아래의 헤드리스/가상 디스플레이 구성을 사용하거나, 아직 X11 세션을 제공하는 배포판이라면 X11 세션을 사용하세요.
+- **활성 세션에서만 작동.** Wayland 캡처는 로그인된 그래픽 세션에 종속됩니다. Wayland 로그인 화면(그리터) 캡처는 아직 지원되지 않으며, 현재 활발히 개발 중입니다([PR #15420](https://github.com/rustdesk/rustdesk/pull/15420)). 현재 로그인 이전 접속이 필요하다면 지원되는 경우 디스플레이 관리자의 로그인 그리터가 X11/Xorg를 사용하도록 설정하세요.
 
 Wayland 지원은 계속 개선되고 있습니다 — 예를 들어 RustDesk 1.4.3(2025년 10월)에서는 [Wayland용 다중 모니터 공유가 추가](https://ubuntuhandbook.org/index.php/2025/10/rustdesk-released-1-4-3-with-multi-monitor-for-wayland-virtual-mouse/)되었습니다. 다만 Wayland 환경에서 접속했는데 검은 화면이 보인다면, 이는 거의 항상 portal/PipeWire 경로가 제대로 충족되지 않은 경우입니다. Wayland의 검은 화면 문제를 구체적으로 다루는 [RustDesk가 연결되었지만 이미지를 기다리는 경우](/ko/blog/rustdesk-connected-waiting-for-image-ko) 글을 참고하세요.
 
@@ -63,21 +63,18 @@ Wayland 지원은 계속 개선되고 있습니다 — 예를 들어 RustDesk 1.
 
 1. systemd 서비스가 등록되도록 `.deb` 또는 `.rpm`으로 설치하거나, 앱에서 **서비스 활성화**를 클릭하세요.
 2. RustDesk의 연결 설정에서 강력한 **고정 비밀번호**를 설정하세요(가능하면 2단계 인증도 활성화하세요).
-3. 로그인 이전이나 사용자 로그인 전반에 걸친 접속이 필요하다면 아래의 헤드리스 가상 디스플레이 구성을 사용하세요(위에서 다룬 Wayland 그리터의 한계가 여기에도 적용됩니다).
+3. 로그인 이전이나 사용자 로그인 전반에 걸쳐 접속하려면 지원되는 경우 디스플레이 관리자의 로그인 화면 자체가 X11/Xorg를 사용하도록 설정하세요. X11 데스크톱 세션을 선택해도 로그인 이후의 세션에만 영향을 줍니다.
 
-염두에 두어야 할 Wayland의 현실이 하나 있습니다. Wayland 절에서 설명한 동의 기반 포털 방식 때문에, 개발 중인 무인 지원 기능이 정식으로 도입되기 전까지는 완전한 무인 캡처가 X11보다 까다롭습니다. 따라서 사람이 개입하지 않는 머신에는 헤드리스 가상 디스플레이 설정을 계획해 두세요.
+염두에 두어야 할 Wayland의 현실이 하나 있습니다. Wayland 절에서 설명한 동의 기반 포털 방식 때문에, 개발 중인 무인 지원 기능이 정식으로 도입되기 전까지는 완전한 무인 캡처가 X11보다 까다롭습니다.
 
 ## 헤드리스 리눅스: 모니터가 없는 서버
 
 리눅스에서 매우 흔한 사용 사례 중 하나는 디스플레이가 전혀 연결되지 않은 머신입니다 — 홈 서버, 실험실용 머신, VM 등이 그렇습니다. 이 경우 문제는 RustDesk가 아니라 그래픽 스택에 있습니다. 모니터가 연결되어 있지 않으면 X나 Wayland는 프레임버퍼를 전혀 할당하지 않으므로, 그야말로 캡처할 이미지 자체가 없어 검은 화면이 나타납니다.
 
-렌더링할 대상을 만들어 주는 세 가지 방법이 있습니다:
+렌더링할 대상을 만들어 주는 두 가지 방법이 있습니다:
 
 - **더미 플러그** — GPU가 모니터가 연결되어 있다고 인식하게 만드는 저렴한 물리적 HDMI/DisplayPort "헤드리스" 동글입니다.
 - **가상 디스플레이 드라이버** — X11에서는 `xserver-xorg-video-dummy`, 또는 VKMS 같은 커널 수준의 옵션을 사용할 수 있습니다.
-- **RustDesk의 선택적 헤드리스 모드** — `sudo rustdesk --option allow-linux-headless Y` 명령으로 활성화할 수 있습니다. [헤드리스 리눅스 지원 위키](https://github.com/rustdesk/rustdesk/wiki/Headless-Linux-Support)에 따르면 이 기능은 기본적으로 비활성화되어 있으며, 주로 GNOME이 설치된 Ubuntu에서 테스트되었고 `xserver-xorg-video-dummy`와 `lightdm` 같은 패키지가 필요합니다. `sudo rustdesk --get-id`로 머신의 ID를 확인할 수 있고, `sudo rustdesk --password <password>`로 비밀번호를 설정할 수 있습니다.
-
-헤드리스 모드는 아직 다듬어지지 않은 부분이 있으므로, 바로 사용 가능한 완성형 기능이라기보다는 "조심스럽게 다뤄야 작동하는" 기능으로 여기시기 바랍니다.
 
 ## 리눅스에서 RustDesk 서버 자체 호스팅하기
 

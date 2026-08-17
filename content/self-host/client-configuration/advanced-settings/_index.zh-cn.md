@@ -554,21 +554,6 @@ ar, bg, ca, cs, da, de, el, en, eo, es, et, fa, fr, he, hr, hu, id, it, ja, ko, 
 | :------: | :------: | :------: | :------: |
 | 否 | Y, N | N | `allow-always-software-render=N` |
 
-### allow-linux-headless
-
-如果没有显示器，允许传入连接。
-
-此选项需要桌面环境、Xorg服务器和GDM，请参阅[PR 3902](https://github.com/rustdesk/rustdesk/pull/3902)。
-
-**位置**：
-
-1. **桌面** 设置 → 常规 → 其他 → 允许Linux无头模式
-2. **移动端**
-
-| 安装需要 | 值 | 默认值 | 示例 |
-| :------: | :------: | :------: | :------: |
-| 是 | Y, N | N | `allow-linux-headless=N` |
-
 ### enable-hwcodec
 
 启用硬件编码以使画面更流畅。
