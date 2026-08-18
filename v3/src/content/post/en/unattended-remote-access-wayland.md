@@ -53,3 +53,10 @@ We would like to get more real-world testing before making this the default.
 Once the implementation is stable, we plan to bring unattended Wayland access to more Linux distributions, including **Fedora and Arch Linux**, and eventually include it in the standard RustDesk releases.
 
 If you use Wayland, especially with multiple monitors, please give the preview build a try and let us know what works—and what doesn't.
+
+## Related reading
+
+- [RustDesk for Linux](/blog/rustdesk-for-linux)
+- [RustDesk Unattended Access](/blog/rustdesk-unattended-access-setup)
+- [RustDesk vs AnyDesk](/blog/rustdesk-vs-anydesk)
+- [RustDesk vs TeamViewer](/blog/rustdesk-vs-teamviewer)

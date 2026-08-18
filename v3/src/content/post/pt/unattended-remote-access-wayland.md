@@ -50,3 +50,10 @@ Gostaríamos de reunir mais testes em condições reais antes de torná-lo o pad
 Quando a implementação estiver estável, planejamos levar o acesso não assistido no Wayland a mais distribuições Linux, incluindo **Fedora e Arch Linux**, e, por fim, incluí-lo nas versões padrão do RustDesk.
 
 Se você usa Wayland, especialmente com vários monitores, experimente a versão de pré-visualização e conte para nós o que funciona — e o que não funciona.
+
+## Leituras relacionadas
+
+- [RustDesk para Linux](/pt/blog/rustdesk-para-linux-o-desktop-remoto-de-codigo-aberto)
+- [Acesso Não Assistido do RustDesk](/pt/blog/acesso-nao-assistido-do-rustdesk-guia-de-configuracao)
+- [RustDesk vs AnyDesk](/pt/blog/rustdesk-vs-anydesk-area-de-trabalho-remota-auto-hospedada-e-de-codigo)
+- [RustDesk vs TeamViewer](/pt/blog/rustdesk-vs-teamviewer-a-alternativa-auto-hospedada)

@@ -553,21 +553,6 @@ ar, bg, ca, cs, da, de, el, en, eo, es, et, fa, fr, he, hr, hu, id, it, ja, ko, 
 | :------: | :------: | :------: | :------: |
 | N | Y, N | N | `allow-always-software-render=N` |
 
-### allow-linux-headless
-
-ディスプレイがない場合の着信接続を許可します。
-
-このオプションはデスクトップ環境、Xorgサーバー、GDMが必要です。[PR 3902](https://github.com/rustdesk/rustdesk/pull/3902)を参照してください。
-
-**場所**：
-
-1. **デスクトップ** 設定 → 一般 → その他 → Linux headlessを許可
-2. **モバイル**
-
-| インストール必要 | 値 | デフォルト | 例 |
-| :------: | :------: | :------: | :------: |
-| Y | Y, N | N | `allow-linux-headless=N` |
-
 ### enable-hwcodec
 
 画像をより滑らかにするためにハードウェアエンコーディングを有効にします。

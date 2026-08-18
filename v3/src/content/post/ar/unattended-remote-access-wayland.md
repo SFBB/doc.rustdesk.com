@@ -50,3 +50,10 @@ metadata:
 بمجرد استقرار التنفيذ، نخطط لجلب الوصول غير المراقب على Wayland إلى المزيد من توزيعات لينكس، بما في ذلك **Fedora و Arch Linux**، وإدراجه في النهاية ضمن إصدارات RustDesk القياسية.
 
 إذا كنت تستخدم Wayland، وخصوصاً مع عدة شاشات، فجرّب الإصدار التجريبي وأخبرنا بما يعمل جيداً — وما لا يعمل.
+
+## قراءات ذات صلة
+
+- [RustDesk لنظام Linux](/ar/blog/rustdesk-for-linux-ar)
+- [الوصول غير المراقب في RustDesk](/ar/blog/rustdesk-unattended-access-setup-ar)
+- [RustDesk مقابل AnyDesk](/ar/blog/rustdesk-vs-anydesk-ar)
+- [RustDesk مقابل TeamViewer](/ar/blog/rustdesk-vs-teamviewer-ar)

@@ -14,7 +14,7 @@ faq:
   - question: 'Pourquoi RustDesk affiche-t-il « Connected, waiting for image » ?'
     answer: "La session s'est établie avec succès, mais la machine distante ne produit aucune image d'écran à envoyer. La cause la plus fréquente est l'absence d'affichage actif à capturer — un serveur headless sans moniteur, un écran passé en veille ou verrouillé, ou un affichage que le système d'exploitation refuse de laisser RustDesk enregistrer. Corrigez la source de capture et l'image apparaît."
   - question: 'Comment résoudre le « waiting for image » de RustDesk sur un ordinateur headless ?'
-    answer: "Une machine sans moniteur n'a aucun framebuffer à capturer, donc RustDesk n'a rien à envoyer. Branchez un véritable moniteur, installez un adaptateur HDMI factice (dummy plug) peu coûteux qui fait croire au GPU qu'un écran est connecté, ou, sous Linux, utilisez la configuration headless documentée (github.com/rustdesk/rustdesk/wiki/Headless-Linux-Support). Réveiller l'écran ou l'empêcher de se mettre en veille résout la plupart des cas."
+    answer: "Une machine sans moniteur n'a aucun framebuffer à capturer, donc RustDesk n'a rien à envoyer. Branchez un véritable moniteur ou installez un adaptateur HDMI factice (dummy plug) peu coûteux qui fait croire au GPU qu'un écran est connecté. Réveiller l'écran ou l'empêcher de se mettre en veille résout la plupart des cas."
   - question: "Changer le codec vidéo permet-il de corriger l'écran noir ?"
     answer: "Souvent, oui. Dans la barre d'outils de la session distante ou dans les paramètres, vous pouvez changer de codec — VP8, VP9, AV1, ou H.264/H.265 lorsque le matériel le permet. Un codec que le matériel distant ne peut pas encoder affichera une image vide ou figée, et revenir à un codec logiciel comme VP9 rétablit généralement l'image."
   - question: "RustDesk affiche l'image sur un PC mais pas sur un autre. Pourquoi ?"
@@ -37,11 +37,10 @@ La session est connectée, mais il n'y a aucun framebuffer à capturer. Sur une 
 
 La cause la plus signalée, de loin, est une **machine headless** — un serveur, un mini-PC ou une station de travail fonctionnant sans moniteur branché, ou avec l'affichage en veille. Sans affichage actif, le GPU ne produit aucun framebuffer, donc RustDesk se connecte mais n'a rien à envoyer. Ce schéma revient sans cesse dans le suivi des problèmes de RustDesk, y compris des [signalements d'écrans noirs précisément lorsque le moniteur de la cible est éteint](https://github.com/rustdesk/rustdesk/issues/9884) et le [fil de discussion « Connected, waiting for image »](https://github.com/rustdesk/rustdesk/issues/222), qui dure depuis longtemps.
 
-Trois façons de lui donner quelque chose à capturer :
+Deux façons de lui donner quelque chose à capturer :
 
 - **Branchez un moniteur** et assurez-vous qu'il est allumé et actif.
 - **Utilisez un adaptateur HDMI (ou DisplayPort) factice.** Ces adaptateurs peu coûteux font croire au GPU qu'un écran est connecté, ce qui le pousse à continuer de générer un framebuffer que RustDesk peut capturer. C'est la solution standard pour les postes headless et les serveurs personnels.
-- **Sous Linux, utilisez le chemin headless documenté.** RustDesk prend en charge les postes Linux headless, mais la configuration diffère d'une session de bureau normale — voir le [wiki Headless Linux Support](https://github.com/rustdesk/rustdesk/wiki/Headless-Linux-Support).
 
 Si un moniteur _est_ bien branché, le prochain suspect est qu'il s'est mis en veille.
 
@@ -49,7 +48,7 @@ Si un moniteur _est_ bien branché, le prochain suspect est qu'il s'est mis en v
 
 | Cause                             | Symptôme                                     | Solution                                                                                                                                                             |
 | --------------------------------- | -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Headless / pas d'affichage        | Écran noir sur un serveur ou un mini-PC      | Branchez un moniteur, ajoutez un adaptateur HDMI factice, ou utilisez le chemin headless Linux                                                                       |
+| Headless / pas d'affichage        | Écran noir sur un serveur ou un mini-PC      | Branchez un moniteur ou ajoutez un adaptateur HDMI factice                                                                                                           |
 | Écran en veille / verrouillé      | Fonctionnait avant, noir après inactivité    | Réveillez l'écran ; désactivez la veille/l'économiseur d'écran ; sous macOS, empêchez la mise en veille de l'affichage dans les Réglages                             |
 | Autorisation manquante (macOS)    | Se connecte, écran noir permanent            | Accordez l'enregistrement d'écran dans Confidentialité et sécurité ; installez l'assistant pour l'écran de connexion                                                 |
 | Incompatibilité de codec          | Image vide ou figée                          | Changez de codec (VP8 / VP9 / AV1 / H.264 / H.265) ; revenez à un codec logiciel                                                                                     |
@@ -83,7 +82,7 @@ Certains GPU — les configurations NVIDIA reviennent le plus souvent — entren
 
 ### Linux et Wayland
 
-Sous Linux, **la capture d'écran Wayland passe par PipeWire et le `xdg-desktop-portal`** : il demande le consentement pour choisir un affichage la première fois — dans la plupart des cas, le choix est mémorisé, donc l'invite ne réapparaît pas — et fonctionne au sein d'une session de connexion active. Il s'agit d'une conception de sécurité propre à Wayland, qui ne couvre donc pas, par nature, l'écran de connexion (greeter) ni une machine véritablement headless — même si la capture Wayland sans surveillance est en développement actif ([PR #15420](https://github.com/rustdesk/rustdesk/pull/15420)). Si vous obtenez un écran vide sous Wayland, la solution consiste généralement à accepter l'invite de partage d'écran du portail et à vérifier que `xdg-desktop-portal` et PipeWire sont installés et en cours d'exécution ; sur une machine headless, utilisez la [configuration headless](https://github.com/rustdesk/rustdesk/wiki/Headless-Linux-Support) documentée. Se connecter à une session X11/Xorg évite aussi le chemin du portail, là où une distribution en propose encore une — mais comme de nombreuses distributions passent au tout-Wayland, corriger le chemin portail/PipeWire est l'approche la plus pérenne.
+Sous Linux, **la capture d'écran Wayland passe par PipeWire et le `xdg-desktop-portal`** : il demande le consentement pour choisir un affichage la première fois — dans la plupart des cas, le choix est mémorisé, donc l'invite ne réapparaît pas — et fonctionne au sein d'une session de connexion active. Il s'agit d'une conception de sécurité propre à Wayland, qui ne couvre donc pas, par nature, l'écran de connexion (greeter) ni une machine véritablement headless — même si la capture Wayland sans surveillance est en développement actif ([PR #15420](https://github.com/rustdesk/rustdesk/pull/15420)). Si vous obtenez un écran vide sous Wayland, la solution consiste généralement à accepter l'invite de partage d'écran du portail et à vérifier que `xdg-desktop-portal` et PipeWire sont installés et en cours d'exécution. Se connecter à une session X11/Xorg évite aussi le chemin du portail, là où une distribution en propose encore une — mais comme de nombreuses distributions passent au tout-Wayland, corriger le chemin portail/PipeWire est l'approche la plus pérenne.
 
 ### Réseau et relais
 

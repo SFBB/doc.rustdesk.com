@@ -553,21 +553,6 @@ Utilise toujours le rendu logiciel.
 | :------: | :------: | :------: | :------: |
 | N | Y, N | N | `allow-always-software-render=N` |
 
-### allow-linux-headless
-
-Autorise la connexion entrante s'il n'y a pas d'écrans.
-
-Cette option nécessite un environnement de bureau, un serveur Xorg et GDM, voir [PR 3902](https://github.com/rustdesk/rustdesk/pull/3902).
-
-**Emplacement** :
-
-1. **Bureau** Paramètres → Général → Autre → Autoriser Linux headless
-2. **Mobile**
-
-| Installation requise | Valeurs | Défaut | Exemple |
-| :------: | :------: | :------: | :------: |
-| Y | Y, N | N | `allow-linux-headless=N` |
-
 ### enable-hwcodec
 
 Active l'encodage matériel pour rendre l'image plus fluide.

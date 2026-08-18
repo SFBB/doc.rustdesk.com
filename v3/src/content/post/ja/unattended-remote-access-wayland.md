@@ -50,3 +50,10 @@ RustDesk は、リモート側のマシンで毎回セッションを承認し�
 実装が安定した段階で、**Fedora や Arch Linux** をはじめとするより多くの Linux ディストリビューションへ Wayland 無人アクセスを展開し、最終的には RustDesk の標準リリースに組み込む予定です。
 
 Wayland をお使いの方、特にマルチモニター環境の方は、ぜひプレビュービルドを試して、うまく動く点・動かない点を教えてください。
+
+## 関連記事
+
+- [RustDesk for Linux](/ja/blog/rustdesk-for-linux-ja)
+- [RustDesk無人アクセス設定ガイド](/ja/blog/rustdesk-unattended-access-setup-ja)
+- [RustDesk vs AnyDesk](/ja/blog/rustdesk-vs-anydesk-ja)
+- [RustDesk vs TeamViewer](/ja/blog/rustdesk-vs-teamviewer-ja)

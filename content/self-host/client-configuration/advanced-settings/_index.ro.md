@@ -554,21 +554,6 @@ Folosește întotdeauna rendering software.
 | :------: | :------: | :------: | :------: |
 | N | Y, N | N | `allow-always-software-render=N` |
 
-### allow-linux-headless
-
-Permite conexiuni primite dacă nu există display-uri (headless).
-
-Această opțiune necesită mediu desktop, server Xorg și GDM, vezi [PR 3902](https://github.com/rustdesk/rustdesk/pull/3902).
-
-**Locație**:
-
-1. **Desktop** Settings → General → Other → Allow Linux headless
-2. **Mobile**
-
-| Install required | Values | Default | Example |
-| :------: | :------: | :------: | :------: |
-| Y | Y, N | N | `allow-linux-headless=N` |
-
 ### enable-hwcodec
 
 Activează encodarea hardware pentru a face imaginea mai fluidă.

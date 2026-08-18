@@ -554,21 +554,6 @@ Zawsze używaj renderowania programowego.
 | :------: | :------: | :------: | :------: |
 | N | Y, N | N | `allow-always-software-render=N` |
 
-### allow-linux-headless
-
-Zezwól na połączenia przychodzące, jeśli nie ma wyświetlaczy.
-
-Ta opcja wymaga środowiska graficznego, serwera Xorg i GDM, zobacz [PR 3902](https://github.com/rustdesk/rustdesk/pull/3902).
-
-**Lokalizacja**:
-
-1. **K. stacjonarny** Ustawienia → Ogólne → Inne → Zezwól na obsługę Linuxa bez monitora
-2. **Smartfon**
-
-| Wymagana instalacja | Wartości | Domyślne | Przykład |
-| :------: | :------: | :------: | :------: |
-| Y | Y, N | N | `allow-linux-headless=N` |
-
 ### enable-hwcodec
 
 Włącz kodowanie sprzętowe, aby obraz był płynniejszy.

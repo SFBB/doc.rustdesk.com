@@ -12,11 +12,11 @@ author: 'RustDesk Team'
 slug: 'rustdesk-para-linux-o-desktop-remoto-de-codigo-aberto'
 faq:
   - question: 'O RustDesk funciona no Wayland?'
-    answer: 'Sim — o RustDesk tem um dos suportes a Wayland mais robustos entre as ferramentas de desktop remoto, incluindo o compartilhamento multimonitor adicionado na versão 1.4.3. No Wayland, ele captura a tela por meio do PipeWire e do portal de desktop XDG, que exibe uma caixa de diálogo de consentimento para escolher um display — na maioria dos casos a escolha é lembrada, então você não precisa confirmar novamente — e funciona dentro da sessão gráfica ativa e autenticada. Essa etapa de consentimento é um recurso de segurança do próprio Wayland, compartilhado por todos os aplicativos de compartilhamento de tela. Para acesso antes do login ou em máquinas totalmente não assistidas, use por enquanto a configuração headless com display virtual (ou uma sessão X11, em distribuições que ainda oferecem essa opção, já que várias estão migrando para usar somente Wayland); a captura Wayland totalmente não assistida está em desenvolvimento ativo (veja github.com/rustdesk/rustdesk/pull/15420).'
+    answer: 'Sim — o RustDesk tem um dos suportes a Wayland mais robustos entre as ferramentas de desktop remoto, incluindo o compartilhamento multimonitor adicionado na versão 1.4.3. No Wayland, ele captura a tela por meio do PipeWire e do portal de desktop XDG, que exibe uma caixa de diálogo de consentimento para escolher um display — na maioria dos casos a escolha é lembrada, então você não precisa confirmar novamente — e funciona dentro da sessão gráfica ativa e autenticada. Essa etapa de consentimento é um recurso de segurança do próprio Wayland, compartilhado por todos os aplicativos de compartilhamento de tela. Para acesso antes do login, configure a tela de login do gerenciador de exibição para usar X11/Xorg onde houver suporte (várias distribuições estão migrando para usar somente Wayland); a captura Wayland totalmente não assistida está em desenvolvimento ativo (veja github.com/rustdesk/rustdesk/pull/15420).'
   - question: 'Qual pacote devo instalar no Linux?'
     answer: 'Use o .deb no Debian, Ubuntu e Linux Mint, o .rpm no Fedora, RHEL e openSUSE, o Flatpak do Flathub para uma versão isolada e amplamente compatível, ou o AppImage portátil como alternativa em arquivo único. Os pacotes .deb e .rpm registram e iniciam um serviço systemd, de modo que o RustDesk sobrevive a reinicializações; o Flatpak e o AppImage não fazem isso por padrão.'
   - question: 'Por que minha máquina Linux headless mostra uma tela preta?'
-    answer: 'Sem nenhum monitor conectado, o X ou o Wayland nunca alocam um framebuffer, então não há nada para o RustDesk capturar, e o visualizador mostra uma tela preta ou de espera pela imagem. Conecte um plugue HDMI/DisplayPort dummy, configure um display virtual como o xserver-xorg-video-dummy ou o VKMS, ou ative o modo headless opcional do RustDesk para Linux, para que um display virtual seja criado automaticamente para você.'
+    answer: 'Sem nenhum monitor conectado, o X ou o Wayland nunca alocam um framebuffer, então não há nada para o RustDesk capturar, e o visualizador mostra uma tela preta ou de espera pela imagem. Conecte um plugue HDMI/DisplayPort dummy.'
   - question: 'Posso fazer a auto-hospedagem do servidor RustDesk no Linux?'
     answer: 'Sim. O servidor do RustDesk (os processos hbbs de ID/rendezvous e hbbr de retransmissão) é feito para Linux, e essa é a forma padrão de executá-lo. O servidor comunitário, gratuito e de código aberto, roda indefinidamente sem custo, e o Server Pro acrescenta um console web, grupos de dispositivos e um gerador de cliente personalizado. Ambos podem ser instalados em uma VM Linux simples ou em um servidor bare-metal.'
 metadata:
@@ -53,7 +53,7 @@ Esta é a coisa mais importante a entender sobre o RustDesk no Linux, pois é is
 **Wayland: o RustDesk tem, sem dúvida, um dos suportes mais fortes entre as ferramentas de desktop remoto.** O RustDesk oferece suporte a Wayland desde a versão 1.2.0 e continua expandindo esse suporte. Como os compositores do Wayland não permitem acesso direto ao framebuffer, o RustDesk captura a tela por meio do serviço `xdg-desktop-portal` e do [PipeWire](https://deepwiki.com/rustdesk/rustdesk/6.3.1-wayland-support), e injeta a entrada por meio do módulo `uinput` do kernel. Duas consequências decorrem do próprio design do Wayland — e elas se aplicam a qualquer ferramenta de compartilhamento de tela no Wayland, não só ao RustDesk:
 
 - **Consentimento a cada conexão.** O portal exibe uma caixa de diálogo pedindo que você selecione qual display compartilhar. Esse é um recurso de segurança deliberado do Wayland, não um bug do RustDesk — um aplicativo em segundo plano não pode começar a gravar sua tela silenciosamente. O Portal v4 e versões mais recentes oferecem suporte a um "token de restauração" para que você não precise confirmar toda vez, mas o primeiro compartilhamento exige um clique na tela.
-- **Somente sessão ativa.** A captura no Wayland está vinculada à sessão gráfica com login já efetuado. A captura da tela de login (greeter) do Wayland ainda não é suportada — está em desenvolvimento ativo ([PR #15420](https://github.com/rustdesk/rustdesk/pull/15420)). Para acesso antes do login hoje, use a configuração headless/display virtual abaixo, ou uma sessão X11 em distribuições que ainda oferecem essa opção.
+- **Somente sessão ativa.** A captura no Wayland está vinculada à sessão gráfica com login já efetuado. A captura da tela de login (greeter) do Wayland ainda não é suportada — está em desenvolvimento ativo ([PR #15420](https://github.com/rustdesk/rustdesk/pull/15420)). Para acesso antes do login hoje, configure o greeter de login do gerenciador de exibição para usar X11/Xorg onde houver suporte.
 
 O suporte ao Wayland continua melhorando — o RustDesk 1.4.3 (outubro de 2025), por exemplo, [adicionou compartilhamento multimonitor para o Wayland](https://ubuntuhandbook.org/index.php/2025/10/rustdesk-released-1-4-3-with-multi-monitor-for-wayland-virtual-mouse/). Mas, se você se conectar e ver uma tela preta em uma máquina Wayland, isso quase sempre significa que o caminho do portal/PipeWire não foi satisfeito. Nosso artigo dedicado a [RustDesk conectado, mas aguardando imagem](/pt/blog/rustdesk-conectado-aguardando-imagem-guia-completo-de-correcao) detalha especificamente o caso da tela preta no Wayland.
 
@@ -63,21 +63,18 @@ Acesso não assistido significa se conectar a uma máquina sem ninguém sentado 
 
 1. Instale via `.deb` ou `.rpm` para que o serviço systemd seja registrado, ou clique em **Enable Service** (Ativar serviço) no aplicativo.
 2. No RustDesk, defina uma **senha permanente** forte nas configurações de conexão (e, idealmente, ative a autenticação de dois fatores).
-3. Para acesso antes do login ou em trocas entre usuários, use a configuração headless com display virtual abaixo (a lacuna do Wayland no login, mencionada acima, também se aplica aqui).
+3. Para acesso antes do login ou durante trocas de usuário, configure a própria tela de login do gerenciador de exibição para usar X11/Xorg onde houver suporte; escolher uma sessão de desktop X11 afeta apenas a sessão após o login.
 
-Uma realidade do Wayland para a qual você deve se planejar: o portal baseado em consentimento descrito na seção sobre Wayland torna a captura totalmente não assistida mais difícil do que no X11, até que o suporte não assistido — ainda em desenvolvimento — seja lançado; portanto, planeje usar a configuração headless com display virtual para máquinas que operam sem intervenção.
+Uma realidade do Wayland para a qual você deve se planejar: o portal baseado em consentimento descrito na seção sobre Wayland torna a captura totalmente não assistida mais difícil do que no X11, até que o suporte não assistido — ainda em desenvolvimento — seja lançado.
 
 ## Linux headless: servidores sem monitor
 
 Um caso de uso muito comum no Linux é uma máquina sem nenhum display conectado — um servidor doméstico, uma máquina de laboratório, uma VM. Aqui o problema não é o RustDesk, é a pilha gráfica: sem nenhum monitor conectado, o X ou o Wayland nunca alocam um framebuffer, então literalmente não há imagem para capturar, e você obtém uma tela preta.
 
-Três formas de dar a ele algo para renderizar:
+Duas formas de dar a ele algo para renderizar:
 
 - **Um plugue dummy** — um adaptador físico HDMI/DisplayPort "headless" barato que faz a GPU pensar que há um monitor conectado.
 - **Um driver de display virtual** — `xserver-xorg-video-dummy` no X11, ou uma opção em nível de kernel como o VKMS.
-- **O modo headless opcional do RustDesk** — ative-o com `sudo rustdesk --option allow-linux-headless Y`. Segundo a [wiki de suporte a Linux headless](https://github.com/rustdesk/rustdesk/wiki/Headless-Linux-Support), ele vem desativado por padrão, é testado principalmente no Ubuntu com GNOME, e espera pacotes como `xserver-xorg-video-dummy` e `lightdm`. Você pode obter o ID da máquina com `sudo rustdesk --get-id` e definir uma senha com `sudo rustdesk --password <password>`.
-
-O modo headless ainda tem algumas arestas para aparar, então trate-o como algo que "funciona, com cuidado", não como uma solução pronta para uso imediato.
 
 ## Auto-hospedagem do servidor RustDesk no Linux
 
