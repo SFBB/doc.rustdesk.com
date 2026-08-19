@@ -1231,6 +1231,18 @@ https://github.com/rustdesk/rustdesk/discussions/7956
 | :------: | :------: | :------: |
 | Y, N | Y | `remove-preset-password-warning=Y` |
 
+### hide-general-settings
+
+Contrôle s'il faut cacher l'onglet `Général` de la page des paramètres. Contrairement aux autres options `hide-*-settings`, celle-ci fonctionne aussi lorsque `Désactiver les paramètres` est activé, car `Désactiver les paramètres` ne cache pas l'onglet `Général`.
+
+https://github.com/rustdesk/rustdesk-server-pro/issues/1001
+
+Disponible depuis RustDesk 1.5.0
+
+| Valeurs | Défaut | Exemple |
+| :------: | :------: | :------: |
+| Y, N | N | `hide-general-settings=Y` |
+
 ### hide-security-settings / hide-network-settings / hide-server-settings / hide-proxy-settings / hide-websocket-settings / hide-remote-printer-settings
 
 Contrôle s'il faut cacher certains paramètres. Veuillez vous assurer que `Désactiver les paramètres` est désactivé, sinon ceux-ci ne fonctionneront pas.

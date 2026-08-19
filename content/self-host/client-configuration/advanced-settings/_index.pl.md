@@ -1243,6 +1243,18 @@ https://github.com/rustdesk/rustdesk/discussions/7956
 | :------: | :------: | :------: |
 | Y, N | Y | `remove-preset-password-warning=Y` |
 
+### hide-general-settings
+
+Kontroluje, czy ukrywać kartę `Ogólne` na stronie ustawień. W przeciwieństwie do pozostałych opcji `hide-*-settings` ta działa również wtedy, gdy opcja `Wyłącz ustawienia` jest włączona, ponieważ `Wyłącz ustawienia` nie ukrywa karty `Ogólne`.
+
+https://github.com/rustdesk/rustdesk-server-pro/issues/1001
+
+Dostępne od RustDesk 1.5.0
+
+| Wartości | Domyślnie | Przykład |
+| :------: | :------: | :------: |
+| Y, N | N | `hide-general-settings=Y` |
+
 ### hide-security-settings / hide-network-settings / hide-server-settings / hide-proxy-settings / hide-websocket-settings / hide-remote-printer-settings
 
 Kontroluje, czy ukrywać niektóre ustawienia. Upewnij się, że opcja `Wyłącz ustawienia` jest wyłączona, w przeciwnym razie nie będą one działać.

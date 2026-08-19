@@ -1242,6 +1242,18 @@ https://github.com/rustdesk/rustdesk/discussions/7956
 | :------: | :------: | :------: |
 | Y, N | Y | `remove-preset-password-warning=Y` |
 
+### hide-general-settings
+
+設定ページの`一般`タブを非表示にするかどうかを制御します。他の`hide-*-settings`オプションとは異なり、`設定を無効にする`がオンの場合でも動作します。`設定を無効にする`は`一般`タブを非表示にしないためです。
+
+https://github.com/rustdesk/rustdesk-server-pro/issues/1001
+
+RustDesk 1.5.0 以降で利用可能
+
+| 値 | デフォルト | 例 |
+| :------: | :------: | :------: |
+| Y, N | N | `hide-general-settings=Y` |
+
 ### hide-security-settings / hide-network-settings / hide-server-settings / hide-proxy-settings / hide-websocket-settings / hide-remote-printer-settings
 
 一部の設定を非表示にするかどうかを制御します。`設定を無効にする`がオフになっていることを確認してください。そうでないとこれらが動作しません。
