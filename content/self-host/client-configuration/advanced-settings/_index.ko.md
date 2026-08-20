@@ -1251,6 +1251,18 @@ https://github.com/rustdesk/rustdesk/discussions/7956
 | :------: | :------: | :------: |
 | Y, N | Y | `remove-preset-password-warning=Y` |
 
+### hide-general-settings
+
+설정 페이지의 `일반` 탭을 숨길지 여부를 제어합니다. 다른 `hide-*-settings` 옵션과 달리 `Disable settings`가 켜져 있어도 동작합니다. `Disable settings`는 `일반` 탭을 숨기지 않기 때문입니다.
+
+https://github.com/rustdesk/rustdesk-server-pro/issues/1001
+
+RustDesk 1.5.0부터 사용 가능합니다.
+
+| 값 | 기본값 | 예시 |
+| :------: | :------: | :------: |
+| Y, N | N | `hide-general-settings=Y` |
+
 ### hide-security-settings / hide-network-settings / hide-server-settings / hide-proxy-settings / hide-websocket-settings / hide-remote-printer-settings
 
 일부 설정을 숨길지 여부를 제어합니다. `Disable settings`가 꺼짐 상태인지 확인하십시오. 그렇지 않으면 이 설정들이 작동하지 않습니다.

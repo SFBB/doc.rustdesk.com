@@ -1243,6 +1243,18 @@ https://github.com/rustdesk/rustdesk/discussions/7956
 | :------: | :------: | :------: |
 | Y, N | Y | `remove-preset-password-warning=Y` |
 
+### hide-general-settings
+
+Controlează dacă se ascunde fila `General` din pagina de setări. Spre deosebire de celelalte opțiuni `hide-*-settings`, aceasta funcționează și atunci când `Disable settings` este activat, deoarece `Disable settings` nu ascunde fila `General`.
+
+https://github.com/rustdesk/rustdesk-server-pro/issues/1001
+
+Disponibil din RustDesk 1.5.0
+
+| Valori | Implicit | Exemplu |
+| :------: | :------: | :------: |
+| Y, N | N | `hide-general-settings=Y` |
+
 ### hide-security-settings / hide-network-settings / hide-server-settings / hide-proxy-settings / hide-websocket-settings / hide-remote-printer-settings
 
 Controlează dacă se ascund unele setări. Vă rugăm să vă asigurați că `Disable settings` este dezactivat, altfel acestea nu vor funcționa.

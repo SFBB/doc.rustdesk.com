@@ -1232,6 +1232,18 @@ https://github.com/rustdesk/rustdesk/discussions/7956
 | :------: | :------: | :------: |
 | Y, N | Y | `remove-preset-password-warning=Y` |
 
+### hide-general-settings
+
+控制是否隐藏设置页面的`常规`选项卡。与其他 `hide-*-settings` 选项不同，即使`禁用设置`已开启，此选项依然生效，因为`禁用设置`不会隐藏`常规`选项卡。
+
+https://github.com/rustdesk/rustdesk-server-pro/issues/1001
+
+自 RustDesk 1.5.0 版本起可用
+
+| 值 | 默认值 | 示例 |
+| :------: | :------: | :------: |
+| Y, N | N | `hide-general-settings=Y` |
+
 ### hide-security-settings / hide-network-settings / hide-server-settings / hide-proxy-settings / hide-websocket-settings / hide-remote-printer-settings
 
 控制是否隐藏某些设置。请确保`禁用设置`已关闭，否则这些不会生效。

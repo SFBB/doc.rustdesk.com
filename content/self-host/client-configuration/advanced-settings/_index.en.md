@@ -1252,6 +1252,18 @@ https://github.com/rustdesk/rustdesk/discussions/7956
 | :------: | :------: | :------: |
 | Y, N | Y | `remove-preset-password-warning=Y` |
 
+### hide-general-settings
+
+Controls whether to hide the `General` tab of the settings page. Unlike the other `hide-*-settings` options, this one also works when `Disable settings` is enabled, because `Disable settings` does not hide the `General` tab.
+
+https://github.com/rustdesk/rustdesk-server-pro/issues/1001
+
+Available since RustDesk 1.5.0
+
+| Values | Default | Example |
+| :------: | :------: | :------: |
+| Y, N | N | `hide-general-settings=Y` |
+
 ### hide-security-settings / hide-network-settings / hide-server-settings / hide-proxy-settings / hide-websocket-settings / hide-remote-printer-settings
 
 Controls whether to hide some settings. Please ensure `Disable settings` is turned off, otherwise these won't work.

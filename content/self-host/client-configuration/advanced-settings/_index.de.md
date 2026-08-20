@@ -1231,6 +1231,18 @@ https://github.com/rustdesk/rustdesk/discussions/7956
 | :------: | :------: | :------: |
 | Y, N | Y | `remove-preset-password-warning=Y` |
 
+### hide-general-settings
+
+Steuert, ob die Registerkarte `Allgemein` der Einstellungsseite ausgeblendet wird. Anders als die anderen `hide-*-settings`-Optionen funktioniert diese auch, wenn `Einstellungen deaktivieren` eingeschaltet ist, da `Einstellungen deaktivieren` die Registerkarte `Allgemein` nicht ausblendet.
+
+https://github.com/rustdesk/rustdesk-server-pro/issues/1001
+
+Verfügbar seit RustDesk 1.5.0
+
+| Werte | Standard | Beispiel |
+| :------: | :------: | :------: |
+| Y, N | N | `hide-general-settings=Y` |
+
 ### hide-security-settings / hide-network-settings / hide-server-settings / hide-proxy-settings / hide-websocket-settings / hide-remote-printer-settings
 
 Steuert, ob einige Einstellungen ausgeblendet werden. Bitte stellen Sie sicher, dass `Einstellungen deaktivieren` ausgeschaltet ist, sonst funktionieren diese nicht.
