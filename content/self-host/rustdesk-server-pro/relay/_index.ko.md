@@ -14,7 +14,7 @@ keywords: ["rustdesk relay server", "rustdesk hbbr", "rustdesk geolocation relay
 ## 릴레이 설정 체크리스트
 
 1. 대상 지역에 추가 `hbbr` 릴레이 서버를 배포합니다.
-2. `id_ed25519` 및 `id_ed25519.pub` 키 쌍을 해당 릴레이 서버로 복사합니다.
+2. `hbbr`의 `KEY` 환경 변수를 `id_ed25519.pub`의 공개 키로 설정하거나 `id_ed25519` 및 `id_ed25519.pub`를 릴레이 서버로 복사합니다.
 3. TCP 포트 `21117`와 `21119`를 열어줍니다.
 4. RustDesk Pro 웹 콘솔에 새로운 릴레이 호스트명 또는 IP 주소를 추가합니다.
 5. `hbbs`에 MaxMind GeoLite2 City 데이터베이스를 설치합니다.
@@ -36,7 +36,44 @@ keywords: ["rustdesk relay server", "rustdesk hbbr", "rustdesk geolocation relay
 알려진 문제: https://github.com/rustdesk/rustdesk/discussions/7934
 {{% /notice %}}
 
-> 개인 키 쌍 `id_ed25519`와 `id_ed25519.pub`가 필요합니다.
+> `hbbr`의 `KEY` 환경 변수를 `id_ed25519.pub`의 공개 키로 설정하거나 `id_ed25519` 및 `id_ed25519.pub`를 릴레이 서버로 복사합니다.
+
+### Docker Compose
+
+추가 릴레이 서버에는 `hbbr`만 필요하며 `hbbs`와 `depends_on`은 필요하지 않습니다. 다음 키 구성 방법 중 하나를 선택합니다.
+
+- `environment` 섹션을 유지하고 아래와 같이 `KEY`를 `id_ed25519.pub`의 내용으로 설정합니다.
+- `environment` 섹션 전체를 제거하고 `id_ed25519`와 `id_ed25519.pub`를 `./data`에 넣습니다.
+
+다음 내용으로 `compose.yml` 파일을 만듭니다.
+
+```yaml
+services:
+  hbbr:
+    container_name: hbbr
+    image: docker.io/rustdesk/rustdesk-server-pro:latest
+    environment:
+      KEY: "<PUBLIC_KEY>"
+    command: hbbr
+    volumes:
+      - ./data:/root
+    network_mode: "host"
+    restart: unless-stopped
+```
+
+### Docker
+
+#### 환경 변수로 키 설정
+
+`KEY`를 `id_ed25519.pub`의 내용으로 설정합니다.
+
+```bash
+# sudo docker run --name hbbr -e KEY="<PUBLIC_KEY>" -td --net=host rustdesk/rustdesk-server-pro hbbr
+```
+
+#### 키 파일 사용
+
+아래 Docker 예제에서는 키 파일 방식을 사용합니다.
 
 1 - 이미 Docker가 설치되어 있다면 SSH를 통해 서버에 연결하고 hbbr용 볼륨을 생성하세요.
 
@@ -58,8 +95,18 @@ keywords: ["rustdesk relay server", "rustdesk hbbr", "rustdesk geolocation relay
 3 - 이전에 생성한 볼륨을 사용하여 hbbr 컨테이너를 배포하십시오. 이 볼륨에는 개인 릴레이 서버를 실행하는 데 필요한 개인 키 쌍이 있습니다.
 
 ```
+# sudo docker run --name hbbr -v hbbr:/root -td --net=host rustdesk/rustdesk-server-pro hbbr
+```
+
+`rustdesk/rustdesk-server` 이미지는 여전히 `-k <KEY>`를 지원합니다. 마운트된 키 파일을 사용하려면 `-k _`를 지정하여 실행합니다.
+
+```bash
 # sudo docker run --name hbbr -v hbbr:/root -td --net=host rustdesk/rustdesk-server hbbr -k _
 ```
+
+여기서 `_`는 키 자체가 아니라 특수 값입니다. 이 값은 `hbbr`가 `id_ed25519`를 불러오거나 생성하고, 여기에서 공개 키를 얻어 릴레이 요청을 검증하도록 합니다. RustDesk Server Pro 1.8.6 이전 버전에서도 `id_ed25519`를 불러오기 위해 `-k _`를 사용할 수 있었습니다.
+
+RustDesk Server Pro 1.8.6부터 `hbbr`의 `-k` 옵션은 더 이상 사용되지 않으며 무시됩니다. `KEY`가 설정되지 않은 경우 `hbbr`는 `id_ed25519`에서 공개 키를 가져오며, 개인 키 파일이 없으면 `id_ed25519.pub`에서 읽습니다. 두 파일이 모두 없으면 `hbbr`는 공개 릴레이 모드로 실행됩니다.
 
 4 - 실행 로그를 확인하여 키 쌍을 사용해 hbbr가 실행 중인지 확인하십시오.
 
