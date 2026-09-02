@@ -117,7 +117,7 @@ Pour attribuer une stratégie à un périphérique, survolez le côté droit de 
 
 ## Jeton API
 
-Vous devez d’abord aller dans **Paramètres → Jetons → Créer** et créer un jeton avec les permissions requises : **Périphérique, Journal d’Audit, Utilisateur, Groupe, Stratégie, Carnet d’Adresses**.
+Vous devez d’abord aller dans **Paramètres → Jetons → Créer** et créer un jeton avec les permissions requises : **Périphérique, Journal d’Audit, Utilisateur, Groupe, Stratégie, Carnet d’Adresses, Rôle Administrateur, Rôle de Contrôle**.
 
 Une fois créé, vous pouvez utiliser ces jetons via **ligne de commande** ou **Python CLI** pour effectuer des actions avec les permissions correspondantes.
 
@@ -280,6 +280,107 @@ voir [ici](https://github.com/rustdesk/rustdesk/discussions/6377#discussioncomme
 **Exigences de permissions :**
 - Les commandes `view/add/update/delete/add-users` nécessitent **Permission de Groupe d'Utilisateurs**
 - La commande `view-users` nécessite **Permission d'Utilisateur**
+
+---
+
+#### Gestion des rôles administrateur (`admin-roles.py`)
+
+Le jeton doit appartenir à un administrateur complet et disposer d’un accès en lecture ou en lecture-écriture pour **Admin Role**. Les commandes qui résolvent les noms d’utilisateur ou répertorient les membres d’un rôle nécessitent également un accès en lecture pour **User**.
+
+**Afficher les rôles :**
+
+```bash
+./admin-roles.py --url <url> --token <token> view [--name <nom_role>] [--type global|individual|group]
+./admin-roles.py --url <url> --token <token> view --guid <guid_role>
+```
+
+**Créer un rôle :**
+
+```bash
+./admin-roles.py --url <url> --token <token> add \
+  --name "Support Admin" --type global \
+  --permissions "users.view,devices.view,audits.view" --note "Support en lecture seule"
+
+./admin-roles.py --url <url> --token <token> add \
+  --name "Support Scope" --type group \
+  --permissions "users.view,devices.view,devices.enable_disable" \
+  --user-groups "Support" --device-groups "Servers" --unassigned
+```
+
+Le type d’un rôle ne peut plus être modifié après sa création. `--permissions` accepte des noms de permissions séparés par des virgules, des ID décimaux ou des ID préfixés par `0x`, et ces formats peuvent être mélangés. Par exemple, `users.view,513,0x0203` équivaut à `257,513,515`. Le serveur rejette les permissions qui ne sont pas valides pour le type de rôle choisi.
+
+La commande `view` reconvertit les ID connus en noms figurant dans le tableau suivant. Un ID inconnu du script reste affiché sous forme numérique afin de ne pas masquer une permission ajoutée par un serveur plus récent.
+
+| Domaine | Permissions | Types de rôle valides |
+| --- | --- | --- |
+| Utilisateurs | `users.view` (`257`); `users.create` (`259`); `users.invite` (`260`); `users.delete` (`261`); `users.enable_disable` (`262`); `users.edit_email` (`263`); `users.edit_password` (`264`); `users.edit_note` (`265`); `users.manage_2fa` (`266`); `users.force_logout` (`267`); `users.change_strategy` (`269`); `users.change_control_role` (`270`); `users.edit_display_name` (`271`) | `global`, `group` |
+| Utilisateurs | `users.change_group` (`268`) | `global` |
+| Périphériques | `devices.view` (`513`) | `global`, `group` |
+| Périphériques | `devices.enable_disable` (`515`); `devices.delete` (`516`); `devices.edit_info` (`517`); `devices.change_strategy` (`520`) | `global`, `individual`, `group` |
+| Périphériques | `devices.assign_to_user` (`518`); `devices.change_group` (`519`) | `global` |
+| Groupes d’utilisateurs | `user_groups.view` (`769`); `user_groups.edit` (`770`) | `global` |
+| Groupes de périphériques | `device_groups.view` (`1025`); `device_groups.edit` (`1026`); `device_groups.change_strategy` (`1027`) | `global` |
+| Journaux d’audit | `audits.view` (`1281`); `audits.edit` (`1282`) | `global`, `individual` |
+| Stratégies | `strategies.view` (`1537`); `strategies.edit` (`1538`) | `global` |
+| Clients personnalisés | `custom_clients.view` (`1793`); `custom_clients.edit` (`1794`) | `global` |
+| Rôles de contrôle | `control_roles.view` (`2049`); `control_roles.edit` (`2050`) | `global` |
+
+**Mettre à jour ou supprimer un rôle :**
+
+```bash
+./admin-roles.py --url <url> --token <token> update --name "Support Admin" \
+  [--new-name "Helpdesk Admin"] [--note "nouvelle note"] [--permissions "users.view,devices.view"] \
+  [--user-groups "Support"] [--device-groups "Servers"] [--unassigned|--no-unassigned]
+
+./admin-roles.py --url <url> --token <token> delete --name "Support Admin"
+```
+
+Passez une valeur vide à `--note`, `--permissions`, `--user-groups` ou `--device-groups` pour effacer le champ, par exemple `--permissions ""`.
+
+**Gérer les membres du rôle :**
+
+```bash
+./admin-roles.py --url <url> --token <token> view-users --name "Support Admin"
+./admin-roles.py --url <url> --token <token> add-users --name "Support Admin" --users "user1,user2"
+./admin-roles.py --url <url> --token <token> remove-users --name "Support Admin" --users "user1,user2"
+```
+
+Les rôles et les utilisateurs peuvent également être indiqués par GUID. `--users` accepte un mélange de noms d’utilisateur et de GUID.
+
+---
+
+#### Gestion des rôles de contrôle (`control-roles.py`)
+
+Le jeton doit disposer d’un accès en lecture ou en lecture-écriture pour **Control Role**. Les commandes qui résolvent les noms d’utilisateur ou répertorient les membres d’un rôle nécessitent également un accès en lecture pour **User**.
+
+**Afficher les rôles :**
+
+```bash
+./control-roles.py --url <url> --token <token> view [--name <nom_role>] [--status enabled|disabled]
+./control-roles.py --url <url> --token <token> view --guid <guid_role>
+```
+
+**Créer, mettre à jour, supprimer, activer ou désactiver un rôle :**
+
+```bash
+./control-roles.py --url <url> --token <token> add --name "Contractors" [--note "Accès restreint"]
+./control-roles.py --url <url> --token <token> update --name "Contractors" [--new-name "Vendors"] [--note "nouvelle note"]
+./control-roles.py --url <url> --token <token> delete --name "Contractors"
+./control-roles.py --url <url> --token <token> enable --name "Contractors"
+./control-roles.py --url <url> --token <token> disable --name "Contractors"
+```
+
+Les nouveaux rôles créés avec ce script ne contiennent aucune permission de contrôle. Configurez-les dans la console web avant d’y affecter des utilisateurs. Ce script ne gère et n’affiche pas les définitions des permissions de contrôle.
+
+**Gérer les membres du rôle :**
+
+```bash
+./control-roles.py --url <url> --token <token> view-users --name "Contractors"
+./control-roles.py --url <url> --token <token> assign-users --name "Contractors" --users "user1,user2"
+./control-roles.py --url <url> --token <token> remove-users --users "user1,user2"
+```
+
+Les rôles et les utilisateurs peuvent également être indiqués par GUID. `remove-users` efface le rôle de contrôle actuel de chaque utilisateur et n’accepte donc ni `--name` ni `--guid`. Pour le rôle réservé `Default`, `view-users` ne répertorie que les affectations explicites ; les utilisateurs sans rôle de contrôle affecté héritent également de `Default`. Le rôle `Not Logged` ne peut pas être affecté à des utilisateurs, et les rôles réservés ne peuvent pas être renommés, recevoir une note ou être supprimés.
 
 ---
 

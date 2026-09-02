@@ -118,7 +118,7 @@ Aby przypisać strategię do urządzenia, najedź kursorem na prawą stronę lis
 
 ## Token API
 
-Najpierw przejdź do **Ustawienia → Tokeny → Utwórz** i utwórz token z wymaganymi uprawnieniami: **Urządzenie, Dziennik audytu, Użytkownik, Grupa, Strategia, Książka adresowa**.
+Najpierw przejdź do **Ustawienia → Tokeny → Utwórz** i utwórz token z wymaganymi uprawnieniami: **Urządzenie, Dziennik audytu, Użytkownik, Grupa, Strategia, Książka adresowa, Rola administratora, Rola sterowania**.
 
 Po utworzeniu tokeny te można używać przez **wiersz poleceń** lub **CLI w Pythonie**, aby wykonywać akcje z odpowiadającymi uprawnieniami.
 
@@ -281,6 +281,112 @@ zobacz [tutaj](https://github.com/rustdesk/rustdesk/discussions/6377#discussionc
 **Wymagania uprawnień:**
 - Polecenia `view/add/update/delete/add-users` wymagają **Uprawnienia Grupy Użytkowników**
 - Polecenie `view-users` wymaga **Uprawnienia Użytkownika**
+
+---
+
+#### Zarządzanie rolami administratora (`admin-roles.py`)
+
+Token musi należeć do pełnego administratora i mieć uprawnienie **Rola administratora** do odczytu lub odczytu/zapisu. Polecenia, które rozpoznają nazwy użytkowników lub wyświetlają członków roli, wymagają również uprawnienia **Użytkownik** do odczytu.
+
+**Wyświetlanie ról:**
+
+```bash
+# Wyświetla role, opcjonalnie filtrowane według dokładnej nazwy lub typu
+./admin-roles.py --url <url> --token <token> view [--name <role_name>] [--type global|individual|group]
+
+# Wyświetla jedną rolę według GUID
+./admin-roles.py --url <url> --token <token> view --guid <role_guid>
+```
+
+**Tworzenie roli:**
+
+```bash
+# Rola globalna
+./admin-roles.py --url <url> --token <token> add \
+  --name "Support Admin" --type global \
+  --permissions "users.view,devices.view,audits.view" --note "Read-only support"
+
+# Rola o zakresie grupowym
+./admin-roles.py --url <url> --token <token> add \
+  --name "Support Scope" --type group \
+  --permissions "users.view,devices.view,devices.enable_disable" \
+  --user-groups "Support" --device-groups "Servers" --unassigned
+```
+
+Typu roli nie można zmienić po jej utworzeniu. `--permissions` przyjmuje oddzielone przecinkami nazwy uprawnień, identyfikatory dziesiętne lub identyfikatory z prefiksem `0x`; formaty można łączyć. Na przykład `users.view,513,0x0203` jest równoważne `257,513,515`. Serwer odrzuca uprawnienia, które nie są prawidłowe dla wybranego typu roli.
+
+Polecenie `view` zamienia znane identyfikatory uprawnień z powrotem na poniższe nazwy. Identyfikator nieznany skryptowi pozostaje liczbą, dzięki czemu uprawnienia dodane przez nowszą wersję serwera nie są ukrywane.
+
+| Obszar | Uprawnienia | Prawidłowe typy ról |
+| --- | --- | --- |
+| Użytkownicy | `users.view` (`257`); `users.create` (`259`); `users.invite` (`260`); `users.delete` (`261`); `users.enable_disable` (`262`); `users.edit_email` (`263`); `users.edit_password` (`264`); `users.edit_note` (`265`); `users.manage_2fa` (`266`); `users.force_logout` (`267`); `users.change_strategy` (`269`); `users.change_control_role` (`270`); `users.edit_display_name` (`271`) | global, group |
+| Użytkownicy | `users.change_group` (`268`) | global |
+| Urządzenia | `devices.view` (`513`) | global, group |
+| Urządzenia | `devices.enable_disable` (`515`); `devices.delete` (`516`); `devices.edit_info` (`517`); `devices.change_strategy` (`520`) | global, individual, group |
+| Urządzenia | `devices.assign_to_user` (`518`); `devices.change_group` (`519`) | global |
+| Grupy użytkowników | `user_groups.view` (`769`); `user_groups.edit` (`770`) | global |
+| Grupy urządzeń | `device_groups.view` (`1025`); `device_groups.edit` (`1026`); `device_groups.change_strategy` (`1027`) | global |
+| Audyty | `audits.view` (`1281`); `audits.edit` (`1282`) | global, individual |
+| Strategie | `strategies.view` (`1537`); `strategies.edit` (`1538`) | global |
+| Klienci niestandardowi | `custom_clients.view` (`1793`); `custom_clients.edit` (`1794`) | global |
+| Role sterowania | `control_roles.view` (`2049`); `control_roles.edit` (`2050`) | global |
+
+**Aktualizowanie lub usuwanie roli:**
+
+```bash
+./admin-roles.py --url <url> --token <token> update --name "Support Admin" \
+  [--new-name "Helpdesk Admin"] [--note "new note"] [--permissions "users.view,devices.view"] \
+  [--user-groups "Support"] [--device-groups "Servers"] [--unassigned|--no-unassigned]
+
+./admin-roles.py --url <url> --token <token> delete --name "Support Admin"
+```
+
+Aby wyczyścić `--note`, `--permissions`, `--user-groups` lub `--device-groups`, przekaż pustą wartość, na przykład `--permissions ""`.
+
+**Zarządzanie członkami roli:**
+
+```bash
+./admin-roles.py --url <url> --token <token> view-users --name "Support Admin"
+./admin-roles.py --url <url> --token <token> add-users --name "Support Admin" --users "user1,user2"
+./admin-roles.py --url <url> --token <token> remove-users --name "Support Admin" --users "user1,user2"
+```
+
+Role docelowe i użytkowników można również podawać za pomocą GUID. W `--users` można łączyć nazwy użytkowników i identyfikatory GUID.
+
+---
+
+#### Zarządzanie rolami sterowania (`control-roles.py`)
+
+Token wymaga uprawnienia **Rola sterowania** do odczytu lub odczytu/zapisu. Polecenia, które rozpoznają nazwy użytkowników lub wyświetlają członków roli, wymagają również uprawnienia **Użytkownik** do odczytu.
+
+**Wyświetlanie ról:**
+
+```bash
+./control-roles.py --url <url> --token <token> view [--name <role_name>] [--status enabled|disabled]
+./control-roles.py --url <url> --token <token> view --guid <role_guid>
+```
+
+**Tworzenie, aktualizowanie, usuwanie, włączanie lub wyłączanie roli:**
+
+```bash
+./control-roles.py --url <url> --token <token> add --name "Contractors" [--note "Restricted access"]
+./control-roles.py --url <url> --token <token> update --name "Contractors" [--new-name "Vendors"] [--note "new note"]
+./control-roles.py --url <url> --token <token> delete --name "Contractors"
+./control-roles.py --url <url> --token <token> enable --name "Contractors"
+./control-roles.py --url <url> --token <token> disable --name "Contractors"
+```
+
+Nowe role utworzone przez ten skrypt nie zawierają uprawnień sterowania. Skonfiguruj je w konsoli internetowej przed przypisaniem użytkowników. Ten skrypt nie zarządza definicjami uprawnień sterowania ani ich nie wyświetla.
+
+**Zarządzanie członkami roli:**
+
+```bash
+./control-roles.py --url <url> --token <token> view-users --name "Contractors"
+./control-roles.py --url <url> --token <token> assign-users --name "Contractors" --users "user1,user2"
+./control-roles.py --url <url> --token <token> remove-users --users "user1,user2"
+```
+
+Role docelowe i użytkowników można również podawać za pomocą GUID. `remove-users` usuwa bieżącą rolę sterowania każdego użytkownika, dlatego nie przyjmuje `--name` ani `--guid`. W przypadku zastrzeżonej roli `Default` polecenie `view-users` wyświetla tylko jawne przypisania; użytkownicy bez przypisanej roli sterowania również dziedziczą rolę `Default`. Zastrzeżonej roli `Not Logged` nie można przypisywać użytkownikom, a nazw zastrzeżonych ról nie można zmieniać, dodawać do nich notatek ani ich usuwać.
 
 ---
 
@@ -559,7 +665,7 @@ Aby przypisać strategię do urządzenia, najedź kursorem na prawą stronę lis
 
 ## Token API
 
-Najpierw przejdź do **Ustawienia → Tokeny → Utwórz** i utwórz token z wymaganymi uprawnieniami: **Urządzenie, Dziennik audytu, Użytkownik, Grupa, Strategia, Książka adresowa**.
+Najpierw przejdź do **Ustawienia → Tokeny → Utwórz** i utwórz token z wymaganymi uprawnieniami: **Urządzenie, Dziennik audytu, Użytkownik, Grupa, Strategia, Książka adresowa, Rola administratora, Rola sterowania**.
 
 Po utworzeniu tokeny te można używać przez **wiersz poleceń** lub **CLI w Pythonie**, aby wykonywać akcje z odpowiadającymi uprawnieniami.
 
