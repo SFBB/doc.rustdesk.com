@@ -117,7 +117,7 @@ Para atribuir uma estratégia a um dispositivo, passe o mouse sobre o lado direi
 
 ## Token de API
 
-Primeiro, você deve ir em **Configurações → Tokens → Criar** e criar um token com as permissões necessárias: **Dispositivo, Registro de Auditoria, Usuário, Grupo, Estratégia, Livro de Endereços**.
+Primeiro, você deve ir em **Configurações → Tokens → Criar** e criar um token com as permissões necessárias: **Dispositivo, Registro de Auditoria, Usuário, Grupo, Estratégia, Livro de Endereços, Função de Administrador, Função de Controle**.
 
 Depois de criado, você pode usar esses tokens via **linha de comando** ou **CLI Python** para executar ações com as permissões correspondentes.
 
@@ -280,6 +280,112 @@ veja [aqui](https://github.com/rustdesk/rustdesk/discussions/6377#discussioncomm
 **Requisitos de permissões:**
 - Os comandos `view/add/update/delete/add-users` requerem **Permissão de Grupo de Usuários**
 - O comando `view-users` requer **Permissão de Usuário**
+
+---
+
+#### Gerenciamento de funções de administrador (`admin-roles.py`)
+
+O token deve pertencer a um administrador completo e ter a permissão **Função de Administrador** de leitura ou leitura/gravação. Os comandos que resolvem nomes de usuários ou listam membros da função também exigem a permissão **Usuário** de leitura.
+
+**Visualizar funções:**
+
+```bash
+# Lista funções, opcionalmente filtradas pelo nome exato ou tipo
+./admin-roles.py --url <url> --token <token> view [--name <role_name>] [--type global|individual|group]
+
+# Visualiza uma função pelo GUID
+./admin-roles.py --url <url> --token <token> view --guid <role_guid>
+```
+
+**Criar uma função:**
+
+```bash
+# Função global
+./admin-roles.py --url <url> --token <token> add \
+  --name "Support Admin" --type global \
+  --permissions "users.view,devices.view,audits.view" --note "Read-only support"
+
+# Função com escopo de grupo
+./admin-roles.py --url <url> --token <token> add \
+  --name "Support Scope" --type group \
+  --permissions "users.view,devices.view,devices.enable_disable" \
+  --user-groups "Support" --device-groups "Servers" --unassigned
+```
+
+O tipo da função não pode ser alterado após a criação. `--permissions` aceita nomes de permissões, IDs decimais ou IDs com o prefixo `0x`, separados por vírgulas; os formatos podem ser combinados. Por exemplo, `users.view,513,0x0203` equivale a `257,513,515`. O servidor rejeita permissões que não são válidas para o tipo de função selecionado.
+
+O comando `view` converte os IDs de permissões conhecidos de volta para os nomes abaixo. Um ID desconhecido pelo script é mantido como número, para que permissões adicionadas por uma versão mais recente do servidor não fiquem ocultas.
+
+| Área | Permissões | Tipos de função válidos |
+| --- | --- | --- |
+| Usuários | `users.view` (`257`); `users.create` (`259`); `users.invite` (`260`); `users.delete` (`261`); `users.enable_disable` (`262`); `users.edit_email` (`263`); `users.edit_password` (`264`); `users.edit_note` (`265`); `users.manage_2fa` (`266`); `users.force_logout` (`267`); `users.change_strategy` (`269`); `users.change_control_role` (`270`); `users.edit_display_name` (`271`) | global, group |
+| Usuários | `users.change_group` (`268`) | global |
+| Dispositivos | `devices.view` (`513`) | global, group |
+| Dispositivos | `devices.enable_disable` (`515`); `devices.delete` (`516`); `devices.edit_info` (`517`); `devices.change_strategy` (`520`) | global, individual, group |
+| Dispositivos | `devices.assign_to_user` (`518`); `devices.change_group` (`519`) | global |
+| Grupos de usuários | `user_groups.view` (`769`); `user_groups.edit` (`770`) | global |
+| Grupos de dispositivos | `device_groups.view` (`1025`); `device_groups.edit` (`1026`); `device_groups.change_strategy` (`1027`) | global |
+| Auditorias | `audits.view` (`1281`); `audits.edit` (`1282`) | global, individual |
+| Estratégias | `strategies.view` (`1537`); `strategies.edit` (`1538`) | global |
+| Clientes personalizados | `custom_clients.view` (`1793`); `custom_clients.edit` (`1794`) | global |
+| Funções de controle | `control_roles.view` (`2049`); `control_roles.edit` (`2050`) | global |
+
+**Atualizar ou excluir uma função:**
+
+```bash
+./admin-roles.py --url <url> --token <token> update --name "Support Admin" \
+  [--new-name "Helpdesk Admin"] [--note "new note"] [--permissions "users.view,devices.view"] \
+  [--user-groups "Support"] [--device-groups "Servers"] [--unassigned|--no-unassigned]
+
+./admin-roles.py --url <url> --token <token> delete --name "Support Admin"
+```
+
+Passe um valor vazio para limpar `--note`, `--permissions`, `--user-groups` ou `--device-groups`, por exemplo, `--permissions ""`.
+
+**Gerenciar membros da função:**
+
+```bash
+./admin-roles.py --url <url> --token <token> view-users --name "Support Admin"
+./admin-roles.py --url <url> --token <token> add-users --name "Support Admin" --users "user1,user2"
+./admin-roles.py --url <url> --token <token> remove-users --name "Support Admin" --users "user1,user2"
+```
+
+As funções e os usuários de destino também podem ser informados por GUID. Nomes de usuários e GUIDs podem ser combinados em `--users`.
+
+---
+
+#### Gerenciamento de funções de controle (`control-roles.py`)
+
+O token precisa da permissão **Função de Controle** de leitura ou leitura/gravação. Os comandos que resolvem nomes de usuários ou listam membros da função também exigem a permissão **Usuário** de leitura.
+
+**Visualizar funções:**
+
+```bash
+./control-roles.py --url <url> --token <token> view [--name <role_name>] [--status enabled|disabled]
+./control-roles.py --url <url> --token <token> view --guid <role_guid>
+```
+
+**Criar, atualizar, excluir, habilitar ou desabilitar uma função:**
+
+```bash
+./control-roles.py --url <url> --token <token> add --name "Contractors" [--note "Restricted access"]
+./control-roles.py --url <url> --token <token> update --name "Contractors" [--new-name "Vendors"] [--note "new note"]
+./control-roles.py --url <url> --token <token> delete --name "Contractors"
+./control-roles.py --url <url> --token <token> enable --name "Contractors"
+./control-roles.py --url <url> --token <token> disable --name "Contractors"
+```
+
+As novas funções criadas por este script não incluem permissões de controle. Configure-as no console web antes de atribuir usuários. Este script não gerencia nem exibe as definições de permissões de controle.
+
+**Gerenciar membros da função:**
+
+```bash
+./control-roles.py --url <url> --token <token> view-users --name "Contractors"
+./control-roles.py --url <url> --token <token> assign-users --name "Contractors" --users "user1,user2"
+./control-roles.py --url <url> --token <token> remove-users --users "user1,user2"
+```
+
+As funções e os usuários de destino também podem ser informados por GUID. `remove-users` limpa a função de controle atual de cada usuário, portanto não aceita `--name` nem `--guid`. Para a função reservada `Default`, `view-users` lista somente as atribuições explícitas; os usuários sem uma função de controle atribuída também herdam `Default`. A função reservada `Not Logged` não pode ser atribuída a usuários, e as funções reservadas não podem ser renomeadas, receber uma nota ou ser excluídas.
 
 ---
 

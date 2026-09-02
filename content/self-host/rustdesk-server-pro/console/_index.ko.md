@@ -127,7 +127,7 @@ Windows 클라이언트의 경우 사용자 지정 서버 구성은 생략하고
 
 ## API 토큰
 
-먼저 **설정 → 토큰 → 생성**으로 이동해 필요한 권한을 가진 토큰을 생성해야 합니다: **장치, 감사 로그, 사용자, 그룹, 전략, 주소록**.  
+먼저 **설정 → 토큰 → 생성**으로 이동해 필요한 권한을 가진 토큰을 생성해야 합니다: **장치, 감사 로그, 사용자, 그룹, 전략, 주소록, 관리자 역할, 제어 역할**.
 
 토큰이 생성되면, 이를 **명령줄**이나 **파이썬 CLI**를 통해 해당 권한을 가진 작업을 수행하는 데 사용할 수 있습니다.
 
@@ -285,6 +285,107 @@ Windows의 명령줄은 기본적으로 출력이 없습니다. 출력을 얻으
 **권한 요구 사항:**
 - `view/add/update/delete/add-users` 명령은 **사용자 그룹 권한**이 필요합니다.
 - `view-users` 명령은 **사용자 권한**이 필요합니다.
+
+---
+
+#### 관리자 역할 관리 (`admin-roles.py`)
+
+토큰은 전체 관리자 계정에 속해야 하며 **Admin Role** 읽기 또는 읽기/쓰기 권한이 필요합니다. 사용자 이름을 확인하거나 역할 구성원을 나열하는 명령에는 **User** 읽기 권한도 필요합니다.
+
+**역할 보기:**
+
+```bash
+./admin-roles.py --url <url> --token <token> view [--name <역할_이름>] [--type global|individual|group]
+./admin-roles.py --url <url> --token <token> view --guid <역할_GUID>
+```
+
+**역할 만들기:**
+
+```bash
+./admin-roles.py --url <url> --token <token> add \
+  --name "Support Admin" --type global \
+  --permissions "users.view,devices.view,audits.view" --note "읽기 전용 지원"
+
+./admin-roles.py --url <url> --token <token> add \
+  --name "Support Scope" --type group \
+  --permissions "users.view,devices.view,devices.enable_disable" \
+  --user-groups "Support" --device-groups "Servers" --unassigned
+```
+
+역할 유형은 만든 후 변경할 수 없습니다. `--permissions`에는 쉼표로 구분한 권한 이름, 10진수 ID 또는 `0x`로 시작하는 ID를 지정할 수 있으며 형식을 혼합할 수도 있습니다. 예를 들어 `users.view,513,0x0203`은 `257,513,515`와 같습니다. 선택한 역할 유형에 유효하지 않은 권한은 서버에서 거부됩니다.
+
+`view` 명령은 알려진 권한 ID를 아래 표의 이름으로 변환합니다. 스크립트가 모르는 ID는 숫자로 유지되므로 최신 서버에서 추가된 권한이 숨겨지지 않습니다.
+
+| 영역 | 권한 | 유효한 역할 유형 |
+| --- | --- | --- |
+| 사용자 | `users.view` (`257`); `users.create` (`259`); `users.invite` (`260`); `users.delete` (`261`); `users.enable_disable` (`262`); `users.edit_email` (`263`); `users.edit_password` (`264`); `users.edit_note` (`265`); `users.manage_2fa` (`266`); `users.force_logout` (`267`); `users.change_strategy` (`269`); `users.change_control_role` (`270`); `users.edit_display_name` (`271`) | `global`, `group` |
+| 사용자 | `users.change_group` (`268`) | `global` |
+| 디바이스 | `devices.view` (`513`) | `global`, `group` |
+| 디바이스 | `devices.enable_disable` (`515`); `devices.delete` (`516`); `devices.edit_info` (`517`); `devices.change_strategy` (`520`) | `global`, `individual`, `group` |
+| 디바이스 | `devices.assign_to_user` (`518`); `devices.change_group` (`519`) | `global` |
+| 사용자 그룹 | `user_groups.view` (`769`); `user_groups.edit` (`770`) | `global` |
+| 디바이스 그룹 | `device_groups.view` (`1025`); `device_groups.edit` (`1026`); `device_groups.change_strategy` (`1027`) | `global` |
+| 감사 로그 | `audits.view` (`1281`); `audits.edit` (`1282`) | `global`, `individual` |
+| 전략 | `strategies.view` (`1537`); `strategies.edit` (`1538`) | `global` |
+| 사용자 지정 클라이언트 | `custom_clients.view` (`1793`); `custom_clients.edit` (`1794`) | `global` |
+| 제어 역할 | `control_roles.view` (`2049`); `control_roles.edit` (`2050`) | `global` |
+
+**역할 업데이트 또는 삭제:**
+
+```bash
+./admin-roles.py --url <url> --token <token> update --name "Support Admin" \
+  [--new-name "Helpdesk Admin"] [--note "새 메모"] [--permissions "users.view,devices.view"] \
+  [--user-groups "Support"] [--device-groups "Servers"] [--unassigned|--no-unassigned]
+
+./admin-roles.py --url <url> --token <token> delete --name "Support Admin"
+```
+
+`--note`, `--permissions`, `--user-groups` 또는 `--device-groups`에 빈 값을 전달하면 해당 필드를 지울 수 있습니다. 예: `--permissions ""`.
+
+**역할 구성원 관리:**
+
+```bash
+./admin-roles.py --url <url> --token <token> view-users --name "Support Admin"
+./admin-roles.py --url <url> --token <token> add-users --name "Support Admin" --users "user1,user2"
+./admin-roles.py --url <url> --token <token> remove-users --name "Support Admin" --users "user1,user2"
+```
+
+역할과 사용자는 GUID로도 지정할 수 있습니다. `--users`에는 사용자 이름과 GUID를 함께 사용할 수 있습니다.
+
+---
+
+#### 제어 역할 관리 (`control-roles.py`)
+
+토큰에는 **Control Role** 읽기 또는 읽기/쓰기 권한이 필요합니다. 사용자 이름을 확인하거나 역할 구성원을 나열하는 명령에는 **User** 읽기 권한도 필요합니다.
+
+**역할 보기:**
+
+```bash
+./control-roles.py --url <url> --token <token> view [--name <역할_이름>] [--status enabled|disabled]
+./control-roles.py --url <url> --token <token> view --guid <역할_GUID>
+```
+
+**역할 만들기, 업데이트, 삭제, 활성화 또는 비활성화:**
+
+```bash
+./control-roles.py --url <url> --token <token> add --name "Contractors" [--note "제한된 액세스"]
+./control-roles.py --url <url> --token <token> update --name "Contractors" [--new-name "Vendors"] [--note "새 메모"]
+./control-roles.py --url <url> --token <token> delete --name "Contractors"
+./control-roles.py --url <url> --token <token> enable --name "Contractors"
+./control-roles.py --url <url> --token <token> disable --name "Contractors"
+```
+
+이 스크립트로 만든 새 역할에는 제어 권한이 포함되지 않습니다. 사용자를 할당하기 전에 웹 콘솔에서 설정하세요. 이 스크립트는 제어 권한 정의를 관리하거나 표시하지 않습니다.
+
+**역할 구성원 관리:**
+
+```bash
+./control-roles.py --url <url> --token <token> view-users --name "Contractors"
+./control-roles.py --url <url> --token <token> assign-users --name "Contractors" --users "user1,user2"
+./control-roles.py --url <url> --token <token> remove-users --users "user1,user2"
+```
+
+역할과 사용자는 GUID로도 지정할 수 있습니다. `remove-users`는 각 사용자의 현재 제어 역할을 제거하므로 `--name`이나 `--guid`를 사용하지 않습니다. 예약된 `Default` 역할의 경우 `view-users`는 명시적 할당만 표시하며, 제어 역할이 할당되지 않은 사용자도 `Default`를 상속합니다. `Not Logged` 역할은 사용자에게 할당할 수 없으며 예약된 역할은 이름 변경, 메모 추가 또는 삭제할 수 없습니다.
 
 ---
 

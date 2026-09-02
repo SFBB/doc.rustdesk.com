@@ -129,7 +129,7 @@ To assign a strategy to a device, hover over the right side of the **Strategy** 
 
 ## API Token
 
-You must first go to **Settings → Tokens → Create** and create a token with the required permissions: **Device, Audit Log, User, Group, Strategy, Address Book**.  
+You must first go to **Settings → Tokens → Create** and create a token with the required permissions: **Device, Audit Log, User, Group, Strategy, Address Book, Admin Role, Control Role**.
 
 Once created, you can use these tokens via **command line** or **Python CLI** to perform actions with the corresponding permissions.
 
@@ -287,6 +287,112 @@ The command line on Windows does not have output by default. To get output, plea
 **Permission requirements:**
 - `view/add/update/delete/add-users` commands require **User Group Permission**
 - `view-users` command requires **User Permission**
+
+---
+
+#### Admin Roles Management (`admin-roles.py`)
+
+The token must belong to a full administrator and have **Admin Role** read or read/write permission. Commands that resolve user names or list role members also require **User** read permission.
+
+**View roles:**
+
+```bash
+# List roles, optionally filtered by exact name or type
+./admin-roles.py --url <url> --token <token> view [--name <role_name>] [--type global|individual|group]
+
+# View one role by GUID
+./admin-roles.py --url <url> --token <token> view --guid <role_guid>
+```
+
+**Create a role:**
+
+```bash
+# Global role
+./admin-roles.py --url <url> --token <token> add \
+  --name "Support Admin" --type global \
+  --permissions "users.view,devices.view,audits.view" --note "Read-only support"
+
+# Group-scoped role
+./admin-roles.py --url <url> --token <token> add \
+  --name "Support Scope" --type group \
+  --permissions "users.view,devices.view,devices.enable_disable" \
+  --user-groups "Support" --device-groups "Servers" --unassigned
+```
+
+The role type cannot be changed after creation. `--permissions` accepts comma-separated permission names, decimal IDs, or `0x`-prefixed IDs, and the formats can be mixed. For example, `users.view,513,0x0203` is equivalent to `257,513,515`. The server rejects permissions that are not valid for the selected role type.
+
+The `view` command converts known permission IDs back to the names below. An ID unknown to the script is preserved as a number so permissions added by a newer server are not hidden.
+
+| Area | Permissions | Valid role types |
+| --- | --- | --- |
+| Users | `users.view` (`257`); `users.create` (`259`); `users.invite` (`260`); `users.delete` (`261`); `users.enable_disable` (`262`); `users.edit_email` (`263`); `users.edit_password` (`264`); `users.edit_note` (`265`); `users.manage_2fa` (`266`); `users.force_logout` (`267`); `users.change_strategy` (`269`); `users.change_control_role` (`270`); `users.edit_display_name` (`271`) | global, group |
+| Users | `users.change_group` (`268`) | global |
+| Devices | `devices.view` (`513`) | global, group |
+| Devices | `devices.enable_disable` (`515`); `devices.delete` (`516`); `devices.edit_info` (`517`); `devices.change_strategy` (`520`) | global, individual, group |
+| Devices | `devices.assign_to_user` (`518`); `devices.change_group` (`519`) | global |
+| User groups | `user_groups.view` (`769`); `user_groups.edit` (`770`) | global |
+| Device groups | `device_groups.view` (`1025`); `device_groups.edit` (`1026`); `device_groups.change_strategy` (`1027`) | global |
+| Audits | `audits.view` (`1281`); `audits.edit` (`1282`) | global, individual |
+| Strategies | `strategies.view` (`1537`); `strategies.edit` (`1538`) | global |
+| Custom clients | `custom_clients.view` (`1793`); `custom_clients.edit` (`1794`) | global |
+| Control roles | `control_roles.view` (`2049`); `control_roles.edit` (`2050`) | global |
+
+**Update or delete a role:**
+
+```bash
+./admin-roles.py --url <url> --token <token> update --name "Support Admin" \
+  [--new-name "Helpdesk Admin"] [--note "new note"] [--permissions "users.view,devices.view"] \
+  [--user-groups "Support"] [--device-groups "Servers"] [--unassigned|--no-unassigned]
+
+./admin-roles.py --url <url> --token <token> delete --name "Support Admin"
+```
+
+Pass an empty value to clear `--note`, `--permissions`, `--user-groups`, or `--device-groups`, for example `--permissions ""`.
+
+**Manage role members:**
+
+```bash
+./admin-roles.py --url <url> --token <token> view-users --name "Support Admin"
+./admin-roles.py --url <url> --token <token> add-users --name "Support Admin" --users "user1,user2"
+./admin-roles.py --url <url> --token <token> remove-users --name "Support Admin" --users "user1,user2"
+```
+
+Role targets and users can also be supplied by GUID. User names and GUIDs can be mixed in `--users`.
+
+---
+
+#### Control Roles Management (`control-roles.py`)
+
+The token needs **Control Role** read or read/write permission. Commands that resolve user names or list role members also require **User** read permission.
+
+**View roles:**
+
+```bash
+./control-roles.py --url <url> --token <token> view [--name <role_name>] [--status enabled|disabled]
+./control-roles.py --url <url> --token <token> view --guid <role_guid>
+```
+
+**Create, update, delete, enable, or disable a role:**
+
+```bash
+./control-roles.py --url <url> --token <token> add --name "Contractors" [--note "Restricted access"]
+./control-roles.py --url <url> --token <token> update --name "Contractors" [--new-name "Vendors"] [--note "new note"]
+./control-roles.py --url <url> --token <token> delete --name "Contractors"
+./control-roles.py --url <url> --token <token> enable --name "Contractors"
+./control-roles.py --url <url> --token <token> disable --name "Contractors"
+```
+
+New roles created by this script do not include control permissions. Configure them in the web console before assigning users. Control-permission definitions are not managed or displayed by this script.
+
+**Manage role members:**
+
+```bash
+./control-roles.py --url <url> --token <token> view-users --name "Contractors"
+./control-roles.py --url <url> --token <token> assign-users --name "Contractors" --users "user1,user2"
+./control-roles.py --url <url> --token <token> remove-users --users "user1,user2"
+```
+
+Role targets and users can also be supplied by GUID. `remove-users` clears each user's current control role, so it does not take `--name` or `--guid`. For the reserved `Default` role, `view-users` lists explicit assignments only; users without a control-role assignment also inherit `Default`. The reserved `Not Logged` role cannot be assigned to users, and reserved roles cannot be renamed, given a note, or deleted.
 
 ---
 

@@ -117,7 +117,7 @@ RustDesk Server Pro Web 主控台是管理使用者、裝置、群組、授權�
 
 ## API Token
 
-首先，需前往 **設定 → Token → 建立**，並建立擁有所需權限的權杖：**設備、審計日誌、使用者、群組、策略、通訊錄**。
+首先，需前往 **設定 → Token → 建立**，並建立擁有所需權限的權杖：**設備、審計日誌、使用者、群組、策略、通訊錄、管理員角色、控制角色**。
 
 建立後，可透過 **命令列** 或 **Python CLI** 使用這些權杖，執行擁有相應權限的操作。
 
@@ -280,6 +280,107 @@ Windows 命令列預設不會輸出結果。若要查看輸出，可使用：
 **權限要求：**
 - `view/add/update/delete/add-users` 命令需要 **使用者群組權限**
 - `view-users` 命令需要 **使用者權限**
+
+---
+
+#### 管理員角色管理 (`admin-roles.py`)
+
+權杖必須屬於完整管理員，並具有 **Admin Role** 讀取或讀寫權限。解析使用者名稱或列出角色成員的命令還需要 **User** 讀取權限。
+
+**查看角色：**
+
+```bash
+./admin-roles.py --url <url> --token <token> view [--name <角色名稱>] [--type global|individual|group]
+./admin-roles.py --url <url> --token <token> view --guid <角色GUID>
+```
+
+**建立角色：**
+
+```bash
+./admin-roles.py --url <url> --token <token> add \
+  --name "Support Admin" --type global \
+  --permissions "users.view,devices.view,audits.view" --note "唯讀支援"
+
+./admin-roles.py --url <url> --token <token> add \
+  --name "Support Scope" --type group \
+  --permissions "users.view,devices.view,devices.enable_disable" \
+  --user-groups "Support" --device-groups "Servers" --unassigned
+```
+
+角色建立後不能變更類型。`--permissions` 接受逗號分隔的權限名稱、十進位 ID 或以 `0x` 開頭的 ID，也可以混用。例如，`users.view,513,0x0203` 等同於 `257,513,515`。伺服器會拒絕不適用於所選角色類型的權限。
+
+`view` 會把已知權限 ID 轉換回下表中的名稱。腳本不認識的 ID 會保留為數字，以免隱藏較新伺服器增加的權限。
+
+| 區域 | 權限 | 有效角色類型 |
+| --- | --- | --- |
+| 使用者 | `users.view` (`257`); `users.create` (`259`); `users.invite` (`260`); `users.delete` (`261`); `users.enable_disable` (`262`); `users.edit_email` (`263`); `users.edit_password` (`264`); `users.edit_note` (`265`); `users.manage_2fa` (`266`); `users.force_logout` (`267`); `users.change_strategy` (`269`); `users.change_control_role` (`270`); `users.edit_display_name` (`271`) | `global`, `group` |
+| 使用者 | `users.change_group` (`268`) | `global` |
+| 設備 | `devices.view` (`513`) | `global`, `group` |
+| 設備 | `devices.enable_disable` (`515`); `devices.delete` (`516`); `devices.edit_info` (`517`); `devices.change_strategy` (`520`) | `global`, `individual`, `group` |
+| 設備 | `devices.assign_to_user` (`518`); `devices.change_group` (`519`) | `global` |
+| 使用者群組 | `user_groups.view` (`769`); `user_groups.edit` (`770`) | `global` |
+| 設備群組 | `device_groups.view` (`1025`); `device_groups.edit` (`1026`); `device_groups.change_strategy` (`1027`) | `global` |
+| 稽核日誌 | `audits.view` (`1281`); `audits.edit` (`1282`) | `global`, `individual` |
+| 策略 | `strategies.view` (`1537`); `strategies.edit` (`1538`) | `global` |
+| 自訂客戶端 | `custom_clients.view` (`1793`); `custom_clients.edit` (`1794`) | `global` |
+| 控制角色 | `control_roles.view` (`2049`); `control_roles.edit` (`2050`) | `global` |
+
+**更新或刪除角色：**
+
+```bash
+./admin-roles.py --url <url> --token <token> update --name "Support Admin" \
+  [--new-name "Helpdesk Admin"] [--note "新備註"] [--permissions "users.view,devices.view"] \
+  [--user-groups "Support"] [--device-groups "Servers"] [--unassigned|--no-unassigned]
+
+./admin-roles.py --url <url> --token <token> delete --name "Support Admin"
+```
+
+為 `--note`、`--permissions`、`--user-groups` 或 `--device-groups` 傳入空值可清除該欄位，例如 `--permissions ""`。
+
+**管理角色成員：**
+
+```bash
+./admin-roles.py --url <url> --token <token> view-users --name "Support Admin"
+./admin-roles.py --url <url> --token <token> add-users --name "Support Admin" --users "user1,user2"
+./admin-roles.py --url <url> --token <token> remove-users --name "Support Admin" --users "user1,user2"
+```
+
+角色目標和使用者也可以使用 GUID。`--users` 中可以混用使用者名稱和 GUID。
+
+---
+
+#### 控制角色管理 (`control-roles.py`)
+
+權杖需要 **Control Role** 讀取或讀寫權限。解析使用者名稱或列出角色成員的命令還需要 **User** 讀取權限。
+
+**查看角色：**
+
+```bash
+./control-roles.py --url <url> --token <token> view [--name <角色名稱>] [--status enabled|disabled]
+./control-roles.py --url <url> --token <token> view --guid <角色GUID>
+```
+
+**建立、更新、刪除、啟用或停用角色：**
+
+```bash
+./control-roles.py --url <url> --token <token> add --name "Contractors" [--note "受限存取"]
+./control-roles.py --url <url> --token <token> update --name "Contractors" [--new-name "Vendors"] [--note "新備註"]
+./control-roles.py --url <url> --token <token> delete --name "Contractors"
+./control-roles.py --url <url> --token <token> enable --name "Contractors"
+./control-roles.py --url <url> --token <token> disable --name "Contractors"
+```
+
+此腳本建立的新角色不包含控制權限。請先在 Web 主控台中設定，再分配使用者。此腳本不管理或顯示控制權限定義。
+
+**管理角色成員：**
+
+```bash
+./control-roles.py --url <url> --token <token> view-users --name "Contractors"
+./control-roles.py --url <url> --token <token> assign-users --name "Contractors" --users "user1,user2"
+./control-roles.py --url <url> --token <token> remove-users --users "user1,user2"
+```
+
+角色目標和使用者也可以使用 GUID。`remove-users` 會清除每位使用者目前的控制角色，因此不接受 `--name` 或 `--guid`。對於保留的 `Default` 角色，`view-users` 只列出明確分配；未分配控制角色的使用者也會繼承 `Default`。`Not Logged` 角色不能分配給使用者，保留角色不能重新命名、新增備註或刪除。
 
 ---
 
