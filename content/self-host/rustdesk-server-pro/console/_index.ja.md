@@ -117,7 +117,7 @@ Windowsクライアントの場合、カスタムサーバー設定を省略し�
 
 ## APIトークン
 
-まず、**設定 → トークン → 作成**に移動し、必要な権限（**デバイス、監査ログ、ユーザー、グループ、戦略、アドレス帳**）を持つトークンを作成する必要があります。
+まず、**設定 → トークン → 作成**に移動し、必要な権限（**デバイス、監査ログ、ユーザー、グループ、戦略、アドレス帳、管理者ロール、制御ロール**）を持つトークンを作成する必要があります。
 
 作成後、これらのトークンを**コマンドライン**または**Python CLI**を通じて使用し、対応する権限で操作を実行できます。
 
@@ -280,6 +280,107 @@ Windowsのコマンドラインはデフォルトでは出力を表示しませ�
 **権限要件:**
 - `view/add/update/delete/add-users` コマンドには **ユーザーグループ権限** が必要
 - `view-users` コマンドには **ユーザー権限** が必要
+
+---
+
+#### 管理者ロール管理 (`admin-roles.py`)
+
+トークンは完全な管理者に属し、**Admin Role** の読み取り権限または読み書き権限を持つ必要があります。ユーザー名の解決やロールメンバーの一覧表示には、**User** の読み取り権限も必要です。
+
+**ロールの表示：**
+
+```bash
+./admin-roles.py --url <url> --token <token> view [--name <ロール名>] [--type global|individual|group]
+./admin-roles.py --url <url> --token <token> view --guid <ロールGUID>
+```
+
+**ロールの作成：**
+
+```bash
+./admin-roles.py --url <url> --token <token> add \
+  --name "Support Admin" --type global \
+  --permissions "users.view,devices.view,audits.view" --note "読み取り専用サポート"
+
+./admin-roles.py --url <url> --token <token> add \
+  --name "Support Scope" --type group \
+  --permissions "users.view,devices.view,devices.enable_disable" \
+  --user-groups "Support" --device-groups "Servers" --unassigned
+```
+
+作成後にロールの種類を変更することはできません。`--permissions` には、カンマ区切りの権限名、10進数ID、または `0x` で始まるIDを指定でき、各形式を混在させることもできます。たとえば `users.view,513,0x0203` は `257,513,515` と同じです。選択したロールの種類で無効な権限はサーバーによって拒否されます。
+
+`view` コマンドは既知の権限IDを次の表の名前に戻します。スクリプトが認識しないIDは数値のまま保持されるため、新しいサーバーで追加された権限が隠れることはありません。
+
+| 領域 | 権限 | 有効なロールの種類 |
+| --- | --- | --- |
+| ユーザー | `users.view` (`257`); `users.create` (`259`); `users.invite` (`260`); `users.delete` (`261`); `users.enable_disable` (`262`); `users.edit_email` (`263`); `users.edit_password` (`264`); `users.edit_note` (`265`); `users.manage_2fa` (`266`); `users.force_logout` (`267`); `users.change_strategy` (`269`); `users.change_control_role` (`270`); `users.edit_display_name` (`271`) | `global`, `group` |
+| ユーザー | `users.change_group` (`268`) | `global` |
+| デバイス | `devices.view` (`513`) | `global`, `group` |
+| デバイス | `devices.enable_disable` (`515`); `devices.delete` (`516`); `devices.edit_info` (`517`); `devices.change_strategy` (`520`) | `global`, `individual`, `group` |
+| デバイス | `devices.assign_to_user` (`518`); `devices.change_group` (`519`) | `global` |
+| ユーザーグループ | `user_groups.view` (`769`); `user_groups.edit` (`770`) | `global` |
+| デバイスグループ | `device_groups.view` (`1025`); `device_groups.edit` (`1026`); `device_groups.change_strategy` (`1027`) | `global` |
+| 監査ログ | `audits.view` (`1281`); `audits.edit` (`1282`) | `global`, `individual` |
+| 戦略 | `strategies.view` (`1537`); `strategies.edit` (`1538`) | `global` |
+| カスタムクライアント | `custom_clients.view` (`1793`); `custom_clients.edit` (`1794`) | `global` |
+| 制御ロール | `control_roles.view` (`2049`); `control_roles.edit` (`2050`) | `global` |
+
+**ロールの更新または削除：**
+
+```bash
+./admin-roles.py --url <url> --token <token> update --name "Support Admin" \
+  [--new-name "Helpdesk Admin"] [--note "新しいメモ"] [--permissions "users.view,devices.view"] \
+  [--user-groups "Support"] [--device-groups "Servers"] [--unassigned|--no-unassigned]
+
+./admin-roles.py --url <url> --token <token> delete --name "Support Admin"
+```
+
+`--note`、`--permissions`、`--user-groups`、または `--device-groups` に空の値を渡すと、その項目をクリアできます（例：`--permissions ""`）。
+
+**ロールメンバーの管理：**
+
+```bash
+./admin-roles.py --url <url> --token <token> view-users --name "Support Admin"
+./admin-roles.py --url <url> --token <token> add-users --name "Support Admin" --users "user1,user2"
+./admin-roles.py --url <url> --token <token> remove-users --name "Support Admin" --users "user1,user2"
+```
+
+ロールとユーザーはGUIDでも指定できます。`--users` ではユーザー名とGUIDを混在させることができます。
+
+---
+
+#### 制御ロール管理 (`control-roles.py`)
+
+トークンには **Control Role** の読み取り権限または読み書き権限が必要です。ユーザー名の解決やロールメンバーの一覧表示には、**User** の読み取り権限も必要です。
+
+**ロールの表示：**
+
+```bash
+./control-roles.py --url <url> --token <token> view [--name <ロール名>] [--status enabled|disabled]
+./control-roles.py --url <url> --token <token> view --guid <ロールGUID>
+```
+
+**ロールの作成、更新、削除、有効化、無効化：**
+
+```bash
+./control-roles.py --url <url> --token <token> add --name "Contractors" [--note "制限付きアクセス"]
+./control-roles.py --url <url> --token <token> update --name "Contractors" [--new-name "Vendors"] [--note "新しいメモ"]
+./control-roles.py --url <url> --token <token> delete --name "Contractors"
+./control-roles.py --url <url> --token <token> enable --name "Contractors"
+./control-roles.py --url <url> --token <token> disable --name "Contractors"
+```
+
+このスクリプトで作成した新しいロールには制御権限が含まれません。ユーザーを割り当てる前に、Webコンソールで設定してください。このスクリプトは制御権限の定義を管理または表示しません。
+
+**ロールメンバーの管理：**
+
+```bash
+./control-roles.py --url <url> --token <token> view-users --name "Contractors"
+./control-roles.py --url <url> --token <token> assign-users --name "Contractors" --users "user1,user2"
+./control-roles.py --url <url> --token <token> remove-users --users "user1,user2"
+```
+
+ロールとユーザーはGUIDでも指定できます。`remove-users` は各ユーザーの現在の制御ロールを解除するため、`--name` または `--guid` は指定しません。予約済みの `Default` ロールでは、`view-users` は明示的な割り当てだけを表示します。制御ロールが割り当てられていないユーザーも `Default` を継承します。`Not Logged` ロールをユーザーに割り当てることはできず、予約済みロールの名前変更、メモ追加、削除もできません。
 
 ---
 
